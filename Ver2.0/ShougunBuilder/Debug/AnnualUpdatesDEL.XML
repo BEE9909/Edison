@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AnnualUpdatesDEL</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.G732.CreateForm(System.Object[])" -->
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.HeaderForm.logic">
+            <summary>
+            画面ロジック
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.HeaderForm.OnLoad(System.EventArgs)">
+            <summary>
+            画面ロード
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.HeaderForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.HeaderForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.HeaderForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.Logic">
+            <summary>
+            画面ロジック
+            </summary>
+        </member>
+        <member name="P:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.ParentBaseForm">
+            <summary>
+            親フォーム
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.OnLoad(System.EventArgs)">
+            <summary>
+            画面Load処理
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.bt_func9_Click(System.Object,System.EventArgs)">
+            <summary>
+            データ削除(F9)
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.bt_func12_Click(System.Object,System.EventArgs)">
+            <summary>
+            閉じる(F12)
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_EigyouRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            営業データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_UketsukeRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            受付データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_HaishaRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            配車データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_KeiryouRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            計量データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_HankanRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            販管データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_ManifestRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            マニフェストデータ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_UnchinRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            運賃データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.txt_RenkeiRange_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            外部連携データ削除する/しないで、日付の使用可不可の切り替え
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.components">
+            <summary>
+            必要なデザイナー変数です。
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.Dispose(System.Boolean)">
+            <summary>
+            使用中のリソースをすべてクリーンアップします。
+            </summary>
+            <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm.InitializeComponent">
+            <summary>
+            デザイナー サポートに必要なメソッドです。このメソッドの内容を
+            コード エディターで変更しないでください。
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.ConvertDaoCls.GetTableColumn(System.String)">
+            <summary>
+            テーブルの項目名取得
+            </summary>
+            <param name="TableName">元テーブル名(T_xx)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.ConvertDaoCls.INSERTOldTable(System.String,System.String,System.String,System.String)">
+            <summary>
+            テーブルコピー(T_xx→OLD_T_xx)
+            </summary>
+            <param name="OldTableName">移動先テーブル名(OLD_T_xx)</param>
+            <param name="TableKomoku">項目名(xx)</param>
+            <param name="TableName">元テーブル名(T_xx)</param>
+            <param name="Joken">WHERE条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.ConvertDaoCls.DeleteTable(System.String,System.String)">
+            <summary>
+            テーブル物理削除(T_xx)
+            </summary>
+            <param name="TableName">元テーブル名(T_xx)</param>
+            <param name="Joken">WHERE条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.ConvertDaoCls.TableDeleteFLG(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="TableName"></param>
+            <param name="Joken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass">
+            <summary>
+            ビジネスロジック
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.ButtonInfoXmlPath">
+            <summary>
+            ボタン定義ファイルパス
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.form">
+            <summary>
+            画面フォーム
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.dto">
+            <summary>
+            DTO
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.SysEntitys">
+            <summary>
+            会社情報のDao
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.entitys">
+            <summary>
+            自社情報入力のDao
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.entityOldData">
+            <summary>
+            データ削除範囲のDao
+            </summary>
+        </member>
+        <member name="F:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.daoConvertClass">
+            <summary>
+            コンバート用
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.#ctor(Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.UIForm)">
+            <summary>
+            コンストラクタ
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.WindowInit">
+            <summary>
+            画面初期化処理
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.HeaderInit">
+            <summary>
+            ヘッダー初期化処理
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.ButtonInit">
+            <summary>
+            ボタン初期化処理
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.CreateButtonInfo">
+            <summary>
+            ボタン設定の読込
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.EventInit">
+            <summary>
+            イベントの初期化処理
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.SetInitDisp">
+            <summary>
+            起動シリーズ毎に、使用可不可の画面表示初期化
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.SetInitDispSeries(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SetInitDispから来た設定値で、メニューの使用可不可を設定
+            </summary>
+            <param name="intEigyou">営業使用有無</param>
+            <param name="intUketsuke">受付使用有無</param>
+            <param name="intHaisha">配車使用有無</param>
+            <param name="intKeiryou">計量使用有無</param>
+            <param name="intHankan">販管使用有無</param>
+            <param name="intManifest">マニ使用有無</param>
+            <param name="intUnchin">運賃使用有無</param>
+            <param name="intRenkei">外部連携使用有無</param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.jikkou">
+            <summary>
+            実行
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.SetProgressBar">
+            <summary>
+            プログレスバーの範囲を設定
+            ※履歴削除テーブルが増減する場合は、プログレスバーのパラメーター数を変更する事
+            　コミットのブロック単位を１とする。
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.IncProgressBar">
+            <summary>
+            プログレスバーを加算
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.ResetProgressBar">
+            <summary>
+            プログレスバーをリセット
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.TableConvert">
+            <summary>
+            データ移動/物理削除
+            各項目の実施「１．する」範囲のデータを、データコピー/削除する。
+            ※伝票のキーを使用して明細等のデータを処理しているので、明細→伝票の順に行う事。
+            ※履歴削除テーブルが増減する場合、SetProgressBar()にて、プログレスバーのパラメーター数も変更する事。
+            </summary>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.InsertAndDelete(System.String,System.String,System.String)">
+            <summary>
+            １）削除範囲のデータをOLDテーブルにコピー　※DelOnlyFLG=0の場合のみ
+            ２）削除範囲の通常データをを物理削除
+            対象：各項目で「1.する」を選択している
+            </summary>
+            <param name="TableName">移動対象テーブル名(元になるテーブル)</param>
+            <param name="SelectWHERE">移動対象の条件を指定（元になるテーブルで条件を指定する）</param>
+            <param name="DeleteWHERE">削除対象の条件を指定（元になるテーブルで条件を指定する）</param>
+        </member>
+        <member name="M:Shougun.Core.AnnualUpdates.AnnualUpdatesDEL.LogicClass.UpdateOldData(System.String)">
+            <summary>
+            削除実行時の履歴を作成する
+            IDはオートナンバー
+            </summary>
+        </member>
+    </members>
+</doc>

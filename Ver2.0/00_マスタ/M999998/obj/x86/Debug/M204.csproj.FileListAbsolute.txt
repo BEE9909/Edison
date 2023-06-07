@@ -1,0 +1,10 @@
+C:\Users\Dell\Desktop\Ver2.0_1\ShougunBuilder\Debug\ContenaShuruiHoshu.dll.config
+C:\Users\Dell\Desktop\Ver2.0_1\ShougunBuilder\Debug\ContenaShuruiHoshu.dll
+C:\Users\Dell\Desktop\Ver2.0_1\ShougunBuilder\Debug\ContenaShuruiHoshu.pdb
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\M204.csproj.AssemblyReference.cache
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\Shougun.Core.Master.ContenaShuruiHoshu.APP.UIForm.resources
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\M204.csproj.GenerateResource.cache
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\M204.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\M204.csproj.CopyComplete
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\ContenaShuruiHoshu.dll
+C:\Users\Dell\Desktop\Ver2.0_1\00_マスタ\M204\obj\x86\Debug\ContenaShuruiHoshu.pdb

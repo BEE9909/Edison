@@ -1,0 +1,1250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>C1.C1Zip.4</name>
+  </assembly>
+  <members>
+    <member name="T:C1.C1Zip.C1ZipEntry">
+      <summary>Zip ファイル内の個々のエントリ（項目名、圧縮／非圧縮サイズ、日付、チェックサム など）を表します。</summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntry.CheckCRC32">
+      <summary>エントリの CRC32 コードを計算し、それをエントリに格納されている CRC32 値と比較します。</summary>
+      <returns>チェックサムが一致する場合は True、一致しない場合は False。</returns>
+      <remarks>このメソッドは、圧縮エントリの完全性をチェックする場合に便利です。計算されたチェックサムと保存されているチェックサムが一致しなかった場合、zip ファイルが壊れているか、zip ファイルの作成に使用したプログラムが C1Zip と互換性が無いことを意味します。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntry.CheckPassword">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipEntry" />が現在設定されているパスワードで読み取れるかどうかをチェックします。
+      </summary>
+      <returns>現在のパスワードでエントリが読み取り可能な場合、またはエントリが暗号化されていない場合にはTrue。</returns>
+      <remarks>このメソッドは　エントリに対して現在のパスワードが有効かどうかを判断するために、try/catch　ブロックを使用したり、エントリを開いてみたりするよりも効果的です。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntry.OpenReader">
+      <summary>先にディスクファイルに抽出せずに、エントリ内に格納されたデータの読み取りに使用できる Stream オブジェクトを返します。</summary>
+      <returns>エントリ内に格納されたデータの読み取りに使用できる Stream オブジェクト。</returns>
+      <remarks>返される Stream は C1ZipStreamReader で、ファイルから読み取るときにデータは圧縮解除されます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntry.Extract(System.String)">
+      <summary>このエントリをファイルに抽出します。</summary>
+      <param name="destFileName">抽出されたファイルの名前と位置。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntry.Remove">
+      <summary>このエントリを zip ファイルから削除します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.FileName">
+      <summary>圧縮ファイルの名前を取得します。これは通常ファイル名ですが、オプションでパスを含むことがあります。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.SizeUncompressed">
+      <summary>ファイルの元のサイズ（非圧縮のサイズ）をバイト単位で取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.SizeCompressed">
+      <summary>ファイルの圧縮サイズをバイト単位で取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.SizeUncompressedLong">
+      <summary>エントリの元の（非圧縮）サイズ（バイト）を long integer として取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.SizeCompressedLong">
+      <summary>エントリの圧縮サイズ（バイト）を long integer として取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.CRC32">
+      <summary>ファイルが圧縮されたときに計算される CRC32 コードを取得します。</summary>
+      <remarks>この値は、エントリを圧縮解除するとき、その完全性をチェックする場合に便利です。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.Date">
+      <summary>元のファイルに対して行った最後の変更のデータを取得します。</summary>
+      <remarks>この値は、エントリを圧縮したあとで、ソースファイルが変更されたことによりエントリをアップデートする必要があるかどうかをチェックするために便利です。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.Comment">
+      <summary>エントリに関連付けられたコメント文字列を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.Attributes">
+      <summary>項目に関連付けられているファイル属性を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntry.IsEncrypted">
+      <summary>エントリが暗号化されているかどうかを示す値を取得します。</summary>
+      <remarks>
+        暗号化されたエントリは、そのファイルを zip ファイルに追加する時点で設定したパスワードを、
+        <see cref="T:C1.C1Zip.C1ZipFile" /> オブジェクトの
+        <see cref="P:C1.C1Zip.C1ZipFile.Password" />プロパティに設定した場合のみ展開できます。
+      </remarks>
+    </member>
+    <member name="T:C1.C1Zip.C1ZipEntryCollection">
+      <summary>
+        zip ファイルのコンテンツを提供する
+        <see cref="T:C1.C1Zip.C1ZipEntry" />オブジェクトのコレクションです。
+      </summary>
+      <remarks>zip ファイルの内容をプログラム内で管理する場合は C1ZipEntryCollection を使用してください。C1ZipEntryCollection に対して、項目の追加、削除、挿入、項目の抽出を行うことができます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Contains(System.String)">
+      <summary>コレクションが指定された名前のエントリを含むかどうかを決定します。</summary>
+      <param name="name">検索するエントリの名前。</param>
+      <returns>コレクションが指定された名前のエントリを含む場合は true、それ以外の場合は false。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Contains(C1.C1Zip.C1ZipEntry)">
+      <summary>コレクションがエントリを含むかどうかを決定します。</summary>
+      <param name="entry">検索するエントリのエントリ。</param>
+      <returns>コレクションがエントリを含む場合は true、それ以外の場合は false。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.IndexOf(System.String)">
+      <summary>指定した名前を持つエントリのインデックスを取得します。</summary>
+      <param name="name">検索するエントリの名前。</param>
+      <returns>コレクション内のエントリのインデックス。見つからなかった場合は -１。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.IndexOf(C1.C1Zip.C1ZipEntry)">
+      <summary>コレクション内のエントリのインデックスを取得します。</summary>
+      <param name="entry">
+        検索する <see cref="T:C1.C1Zip.C1ZipEntry" />。
+      </param>
+      <returns>コレクション内のエントリのインデックス。見つからなかった場合は -１。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.String)">
+      <summary>zip ファイルにエントリを追加します。</summary>
+      <param name="fileName">zip ファイルに追加するエントリのファイル名。</param>
+      <remarks>デフォルトでは、ディレクトリ名は zip ファイルに保存されません。zip ファイルにディレクトリ名の一部を含める場合は、pathLevels 引数を持つ、Add メソッドのオーバーロードメソッドを使用してください。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.String[])">
+      <summary>指定されたファイルリストに基づいて、zip ファイルにファイルを追加します。</summary>
+      <param name="fileNames">zip ファイルに追加するエントリのファイル名を含む配列。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.String,System.Int32)">
+      <summary>zip ファイルにエントリを追加します。</summary>
+      <param name="fileName">zip ファイルに追加するエントリのファイル名。</param>
+      <param name="pathLevels">エントリ名として保存するパスのレベル数。</param>
+      <remarks>
+        <para>デフォルトでは、ディレクトリ名は zip ファイルに保存されません。例えば、"C:¥Temp¥Samples¥Readme.txt" を zip ファイルに追加する場合、zip ファイル内に格納されるファイル名は "Readme.txt" となります。</para>
+        <para>
+          <paramref name="pathLevels" />引数は、エントリ名に１つ以上のレベルのパスを含めることを可能にします。例えば、"C:¥Temp¥Samples¥Readme.txt" を zip ファイルに追加するとき、
+          <paramref name="pathLevels" />引数に１を設定すると、zip ファイル内に格納されるファイル名は "Samples\Readme.txt" となります。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.String,System.String)">
+      <summary>zip ファイルにエントリを追加します。</summary>
+      <param name="fileName">zip ファイルに追加するエントリのファイル名。</param>
+      <param name="entryName">zip ファイルに追加する際の新しいエントリ名。</param>
+      <remarks>デフォルトでは、エントリはオリジナルのファイル（非圧縮ファイル）と同じファイル名で zip ファイルに保存されます。このメソッドは、オリジナルとは異なるファイル名（パスを含む）をエントリに設定することを可能にします。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.String,System.String,System.DateTime)">
+      <summary>エントリを現在の zip ファイルに追加します。</summary>
+      <param name="fileName">zip ファイルに追加するファイルの名前。</param>
+      <param name="entryName">zip ファイルに格納された新しいエントリの名前。</param>
+      <param name="dateTime">ファイルの最終更新日時。</param>
+      <remarks>デフォルトでは、zip ファイル内のエントリは元の（非圧縮）ファイルと同じ名前を持ちます。 このメソッドでは、パスなどを含めた異なる名前を指定できます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.IO.Stream,System.String)">
+      <summary>zip ファイルにストリームを追加します。</summary>
+      <param name="stream">新しいエントリのデータを含む Stream。</param>
+      <param name="entryName">新規エントリとして使用する名前。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Add(System.IO.Stream,System.String,System.DateTime)">
+      <summary>ストリームを現在の zip ファイルに追加します。</summary>
+      <param name="stream">新しいエントリのデータを含むストリーム。</param>
+      <param name="entryName">新しいエントリに使用する名前。</param>
+      <param name="dateTime">ファイルの最終更新日時。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.AddFolder(System.String)">
+      <summary>現在の zip ファイルにフォルダの内容を追加します。</summary>
+      <param name="path">zip ファイルに追加されるフォルダのフルパス。</param>
+      <remarks>このメソッドはすべてのファイルとサブフォルダを zip ファイルに追加します。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.AddFolder(System.String,System.String)">
+      <summary>現在の zip ファイルにフォルダの内容を追加します。</summary>
+      <param name="path">zip ファイルに追加されるフォルダのフルパス。</param>
+      <param name="searchPattern">追加するファイルを指定するマスク。</param>
+      <remarks>フォルダにサブフォルダが含まれる場合、それらも zip ファイルに追加されます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.AddFolder(System.String,System.String,System.Boolean)">
+      <summary>現在の zip ファイルにフォルダの内容を追加します。</summary>
+      <param name="path">zip ファイルに追加されるフォルダのフルパス。</param>
+      <param name="searchPattern">追加するファイルを指定するマスク。</param>
+      <param name="includeSubfolders">サブフォルダを含める場合は True、ルートレベルのファイルのみ含める場合は False。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.ExtractFolder(System.String)">
+      <summary>zip ファイルのコンテンツを指定されたパスに抽出します。</summary>
+      <param name="path">解凍するファイルのターゲットパス。</param>
+      <remarks>zip ファイルが圧縮フォルダを含む場合、 ターゲットパスの下に新しいフォルダが作成され、 アーカイブの階層構造が保たれます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Remove(System.Int32)">
+      <summary>zip ファイルからエントリを削除します。</summary>
+      <param name="index">削除するエントリのインデックス。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Remove(System.String)">
+      <summary>zip ファイルからエントリを削除します。</summary>
+      <param name="fileName">削除するエントリの名前（大小文字は区別しません）。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Remove(System.Int32[])">
+      <summary>zip ファイルからいくつかのエントリを削除します。</summary>
+      <param name="indices">削除するエントリのインデックスを含む配列。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Remove(System.String[])">
+      <summary>zip ファイルからいくつかのエントリを削除します。</summary>
+      <param name="entryNames">削除するエントリの名前を含む配列。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Extract(System.Int32,System.String)">
+      <summary>zip ファイルからファイルを抽出します。</summary>
+      <param name="index">抽出するエントリのインデックス。</param>
+      <param name="destFileName">抽出したファイルの名前や保存場所。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Extract(System.String,System.String)">
+      <summary>zip ファイルからファイルを抽出します。</summary>
+      <param name="entryName">抽出するエントリの名前。</param>
+      <param name="destFileName">抽出したファイルの名前や保存場所。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Extract(System.Int32)">
+      <summary>zip ファイルからファイルを抽出します。</summary>
+      <param name="index">抽出するエントリのインデックス。</param>
+      <remarks>エントリは、エントリ名と同じ名前のファイルとして、zip ファイルと同じディレクトリ内に抽出されます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.Extract(System.String)">
+      <summary>zip ファイルからファイルを抽出します。</summary>
+      <param name="entryName">抽出するエントリの名前。</param>
+      <remarks>エントリは、エントリ名と同じ名前のファイルとして、zip ファイルと同じディレクトリ内に抽出されます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.OpenWriter(System.String,System.Boolean)">
+      <summary>Zip ファイルにデータを直接書き込むための Stream オブジェクトを開きます。</summary>
+      <param name="entryName">新しいエントリの名前。</param>
+      <param name="useMemory">キャッシュとしてメモリを使用する場合は True。一時ファイルを使用する場合は False。</param>
+      <returns>zip ファイルにデータを追加するために使用できるストリームです。エントリは、ストリームが閉じられるまで追加されません。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipEntryCollection.OpenWriter(System.String,System.DateTime,System.Boolean)">
+      <summary>エントリを zip ファイルに書き込むためのストリームを開きます。</summary>
+      <param name="entryName">新しいエントリの名前。</param>
+      <param name="dateTime">ファイルの最終更新日時。</param>
+      <param name="useMemory">メモリストリームまたは一時ファイルを使用するかどうか。</param>
+      <returns>データを zip ファイルに書き込むために使用できるストリーム。 エントリはストリームが閉じるまで追加されません。</returns>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntryCollection.Count">
+      <summary>zip ファイル内のエントリ数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntryCollection.Item(System.Int32)">
+      <summary>
+        インデックスに基づいて
+        <see cref="T:C1.C1Zip.C1ZipEntry" />を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipEntryCollection.Item(System.String)">
+      <summary>
+        エントリ名に基づいて
+        <see cref="T:C1.C1Zip.C1ZipEntry" />を取得します。エントリが見つからなかった場合は null を返します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Zip.C1ZipFile">
+      <summary>Zip ファイルを作成したり、開いたり、管理したりするために使用します。</summary>
+      <remarks>
+        <para>
+          ディスク上の zip ファイルに C1Zip を関連付けるには、
+          <see cref="M:C1.C1Zip.C1ZipFile.Open(System.String)" />メソッドもしくは
+          <see cref="M:C1.C1Zip.C1ZipFile.Create(System.String)" />メソッドを使用します。 また、zip ファイルの内容を調べたり、エントリを追加／展開／削除したりするには、
+          <see cref="P:C1.C1Zip.C1ZipFile.Entries" />プロパティを使用します。
+        </para>
+        <para>C1ZipFile は、標準的な zip ファイルのみ使用できます。コンポーネントは、gzip、zip2、tar、rar など、ほかの類似するフォーマットはサポートしていませんのでご注意ください。</para>
+        <para>標準の zip ファイルでは、それぞれのエントリのサイズに制限があります。４ＧＢ（uint.MaxValue）を超えるファイルは圧縮することができません。</para>
+      </remarks>
+      <example>
+        以下のコードは、"source.zip" という名前の zip ファイルを作成し、拡張子が "cs" であるすべてのファイルを zip ファイルに追加します。
+        <code><![CDATA[
+          // zip ファイルおよび圧縮するファイルのパスを取得します
+          string path = Application.ExecutablePath;
+          int pos = path.IndexOf(@"\bin");
+          path = path.Substring(0, pos + 1);
+          
+          // zip ファイルを作成します
+          C1ZipFile zip = new C1ZipFile();
+          zip.Create(path + "source.zip");
+          
+          // 拡張子が "cs" であるすべてのファイルを zip ファイルに追加します
+          foreach (string fileName in Directory.GetFiles(path, "*.cs"))
+            zip.Entries.Add(fileName);
+            
+          // 結果を表示します
+          foreach (C1ZipEntry ze in zip.Entries)
+          {
+            Console.WriteLine("{0} {1:#,##0} {2:#,##0}", 
+              ze.FileName, ze.SizeUncompressed, ze.SizeCompressed);
+          }
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.#ctor">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.#ctor(System.String,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの新しいインスタンスを初期化し、 この新しいインスタンスに関連付けられた zip ファイルを作成または開きます。
+      </summary>
+      <param name="fileName">開くまたは作成する zip ファイルの名前。</param>
+      <param name="create">新しい zip ファイルを作成する場合は true、既存のファイルを開く場合は false。</param>
+      <remarks>
+        <para>
+          <paramref name="create" />が true で zip ファイルがすでに存在する場合、 その既存ファイルは新しい空のファイルで上書きされます。
+        </para>
+        <para>
+          <paramref name="create" />が false で zip ファイルがすでに存在する場合、 その既存ファイルが開きます。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの新しいインスタンスを初期化し、 この新しいインスタンスに関連付けられた zip ファイルを開きます。
+      </summary>
+      <param name="fileName">開く zip ファイルの名前。</param>
+      <remarks>ファイルが存在しない場合、新しい空のファイルが作成されます。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.#ctor(System.IO.Stream,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの新しいインスタンスを初期化し、 この新しいインスタンスに関連付けられた zip ストリームを開きます。
+      </summary>
+      <param name="stream">
+        <see cref="T:System.IO.Stream" />zip データを含む。
+      </param>
+      <param name="create">空の zip ヘッダーを持つストリームを初期化するか、 またはストリーム内の既存の zip ファイルを開きます。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.#ctor(System.IO.Stream)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの新しいインスタンスを初期化し、 この新しいインスタンスに関連付けられた zip ストリームを開きます。
+      </summary>
+      <param name="stream">
+        <see cref="T:System.IO.Stream" />zip イベントデータを含む。
+      </param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Open(System.String)">
+      <summary>既存の zip ファイルを開きます。</summary>
+      <param name="fileName">既存の zip ファイル名（パスを含む）。</param>
+      <remarks>
+        <para>
+          Open メソッドは、zip ファイルが存在し、zip ファイルが正当であることをチェックしてから、
+          <see cref="P:C1.C1Zip.C1ZipFile.Entries" />コレクション内に直接 zip ファイルを読み込みます。 その後 zip ファイルが閉じられ、他のアプリケーションがその zip にアクセスすることができるようになります。zip ファイルは、明示的に閉じる必要はありません。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Create(System.String)">
+      <summary>指定した名前で新しい空の Zip ファイルを作成します。</summary>
+      <param name="fileName">作成する zip ファイル名（パスを含む）。</param>
+      <remarks>この名前のファイルが存在する場合、それを上書きします。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Open(System.IO.Stream)">
+      <summary>ストリームに格納された既存の zip ファイルを開きます。</summary>
+      <param name="stream">
+        zip ファイルを含む
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <remarks>
+        <para>このメソッドにより、実際のファイルの代わりにストリームに格納された zip ファイルを開いて操作することができます。</para>
+        <para>このメソッドの一般的な使用ケースとしては、アプリケーションのリソースとして格納された、またはバイナリのデータベースフィールドに格納された zip ファイルです。</para>
+      </remarks>
+      <example>
+        <para>以下の例では、埋め込まれたリソース内に格納された zip ファイルから情報を読み込みます。 アプリケーション内に zip ファイルを埋め込むには、以下の手順で操作します：</para>
+        <para>1) Visual Studio のプロジェクトノード上で右クリックし、[追加]－[既存の項目]メニューを選択します。</para>
+        <para>2) zip ファイルを選択し、プロジェクトに追加します。</para>
+        <para>3) 新たに追加されたファイルを選択し、プロパティのビルドアクションを"埋め込まれたリソース"に変更します。</para>
+        <code><![CDATA[
+          // アプリケーションのリソースからストリームを取得します
+          System.Reflection.Assembly a = this.GetType().Assembly;
+          using (Stream stream = a.GetManifestResourceStream("MyApp.test.zip"))
+          {
+            // ストリーム上で C1ZipFile を開きます
+            zip.Open(stream);
+            
+            // zip ファイルに含まれるエントリを列挙します。
+            foreach (C1ZipEntry ze in zip.Entries)
+            {
+              // txt の拡張子を持つエントリを表示します。
+              if (ze.FileName.ToLower().EndsWith(".txt"))
+              {
+                using (StreamReader sr = new StreamReader(ze.OpenReader()))
+                {
+                  MessageBox.Show(sr.ReadToEnd(), ze.FileName);
+                }
+              }
+            }
+          }
+          ]]></code>
+      </example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Create(System.IO.Stream)">
+      <summary>ストリームに新しい zip ファイルを作成します。</summary>
+      <param name="stream">
+        新しい zip ファイルを含む
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <example>
+        以下のコードは、メモリストリーム上に新しい
+        <see cref="T:C1.C1Zip.C1ZipFile" />を作成します。 それからそこにファイルをいくつか追加します。最後に、たとえばデータベースに格納できるように、zip 圧縮されたデータをバイト配列として取得します。
+        <code><![CDATA[
+          // ストリームに zip を作成します
+          MemoryStream msZip = new MemoryStream();
+          C1ZipFile zip = new C1ZipFile(msZip, true);
+          
+          // いくつかのエントリを追加します
+          foreach (string f in Directory.GetFiles(@"c:\WINDOWS\Web\Wallpaper"))
+          {
+            zip.Entries.Add(f);
+          }
+          
+          // zip 圧縮されたデータをバイト配列として取り出します
+          byte[] zipData = msZip.ToArray();
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Close">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />オブジェクトのすべてのデータメンバをリセットします。
+      </summary>
+      <remarks>
+        ディスク上のファイルは C1Zip によって自動的に閉じられます。
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスと物理的な zip ファイルとの接続を切りたい場合のみ、Close メソッドを使用することができます。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.Refresh">
+      <summary>現在の zip ファイルを再度開くことで、すべてのデータメンバを更新します。</summary>
+      <remarks>
+        このメソッドは、他のアプリケーションによって zip ファイルの内容が更新された可能性があるので、
+        <see cref="P:C1.C1Zip.C1ZipFile.Entries" />コレクション内の情報をアップデートしたい、という場合に有効です。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.IsZipFile(System.String)">
+      <summary>指定されたファイルが正当な zip ファイルかどうかをテストします。</summary>
+      <param name="fileName">テストするファイル名。</param>
+      <returns>ファイルが正当な zip ファイルの場合は True、それ以外の場合は False。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.IsZipFile(System.IO.Stream)">
+      <summary>ストリームが有効な zip ファイルを含むかどうかをテストします。</summary>
+      <param name="stream">
+        <see cref="T:System.IO.Stream" />テストする。
+      </param>
+      <returns>
+        <paramref name="stream" />が有効な zip ファイルを含む場合は true、そうでない場合は false。
+      </returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.OpenBatch">
+      <summary>複数の操作を同時に行うために zip ファイルを開きます。</summary>
+      <remarks>
+        <para>
+          デフォルトでは、エントリを追加したり削除したりする場合、
+          <see cref="T:C1.C1Zip.C1ZipFile" />が自動的に zip ファイルのオープン／クローズを制御します。
+        </para>
+        <para>
+          このことは、特定のアンチウィルスソフトウェアをインストールしていたり、比較的小さいサイズのエントリを多数追加しようとした場合に、パフォーマンスの低下を招く恐れがあります。 このようなケースでは、すべての操作が完了するまで zip ファイルのオープン状態を保つために、OpenBatch メソッドと
+          <see cref="M:C1.C1Zip.C1ZipFile.CloseBatch" />メソッドを使用してください。
+        </para>
+        <para>
+          OpenBatch メソッドを使用した場合は、必ず
+          <see cref="M:C1.C1Zip.C1ZipFile.CloseBatch" />メソッドを呼び出して zip ファイルをクローズするようにしてください。処理中に例外が発生した場合も同様です。
+        </para>
+      </remarks>
+      <example>
+        以下のコードは、zip ファイルを開気、いくつかのエントリを追加して、ファイルを閉じます。
+        <code><![CDATA[
+          C1ZipFile zip = new C1ZipFile();
+          zip.Open(myzipfile);
+          try
+          {
+            zip.OpenBatch();
+            foreach (string fileName in Directory.GetFiles(path, "*.*"))
+              zip.Entries.Add(fileName);
+          }
+          finally
+          {
+            zip.CloseBatch();
+          }
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZipFile.CloseBatch">
+      <summary>
+        <see cref="M:C1.C1Zip.C1ZipFile.OpenBatch" />メソッドを呼び出して開いた zip ファイルをクローズします。
+      </summary>
+      <remarks>
+        詳細については、
+        <see cref="M:C1.C1Zip.C1ZipFile.OpenBatch" />メソッドを参照してください。
+      </remarks>
+    </member>
+    <member name="E:C1.C1Zip.C1ZipFile.Progress">
+      <summary>zip ファイルに対してデータを読み書きしている間発生します。</summary>
+      <remarks>このイベントでは、ユーザーの判断でプログレスバーなどの UI 要素を更新したり操作をキャンセルしたりできます。</remarks>
+      <example>
+        以下のコードでは、アプリケーションがファイルを圧縮している間、出力ウィンドウにメッセージを出力します。
+        <code><![CDATA[
+          private void Compress()
+          {
+            // zip ファイルを作成します
+            C1Zip zip = new C1Zip();
+            zip.Create(zipFileName);
+            
+            // イベントハンドラに接続します
+            zip.Progress += new ZipProgressEventHandler(zip_Progress);
+            
+            // ファイルを追加します
+            foreach (string fileName in Directory.GetFiles(path, "*.*"))
+              zip.Entries.Add(fileName);
+          }
+          
+          // ファイルの圧縮中にメッセージを出力します
+          private void zip_Progress(object sender, ZipProgressEventArgs e)
+          {
+            Console.WriteLine("{0} を圧縮中です：{1:p0}", 
+              e.FileName, e.Position/(float)e.FileLength);
+          }
+          ]]></code></example>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.FileName">
+      <summary>現在開いている zip ファイルの名前を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.Password">
+      <summary>エントリを圧縮、または現在の Zip ファイルから抽出する場合に使用するパスワードを取得または設定します。</summary>
+      <remarks>
+        <para>Password プロパティを空でない文字列に設定した場合、Zip ファイルに追加したエントリは暗号化され、パスワードにより保護されます。 後でこれらのエントリを抽出するには、同じパスワードを使用する必要があります。</para>
+        <para>パスワードは、パスワード文字列が設定された時点で適用されます。殻でないパスワード文字列を設定し、zip ファイルにいくつかのエントリを追加した場合、すべてのエントリは同じパスワードを使用します。</para>
+        <para>C1Zip は、パスワード文字として Unicode をサポートしていますが、いくつかの zip ユーティリティでは Unicode をサポートしていない場合があります。暗号化された zip ファイルをサードバーティー製 zip ユーティリティ上で開けるようにするため、パスワード文字列は ASCII 文字のみで設定することをお勧めします。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.Comment">
+      <summary>現在開いている zip ファイルに関連付けられたコメント文字列を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.CompressionLevel">
+      <summary>圧縮するファイルに適用する圧縮レベルを取得または設定します。</summary>
+      <remarks>圧縮レベルを高く設定すると、ファイルサイズは小さくなりますが、処理にかかる時間は長くなります。デフォルト設定（DefaultCompression）では、最適な圧縮レベルおよび処理時間となります。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.Entries">
+      <summary>現在開いている zip ファイル内のエントリのコレクションを取得します。</summary>
+      <remarks>Entries コレクションは、zip ファイル内のエントリを列挙したり、エントリの追加や削除、展開を行う場合に使用します。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.OverwriteReadOnly">
+      <summary>zip ファイルからエントリを抽出するときに、ReadOnly 属性のファイルを上書きするかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.OverwriteHidden">
+      <summary>zip ファイルからエントリを抽出するときに、Hidden 属性のファイルを上書きするかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.OverwriteSystem">
+      <summary>zip ファイルからエントリを抽出するときに、System 属性のファイルを上書きするかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.UseUtf8Encoding">
+      <summary>ファイルの名前とコメントを UTF8 形式で格納するかどうかを決定します。</summary>
+      <remarks>
+        <para>Zip 仕様では、埋め込みファイルの名前とコメントに使用される文字エンコードを指定しません。 元の IBM PC 文字エンコードセット（通称 IBM コードページ 437）がサポートされる唯一のエンコードと想定されます。 このため、一部の zip ユーティリティでは Unicode 文字を含むファイルの名前またはコメントを格納できません。 一部のユーティリティでは格納できますが、 それらのファイルの名前とコメントが他のユーティリティで正しく読み取れない場合があります。</para>
+        <para>
+          <b>UseUtf8Encoding</b>を true に設定すると、 C1Zip は、Utf8 エンコードを使用してファイルの名前とコメントを格納および取得するため、 Unicode 文字を使用可能です。 Unicode ファイルの名前が他の zip ユーティリティで正しく読み取れない場合があることに注意してください。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.MemoryThreshold">
+      <summary>メモリ内で圧縮される、もっとも大きなストリームのサイズを取得または設定します。</summary>
+      <remarks>
+        <para>
+          <see cref="T:C1.C1Zip.C1ZipFile" />は、zip ファイルにエントリを追加する前に、一時ストリーム内でエントリを圧縮します。
+        </para>
+        <para>
+          <see cref="P:C1.C1Zip.C1ZipFile.MemoryThreshold" />のバイト数より小さいエントリは、一時メモリストリームを使用して圧縮されます。
+        </para>
+        <para>
+          <see cref="P:C1.C1Zip.C1ZipFile.MemoryThreshold" />のバイト数より大きいエントリは、一時ファイルを使用して圧縮されます。
+          <see cref="P:C1.C1Zip.C1ZipFile.TempFileName" />プロパティを使用して、一時ファイルの作成場所を制御することができます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZipFile.TempFileName">
+      <summary>zip ファイルにエントリを追加する際に使用される一時ファイルのファイル名を取得または設定します。</summary>
+      <remarks>
+        <para>
+          zip ファイルにエントリを追加する間、
+          <see cref="T:C1.C1Zip.C1ZipFile" />は一時ストリームを作成します。この一時ストリームはメモリベースもしくはディスクベースで、エントリのサイズと
+          <see cref="P:C1.C1Zip.C1ZipFile.MemoryThreshold" />の設定値によってどちらを使用するかが決められます。
+        </para>
+        <para>
+          一時ファイルを使用する場合、TempFileName プロパティで設定された場所に一時ファイルが作成されます。一時ファイル名にパスが含まれていない場合、
+          <see cref="T:C1.C1Zip.C1ZipFile" />は
+          <see cref="M:System.IO.Path.GetTempFileName" />を使用して自動的にファイルを生成します。
+        </para>
+      </remarks>
+    </member>
+    <member name="T:C1.C1Zip.ZipProgressEventHandler">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの
+        <see cref="F:C1.C1Zip.C1ZipFile.Progress" />イベントを処理するメソッドを表します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Zip.ZipProgressEventArgs">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />クラスの
+        <see cref="F:C1.C1Zip.C1ZipFile.Progress" />イベントのデータを提供します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.FileName">
+      <summary>圧縮または展開されているファイルの名前を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.FileLength">
+      <summary>圧縮または展開されているファイルの長さを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.FileLengthLong">
+      <summary>圧縮または展開されるファイルの長さを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.Cancel">
+      <summary>現在の操作をキャンセルする場合は true に設定します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.Position">
+      <summary>ストリーム内の現在位置を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.ZipProgressEventArgs.PositionLong">
+      <summary>ストリームへの現在の位置を取得します。</summary>
+    </member>
+    <member name="T:C1.C1Zip.ZipFileException">
+      <summary>無効な Zip ファイルを開こうとするときにスローされる例外。</summary>
+    </member>
+    <member name="M:C1.C1Zip.ZipFileException.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.C1Zip.ZipFileException" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="msg">例外を説明するメッセージ。</param>
+    </member>
+    <member name="M:C1.C1Zip.ZipFileException.#ctor(System.String,System.String)">
+      <summary>
+        <see cref="T:C1.C1Zip.ZipFileException" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="msg">例外を説明するメッセージ。</param>
+      <param name="filename">例外を発生させたファイルの名前。</param>
+    </member>
+    <member name="M:C1.C1Zip.ZipFileException.#ctor(System.String,System.String,System.Exception)">
+      <summary>
+        <see cref="T:C1.C1Zip.ZipFileException" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="msg">例外を説明するメッセージ。</param>
+      <param name="filename">例外を発生させたファイルの名前。</param>
+      <param name="innerException">内部例外。</param>
+    </member>
+    <member name="T:C1.C1Zip.C1ZStreamReader">
+      <summary>.NET ストリームからデータを圧縮解除します。</summary>
+      <remarks>
+        <para>
+          圧縮されたストリームからデータを読み込んで圧縮解除するには、コンストラクタに圧縮されたストリームを渡して
+          <see cref="T:C1.C1Zip.C1ZStreamReader" />オブジェクトを作成してください。
+        </para>
+        <para>
+          その後、
+          <see cref="M:C1.C1Zip.C1ZStreamReader.Read(System.Byte[],System.Int32,System.Int32)" />メソッドを使用して、
+          <see cref="T:C1.C1Zip.C1ZStreamReader" />からデータを読み込むか、
+          <see cref="T:C1.C1Zip.C1ZStreamReader" />の
+          <see cref="T:System.IO.StreamReader" />を作成します。 後者は、書式化されたデータを読む場合に使用します。
+        </para>
+      </remarks>
+      <example>
+        以下のコードは、メモリストリーム上に保存されている文字列を圧縮解除します。
+        <code><![CDATA[
+          public string ExpandString(byte[] buffer)
+          {
+            // メモリストリーム内のバッファを返します
+            MemoryStream ms = new MemoryStream(buffer)
+            
+            // メモリストリームに圧縮解除ストリームをアタッチします
+            C1ZStreamReader sr = new C1ZStreamReader(ms);
+            
+            // データを圧縮解除します
+            StreamReader reader = new StreamReader(sr);
+            return reader.ReadToEnd();
+          }
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データが含まれる入力ストリーム。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream,System.Boolean,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データが含まれる入力ストリーム。</param>
+      <param name="zip">圧縮されたストリームが zip フォーマットで作成されているかどうかを示すブール値。</param>
+      <param name="sizeCompressed">ストリームから読み込む圧縮データのバイト数。</param>
+      <remarks>
+        <paramref name="sizeCompressed" />引数は、単一のストリームにいくつかの圧縮されたストリーム（zip ファイルなど）が含まれる場合にのみ必要となります。引数を指定しない場合、ストリームには圧縮されたデータの単一のストリームが含まれるとみなされます。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データが含まれる入力ストリーム。</param>
+      <param name="zip">圧縮されたストリームが zip フォーマットで作成されているかどうかを示すブール値。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream,System.Boolean,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データが含まれる入力ストリーム。</param>
+      <param name="header">圧縮されたストリームがヘッダ情報を含んでいるかどうかを示すブール値（zip ファイル内のストリームは False でなければなりません）。</param>
+      <param name="crc32">圧縮されたストリームが CRC32 チェックサムを含むかどうかを示すブール値（zip ファイル内のストリームは True でなければなりません）。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream,System.Boolean,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データが含まれる入力ストリーム。</param>
+      <param name="zip">圧縮されたストリームが zip フォーマットで作成されているかどうかを示すブール値。</param>
+      <param name="sizeCompressed">ストリームから読み込む圧縮データのバイト数。</param>
+      <param name="method">ストリームを圧縮するために使用する方法を示す値。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.#ctor(System.IO.Stream,System.Boolean,System.Int64,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを含む入力ストリーム。</param>
+      <param name="zip">圧縮ストリームが zip 形式で作成されたかどうかを指定します。</param>
+      <param name="sizeCompressed">ストリームから読み取る圧縮バイト数を指定します。</param>
+      <param name="method">ストリームの圧縮に使用されたメソッドを指定します。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.Seek(System.Int64,System.IO.SeekOrigin)">
+      <summary>
+        このメソッドは、
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスではサポートされません。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.SetLength(System.Int64)">
+      <summary>基本ストリームから読み込む圧縮データのバイト数を設定します。</summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>圧縮ストリームからシーケンスを読み込み、圧縮解除したデータを特定のバッファに書き込みます。</summary>
+      <param name="buf">
+        バイト配列。このメソッドが戻るとき、指定したバイト配列の
+        <paramref name="offset" />から (
+        <paramref name="offset" />+
+        <paramref name="count" />- 1) までの値が、ストリームから読み込んだ圧縮解除データに置き換えられます。
+      </param>
+      <param name="offset">
+        現在のストリームからの読み込み開始位置を示す
+        <paramref name="buf" />引数内のバイトオフセット。
+      </param>
+      <param name="count">現在のストリームから読み込む（圧縮解除された）データの最大バイト数。</param>
+      <returns>バッファに読み込まれたバイト数。要求しただけのバイト数を読み取れなかった場合、この値は要求したバイト数より小さくなります。ストリームの末尾に到達した場合は０になることがあります。</returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.ReadByte">
+      <summary>ファイルからバイトを読み取り、読み取り位置を１バイト進めます。</summary>
+      <returns>
+        <see cref="T:System.Int32" />にキャストしたバイト。またはストリームの末尾から読み取る場合は -１。
+      </returns>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+        このメソッドは、
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスではサポートされません。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.Flush">
+      <summary>ストリームに対応するすべてのバッファをクリアし、バッファ内のデータを基本ストリームに書き込みます。</summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamReader.Close">
+      <summary>
+        <para>現在のストリームコンプレッサを閉じ、基本ストリーム内に残っているデータをフラッシュします。</para>
+        <para>
+          <see cref="P:C1.C1Zip.C1ZStreamReader.OwnsBaseStream" />プロパティに True を設定した場合、このメソッドは現在のストリームを閉じ、現在のストリームに関連付けられているすべてのリソース（ソケット、ファイルハンドルなど）を解放します。
+        </para>
+      </summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.BaseStream">
+      <summary>圧縮データが含まれる基本ストリームを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.OwnsBaseStream">
+      <summary>
+        <see cref="M:C1.C1Zip.C1ZStreamReader.Close" />メソッドの呼び出しで基本ストリーム（
+        <see cref="P:C1.C1Zip.C1ZStreamReader.BaseStream" />を参照）も閉じるかどうかを示す値を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.SizeCompressed">
+      <summary>ストリーム内の圧縮バイト数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.SizeUncompressed">
+      <summary>ストリーム内の圧縮解除されたバイト数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.SizeCompressedLong">
+      <summary>ストリーム内のバイト数（圧縮バイト）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.SizeUncompressedLong">
+      <summary>ストリームに圧縮されたバイト数（非圧縮バイト）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.ZStream">
+      <summary>
+        この
+        <see cref="T:C1.C1Zip.C1ZStreamReader" />の ZStream オブジェクトを取得します。
+      </summary>
+      <remarks>このプロパティは、コンプレッサの低レベルの動作をカスタマイズする必要がある高度なアプリケーションでのみ有効です。一般的なアプリケーションでは使用する必要はありません。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.CanRead">
+      <summary>常に True を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.CanWrite">
+      <summary>常に False を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.CanSeek">
+      <summary>常に False を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.Length">
+      <summary>圧縮ストリームの長さを取得します（圧縮ストリームが未定義の場合 -1 を返します）。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamReader.Position">
+      <summary>ストリーム内の位置を取得します。</summary>
+    </member>
+    <member name="T:C1.C1Zip.CompressionLevelEnum">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZipFile" />にエントリを追加するときに適用される圧縮レベルを指定します。
+      </summary>
+    </member>
+    <member name="F:C1.C1Zip.CompressionLevelEnum.NoCompression">
+      <summary>圧縮しません。</summary>
+    </member>
+    <member name="F:C1.C1Zip.CompressionLevelEnum.BestSpeed">
+      <summary>圧縮時間を最小化します。</summary>
+    </member>
+    <member name="F:C1.C1Zip.CompressionLevelEnum.BestCompression">
+      <summary>圧縮ファイルのファイルサイズを最小化します。</summary>
+    </member>
+    <member name="F:C1.C1Zip.CompressionLevelEnum.DefaultCompression">
+      <summary>標準の圧縮時間と速度です。</summary>
+    </member>
+    <member name="T:C1.C1Zip.C1ZStreamWriter">
+      <summary>.NET ストリーム内にデータを圧縮します。</summary>
+      <remarks>
+        <para>
+          ストリーム内にデータを圧縮するには、コンストラクタにストリームを渡して
+          <see cref="T:C1.C1Zip.C1ZStreamWriter" />オブジェクトを作成します。
+        </para>
+        <para>
+          その後、
+          <see cref="M:C1.C1Zip.C1ZStreamWriter.Write(System.Byte[],System.Int32,System.Int32)" />メソッドを使用して
+          <see cref="T:C1.C1Zip.C1ZStreamWriter" />にデータを出力するか、
+          <see cref="T:C1.C1Zip.C1ZStreamWriter" />の
+          <see cref="T:System.IO.StreamWriter" />を作成します。 後者は、書式化されたデータを出力する場合に使用します。
+        </para>
+        <para>
+          データの出力が完了したら、
+          <see cref="M:C1.C1Zip.C1ZStreamWriter.Close" />メソッドを呼び出してデータのフラッシュと基本ストリームのクローズを行います。
+        </para>
+      </remarks>
+      <example>
+        以下のコードは、メモリストリーム内の文字列を圧縮します。
+        <code><![CDATA[
+          public byte[] CompressString(string str)
+          {
+            // メモリストリームを開きます
+            MemoryStream ms = new MemoryStream()
+            
+            // メモリストリームに圧縮ストリームをアタッチします
+            C1ZStreamWriter sw = new C1ZStreamWriter(ms);
+            
+            // 圧縮ストリームにデータを書き込みます
+            StreamWriter writer = new StreamWriter(sw);
+            writer.Write(str);
+            
+            // 残っているデータをフラッシュします
+            writer.Flush();
+            
+            // メモリバッファを返します
+            return ms.ToArray();
+          }
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+      <param name="zip">圧縮されたストリームを zip フォーマットで作成するかどうかを示すブール値。</param>
+      <remarks>
+        <para>zip ファイル内のストリームは、以下の２つの面で通常の ZLib ストリームと異なります。</para>
+        <para>(1) zip ストリームは、任意のローカルヘッダ情報を含みません（この情報は zip ファイルのヘッダに格納されます）。</para>
+        <para>(2) zip ストリームは、ZLib ストリームで使用される adler32 チェックサムの代わりに CRC32 チェックサムを使用します。</para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream,System.Boolean,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+      <param name="header">圧縮されたストリームにヘッダ情報を含めるかどうかを示すブール値（zip ファイル内のストリームは False でなければなりません）。</param>
+      <param name="crc32">圧縮されたストリームに CRC32 チェックサムを含めるかどうかを示すブール値（zip ファイル内のストリームは True でなければなりません）。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream,C1.C1Zip.CompressionLevelEnum)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+      <param name="level">ストリームを圧縮するために使用する方法を示す値。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream,C1.C1Zip.CompressionLevelEnum,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+      <param name="level">ストリームを圧縮するために使用する方法を示す値。</param>
+      <param name="zip">圧縮されたストリームを zip フォーマットで作成するかどうかを示すブール値。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.#ctor(System.IO.Stream,C1.C1Zip.CompressionLevelEnum,System.Boolean,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="baseStream">圧縮データを格納する出力ストリーム。</param>
+      <param name="level">ストリームを圧縮するために使用する方法を示す値。</param>
+      <param name="header">圧縮されたストリームにヘッダ情報を含めるかどうかを示すブール値（zip ファイル内のストリームは False でなければなりません）。</param>
+      <param name="crc32">圧縮されたストリームに CRC32 チェックサムを含めるかどうかを示すブール値（zip ファイル内のストリームは True でなければなりません）。</param>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.Seek(System.Int64,System.IO.SeekOrigin)">
+      <summary>
+        このメソッドは、
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスではサポートされません。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.SetLength(System.Int64)">
+      <summary>
+        このメソッドは、
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスではサポートされません。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+        このメソッドは、
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスではサポートされません。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>現在のストリームにバイト シーケンスを書き込み、書き込んだバイト数の分だけストリームの現在位置を進めます。</summary>
+      <param name="buf">
+        バイト配列。このメソッドは、
+        <paramref name="buf" />から現在のストリームに、
+        <paramref name="count" />で指定されたバイト数だけコピーします。
+      </param>
+      <param name="offset">
+        現在のストリームへのバイトのコピーを開始する位置を示す
+        <paramref name="buf" />内のバイト オフセット。インデックス番号は 0 から始まります。
+      </param>
+      <param name="count">現在のストリームに書き込むバイト数。</param>
+      <remarks>
+        データはストリームに書き込まれるときに圧縮されます。通常、ストリームに
+        <paramref name="count" />バイト書き込む場合、 ストリームの現在位置を進める数は
+        <paramref name="count" />より小さくなります。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.Flush">
+      <summary>ストリームに対応するすべてのバッファをクリアし、バッファ内のデータを基本ストリームに書き込みます。</summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.Close">
+      <summary>
+        <para>現在のストリームコンプレッサを閉じ、基本ストリーム内に残っているデータをフラッシュします。</para>
+        <para>
+          <see cref="P:C1.C1Zip.C1ZStreamWriter.OwnsBaseStream" />プロパティに True を設定した場合、このメソッドは現在のストリームを閉じ、現在のストリームに関連付けられているすべてのリソース（ソケット、ファイルハンドルなど）を解放します。
+        </para>
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.C1ZStreamWriter.WriteByte(System.Byte)">
+      <summary>ストリームの現在位置にバイトを書き込み、ストリームの位置を 1 バイトだけ進めます。</summary>
+      <param name="value">ストリームに書き込むバイト。</param>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.BaseStream">
+      <summary>圧縮データを受け取る基本ストリームを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.OwnsBaseStream">
+      <summary>
+        <see cref="M:C1.C1Zip.C1ZStreamWriter.Close" />メソッドの呼び出しで基本ストリーム（
+        <see cref="P:C1.C1Zip.C1ZStreamWriter.BaseStream" />を参照）も閉じるかどうかを示す値を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.Checksum">
+      <summary>ストリームの完全性をチェックする際に使用するチェックサム値を取得します。</summary>
+      <remarks>
+        チェックサムは、
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />の作成方法に応じてcrc32チェックサム、adler32チェックサムのいずれかにできます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.SizeCompressed">
+      <summary>ストリーム内のバイト数（圧縮バイト数）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.SizeUncompressed">
+      <summary>ストリーム内に圧縮されているバイト数（非圧縮バイト数）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.SizeCompressedLong">
+      <summary>ストリーム内のバイト数（圧縮バイト）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.SizeUncompressedLong">
+      <summary>ストリームに圧縮されたバイト数（非圧縮バイト）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.ZStream">
+      <summary>
+        この
+        <see cref="T:C1.C1Zip.C1ZStreamWriter" />でラップされている ZStream のインスタンスを取得します。
+      </summary>
+      <remarks>このプロパティは、コンプレッサの低レベル動作をカスタマイズする必要があるアプリケーションでだけ有効です。一般的なアプリケーションでは必要ありません。</remarks>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.CanRead">
+      <summary>常に False を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.CanWrite">
+      <summary>常に True を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.CanSeek">
+      <summary>常に False を返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.Length">
+      <summary>基本ストリームの大きさをバイト単位で返します。</summary>
+    </member>
+    <member name="P:C1.C1Zip.C1ZStreamWriter.Position">
+      <summary>ストリーム内の位置を取得します。</summary>
+    </member>
+    <member name="T:C1.C1Zip.ZLib.ZStream">
+      <summary>ZStream は、C1.C1Zip アセンブリの中で最も柔軟性が高いと同時に最も使い方が難しいクラスです。これは、汎用のコンプレッサとデコンプレッサである ZLIB の zstream オブジェクトの C# 実装を含みます。</summary>
+      <remarks>
+        <para>
+          ほとんどの場合、ZStream の代わりに
+          <see cref="T:C1.C1Zip.C1ZStreamReader" />クラスと
+          <see cref="T:C1.C1Zip.C1ZStreamWriter" />クラスを使用できます。これらのクラスは、ZLIB の詳細を処理してくれるフレンドリーで使いやすいラッパを提供します。
+        </para>
+        <para>ZStream を使用するのは、ZLIB に精通し、低レベルでのデータのコンプレッサ／デコンプレッサ処理を制御する必要がある場合だけです（独自のバッファまたは圧縮ディクショナリを提供するなど）。</para>
+        <para>ZStream を直接使用する場合は、http://www.info-Zip.org/ または http://www.gZip.org/ で入手可能な記事を参照してください。</para>
+        <para>ZLIB は、Jean-loup Gailly と Mark Adler によって作成された、オープンソースライブラリです。</para>
+      </remarks>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_OK">
+      <summary>「エラーなし」であることを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_STREAM_END">
+      <summary>「ストリームの末端を検出した」ことを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_NEED_DICT">
+      <summary>「あらかじめセットされた辞書が必要」であることを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_ERRNO">
+      <summary>「ファイルエラー」であることを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_STREAM_ERROR">
+      <summary>「ストリームの構造が矛盾している（例えば入出力バッファが null など）」ことを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_DATA_ERROR">
+      <summary>「入力データが壊れている（フォーマットもしくはチェックサムに誤りがある）」ことを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_MEM_ERROR">
+      <summary>「メモリが不足している」ことを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_BUF_ERROR">
+      <summary>「処理がまったく進行しない、あるいは出力バッファのスペースがない」ことを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.Z_VERSION_ERROR">
+      <summary>「ZLIB バージョンの不一致」であることを示す定数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.next_in">
+      <summary>入力バッファです。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.next_in_index">
+      <summary>入力バッファ内のカーソルの位置です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.avail_in">
+      <summary>入力バッファ内で使用可能なバイト数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.total_in">
+      <summary>これまでに読み込まれた入力バイト総数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.next_out">
+      <summary>出力バッファです。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.next_out_index">
+      <summary>出力バッファ内のカーソルの位置です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.avail_out">
+      <summary>出力バッファ内で使用可能なバイト数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.total_out">
+      <summary>これまでに出力されたバイト総数です。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.msg">
+      <summary>最後に発生したエラーの説明です（エラーが発生していない場合は null）。</summary>
+    </member>
+    <member name="F:C1.C1Zip.ZLib.ZStream.adler">
+      <summary>現在のチェックサム値です（Adler もしくは CRC32）。</summary>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.#ctor">
+      <summary>
+        <see cref="T:C1.C1Zip.ZLib.ZStream" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.#ctor(System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Zip.ZLib.ZStream" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="crc32">
+        <b>True</b>を設定すると CRC32 チェックサムを使用します。
+        <b>False</b>を設定すると Adler チェックサムを使用します。
+      </param>
+      <remarks>CRC32 チェックサムは ZIP ファイルで標準的に使用されます。Adler チェックサムは、ZLIB で使用されるデフォルトです。Adler チェックサムは ZIP フォーマットと互換性はありませんが、処理速度は速くなります。</remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflateInit">
+      <summary>圧縮解除の内部ストリームのステータスを初期化します。</summary>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />フィールドと
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_in" />フィールドは、あらかじめ呼び出し側によって初期化される必要があります。
+        </para>
+        <para>
+          inflateInit は、zlib ヘッダが存在する場合、それを読み取ることを除いて、圧縮解除は実行しません。圧縮解除は
+          <see cref="M:C1.C1Zip.ZLib.ZStream.inflate(System.Int32)" />により実行されます。したがって、
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_in" />は変更できます。ただし、
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />は変更されません。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflateInit(System.Int32)">
+      <summary>圧縮解除の内部ストリームのステータスを初期化します。</summary>
+      <param name="bits">LZ77 データ圧縮のウィンドウのサイズ（ビット単位：デフォルト 15）。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflate(System.Int32)">
+      <summary>できるだけ多くのデータを圧縮解除し、入力バッファが空になるか、出力バッファがいっぱいになったときに停止します。</summary>
+      <param name="flush">出力を出力バッファにフラッシュする方法（デフォルト：２）。</param>
+      <returns>
+        <para>処理が幾分進行（さらに入力の処理か出力の生成を実行）したら、Z_OK を返します。</para>
+        <para>圧縮データの終わりに到達し、すべての圧縮解除された出力を生成したら、Z_STREAM_END を返します。</para>
+        <para>この時点でプリセットディクショナリが必要であれば、Z_NEED_DICT を返します。</para>
+        <para>入力データが壊れた場合（zlib 形式に適合しない入力ストリーム、または無効なチェックサム）、Z_DATA_ERROR を返します。</para>
+        <para>
+          ストリーム構造が一貫しないときは（
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />または
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />が Null の場合など）、Z_STREAM_ERROR を返します。
+        </para>
+        <para>十分なメモリがない場合、Z_MEM_ERROR を返します。</para>
+        <para>Z_FINISH を使用しているときに、これ以上処理を進行できない場合や出力バッファに十分な空がないときは、Z_BUF_ERROR を返します。</para>
+      </returns>
+      <remarks>
+        <para>詳細なセマンティクスは以下のとおりです。inflate は、以下の２つのアクションのいずれか、または両方を実行します。</para>
+        <para>
+          1.
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />から開始してさらに入力を圧縮解除し、随時
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_in" />を更新します。一部の入力しか処理できない場合（出力バッファに十分な空がないため）、
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />が更新され、処理はこの時点から inflate への次の呼び出しを再開します。
+        </para>
+        <para>
+          2.
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />から開始してさらに出力を提供し、随時
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />を更新します。inflate は、入力データがなくなるか、出力バッファに空がなくなるまで最大限の出力を提供します。
+        </para>
+        <para>inflate への呼び出しの前に、アプリケーションは少なくとも２つのアクションのいずれかが可能であることを保証する必要があります。それを行うには、さらに入力の提供か、出力の消費（またはその両方）を実行し、随時 next_* 値と avail_* 値を更新します。</para>
+        <para>
+          inflate が Z_OK を返し、
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />がゼロの場合、保留中の出力が残っている可能性があるので、出力バッファに空を作ってから inflate を再度呼び出す必要があります。
+        </para>
+        <para>
+          アプリケーションは、出力バッファがいっぱいになったとき（
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />== 0）や、inflate の各呼び出しの後など、必要に応じて圧縮解除された出力を消費できます。
+        </para>
+        <para>このメソッドは、フラッシュを強制した場合を除き、出力待ち時間（出力を生成せずに入力を読み込むこと）が生じることがあります。</para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflateEnd">
+      <summary>このストリームに動的に割り当てられたすべてのデータ構造を解放します。この関数は、すべての未処理の入力を破棄しますが、保留の出力はフラッシュしません。</summary>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflateSync">
+      <summary>完全なフラッシュポイント（deflate メソッドの Z_FULL_FLUSH 設定の説明参照）が見つかるか、すべての使用可能な入力をスキップするまで、無効な圧縮データをスキップします。出力は提供されません。</summary>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.inflateSetDictionary(System.Byte[],System.Int32)">
+      <summary>指定の圧縮解除されたバイト列から圧縮解除ディクショナリを初期化します。</summary>
+      <param name="dictionary">ディクショナリ内のデータ。</param>
+      <param name="dictLength">ディクショナリ内のバイト数。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>
+          <see cref="M:C1.C1Zip.ZLib.ZStream.inflate(System.Int32)" />への呼び出しが Z_NEED_DICT を返した場合、この呼び出しの直後にこの関数を呼び出す必要があります。コンプレッサが選択したディクショナリは、
+          <see cref="M:C1.C1Zip.ZLib.ZStream.inflate(System.Int32)" />へのこの呼び出しで返される Adler32 値から決定できます。
+        </para>
+        <para>
+          コンプレッサとデコンプレッサは、まったく同じディクショナリを使用する必要があります（
+          <see cref="M:C1.C1Zip.ZLib.ZStream.deflateSetDictionary(System.Byte[],System.Int32)" />メソッドを参照）。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflateInit(System.Int32)">
+      <summary>圧縮の内部ストリームのステータスを初期化します。</summary>
+      <param name="level">圧縮レベル（０～９）。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>圧縮レベル１は最高速度、９は最高圧縮を提供します。</para>
+        <para>圧縮レベル０は、圧縮なし（入力データは単純にブロックとして一度にコピーされる）を提供します。</para>
+        <para>デフォルトの圧縮レベルは６（Z_DEFAULT_COMPRESSION）で、速度と圧縮の間のデフォルトの妥協値を要求します。</para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflateInit(System.Int32,System.Int32)">
+      <summary>圧縮の内部ストリームのステータスを初期化します。</summary>
+      <param name="level">圧縮レベル（０～９）。</param>
+      <param name="bits">LZ77 データ圧縮のウィンドウのサイズ（ビット単位：デフォルト 15）。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>圧縮レベル１は最高速度、９は最高圧縮を提供します。</para>
+        <para>圧縮レベル０は、圧縮なし（入力データは単純にブロックとして一度にコピーされる）を提供します。</para>
+        <para>デフォルトの圧縮レベルは６（Z_DEFAULT_COMPRESSION）で、速度と圧縮の間のデフォルトの妥協値を要求します。</para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflate(System.Int32)">
+      <summary>deflate は、できるだけ多くのデータを圧縮し、入力バッファが空になるか、出力バッファがいっぱいになったときに停止します。</summary>
+      <param name="flush">０でない場合、すべての保留中の出力を出力バッファにフラッシュ。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>詳細なセマンティクスは以下のとおりです。deflate は、以下の２つのアクションのいずれか、または両方を実行します。</para>
+        <para>
+          1.
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />から開始してさらに入力を圧縮し、随時
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_in" />を更新します。一部の入力しか処理できない場合（出力バッファに十分な空がないため）、
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_in" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_in" />が更新され、処理はこの時点から deflate への次回の呼び出しを再開します。
+        </para>
+        <para>
+          2.
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />から開始してさらに出力を提供し、随時
+          <see cref="F:C1.C1Zip.ZLib.ZStream.next_out" />と
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />を更新します。flush 引数がゼロでない場合、このアクションが強制されます。フラッシュを頻繁に強制すると圧縮率が低下するため、必要な場合にのみ（インタラクティブアプリケーションで）このパラメータを設定します。flush 引数が設定されていないときでも、何らかの出力が提供されることがあります。
+        </para>
+        <para>このメソッドは、フラッシュを強制した場合を除き、出力待ち時間（出力を生成せずに入力を読み込むこと）が生じることがあります。</para>
+        <para>
+          deflate が
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />== 0 で返す場合、フラッシュが完了する（deflate が非ゼロの
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />を返す）まで、同じ値の flush 引数で、より大きい出力スペースを指定（
+          <see cref="F:C1.C1Zip.ZLib.ZStream.avail_out" />を更新）して、この関数を再度呼び出す必要があります。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflateEnd">
+      <summary>このストリームに動的に割り当てられたすべてのデータ構造を解放します。この関数は、すべての未処理の入力を破棄しますが、保留の出力はフラッシュしません。</summary>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflateParams(System.Int32,System.Int32)">
+      <summary>圧縮レベルと圧縮方法を動的に更新します。</summary>
+      <param name="level">圧縮レベル（０～９）。</param>
+      <param name="strategy">圧縮方法（０～２）。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+    </member>
+    <member name="M:C1.C1Zip.ZLib.ZStream.deflateSetDictionary(System.Byte[],System.Int32)">
+      <summary>圧縮出力を生成せずに、指定のバイト列から圧縮ディクショナリを初期化します。</summary>
+      <param name="dictionary">ディクショナリ内のデータ。</param>
+      <param name="dictLength">ディクショナリ内のバイト数。</param>
+      <returns>成功した場合は Z_OK、失敗した場合はエラーコードを返します。</returns>
+      <remarks>
+        <para>
+          <see cref="M:C1.C1Zip.ZLib.ZStream.deflateInit(System.Int32)" />のすぐ後、かつ
+          <see cref="M:C1.C1Zip.ZLib.ZStream.deflate(System.Int32)" />への呼び出しの前に、この関数を呼び出す必要があります。
+        </para>
+        <para>
+          コンプレッサとデコンプレッサはまったく同じディクショナリを使用する必要があります（
+          <see cref="M:C1.C1Zip.ZLib.ZStream.inflateSetDictionary(System.Byte[],System.Int32)" />メソッドを参照）。
+        </para>
+      </remarks>
+    </member>
+    <member name="T:C1.C1Zip.ZLib.ZStreamException">
+      <summary>ZStream の使用中に発生するエラーを表します。</summary>
+    </member>
+  </members>
+</doc>

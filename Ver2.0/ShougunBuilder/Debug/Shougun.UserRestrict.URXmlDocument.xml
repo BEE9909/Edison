@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Shougun.UserRestrict.URXmlDocument</name>
+    </assembly>
+    <members>
+        <member name="T:Shougun.UserRestrict.URXmlDocument.URXmlDocument">
+            <summary>
+            XmlDocument継承した署名/検証機能クラス
+            </summary>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.#ctor">
+            <summary>
+            コンストラクタ
+            </summary>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.Load(System.String)">
+            <summary>
+            構成情報ファイルを読込み、URItemListに値を設定する
+            </summary>
+            <param name="filename">ファイル名</param>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.LoadXml(System.String)">
+            <summary>
+            構成情報テンプレートを読込み、URItemListに値を設定する
+            </summary>
+            <param name="xml">xml文字列</param>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.Save(System.String)">
+            <summary>
+            URXmlDocumentの署名部分を削除し、ファイルに保存する
+            </summary>
+            <param name="filename">保存ファイル名</param>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.Sign(System.String)">
+            <summary>
+            URXmlDocumentに署名を追加する
+            </summary>
+            <param name="secretKeyFilePath">
+            URKey.CreateKeyで出力した秘密鍵ファイルパス
+            </param>
+            <exception cref="T:System.ArgumentException">
+            [署名済みのXmlDocument削除(RemoveChild)]
+              oldChild がこのノードの子ではありません。 または、このノードが読み取り専用です。
+            [秘密鍵ファイル読込み(ReadAllText)]
+              path が、長さが 0 の文字列であるか、空白しか含んでいないか、
+              または 
+              InvalidPathChars で定義されている無効な文字を 1 つ以上含んでいます。
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            [鍵情報設定(FromXmlString)]
+              secretKeyFilePathのファイル内容がnullです。
+            [SignedXmlコンストラクタ]
+              document パラメーターが null です。
+              または
+              document パラメーターに null の DocumentElement プロパティが格納されています。
+            [秘密鍵ファイル読込み(ReadAllText)]
+              path が null です。
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            [URXmlDocumentへの署名XmlElement追加(AppendChild)]
+              このノードは、newChild ノードの型の子ノードが許可されない型です。
+              newChild がこのノードの先祖です。
+            [署名XmlElementのインポート(ImportNode)]
+              インポートできないノード型でこのメソッドを呼び出しています。
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              path の形式が無効です。
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              path によって、読み取り専用のファイルが指定されました。
+              または
+              この操作は、現在のプラットフォームではサポートされていません。
+              または
+              path によってディレクトリが指定されました。
+              または
+              呼び出し元に、必要なアクセス許可がありません。
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              指定したパス、ファイル名、またはその両方がシステム定義の最大長を超えています。 
+              たとえば、Windows ベースのプラットフォームの場合、パスの長さは 248 文字未満、ファイル名の長さは 260 文字未満である必要があります。
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              指定したパスが無効です (割り当てられていないドライブであるなど)。
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              ファイルを開くときに、I/O エラーが発生しました。
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              path で指定されたファイルが見つかりませんでした。
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            [秘密鍵ファイル読込み(ReadAllText)]
+              呼び出し元に、必要なアクセス許可がありません。
+            </exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">
+            [RSACryptoServiceProviderコンストラクタ]
+              暗号化サービス プロバイダー (CSP) を取得できません。
+            [鍵情報設定(FromXmlString)]
+              secretKeyFilePathのXML文字列の書式が有効でない。
+            [デジタル署名の計算(ComputeSignature)]
+              SigningKey プロパティが null である。
+              または
+              SigningKey プロパティが DSA オブジェクトまたは RSA オブジェクトではありません。
+              または
+              キーを読み込むことができませんでした。
+            [SignedXmlオブジェクトのXMLを取得(GetXml)]
+              SignedInfo プロパティが null である。
+              または
+              SignatureValue プロパティが null である。
+            [reference要素へのTransform オブジェクト追加(AddReference)]
+              transform パラメーターが null です。
+            [URXmlDocumentへの署名XmlElement追加(AppendChild)]
+              newChild は、このノードを作成したドキュメントとは異なるドキュメントから作成されました。
+              このノードは読み取り専用です。
+            </exception>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.Verify(System.String)">
+            <summary>
+            URXmlDocumentの署名を検証し、結果を取得する
+            </summary>
+            <param name="publicKeyContents">
+            DBに登録した公開鍵文字列
+            </param>
+            <returns>
+             ture:検証成功
+             false:検証失敗
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              path が、長さが 0 の文字列であるか、空白しか含んでいないか、
+              または 
+              InvalidPathChars で定義されている無効な文字を 1 つ以上含んでいます。
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            [鍵情報設定(FromXmlString)]
+              publicKeyFilePathのファイル内容がnullです。
+            [SignedXmlコンストラクタ]
+              document パラメーターが null です。
+              または
+              document パラメーターに null の DocumentElement プロパティが格納されています。
+            [signatureノード読込み(LoadXml)]
+              value パラメーターが null です。
+            [署名検証(CheckSignature)]
+              key パラメーターが null です。
+            [公開鍵ファイル読込み(ReadAllText)]
+              path が null です。
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              path の形式が無効です。
+            </exception>
+            <exception cref="T:System.UnauthorizedAccessException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              path によって、読み取り専用のファイルが指定されました。
+              または
+              この操作は、現在のプラットフォームではサポートされていません。
+              または
+              path によってディレクトリが指定されました。
+              または
+              呼び出し元に、必要なアクセス許可がありません。
+            </exception>
+            <exception cref="T:System.IO.PathTooLongException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              指定したパス、ファイル名、またはその両方がシステム定義の最大長を超えています。 
+              たとえば、Windows ベースのプラットフォームの場合、パスの長さは 248 文字未満、ファイル名の長さは 260 文字未満である必要があります。
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              指定したパスが無効です (割り当てられていないドライブであるなど)。
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              ファイルを開くときに、I/O エラーが発生しました。
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              path で指定されたファイルが見つかりませんでした。
+            </exception>
+            <exception cref="T:System.Security.SecurityException">
+            [公開鍵ファイル読込み(ReadAllText)]
+              呼び出し元に、必要なアクセス許可がありません。
+            </exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">
+            [RSACryptoServiceProviderコンストラクタ]
+              暗号化サービス プロバイダー (CSP) を取得できません。
+            [鍵情報設定(FromXmlString)]
+              publicKeyFilePathのXML文字列の書式が有効でない。
+            [signatureノード読込み(LoadXml)]
+              value パラメーターが、有効な SignatureValue プロパティを格納していません。
+              または
+              value パラメーターが、有効な SignedInfo プロパティを格納していません。
+            [署名検証(CheckSignature)]
+              key パラメーターの SignatureAlgorithm プロパティが、SignatureMethod プロパティと一致しません。
+              または
+              署名の説明を作成できませんでした。
+              または
+              ハッシュアルゴリズムを作成できませんでした。
+            </exception>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.EnumItems(System.String)">
+             <summary>
+             指定したグループのID文字列の配列を返す。
+            （null指定の場合は全グループが対象）
+             </summary>
+             <param name="group">グループ名</param>
+             <returns>IDの配列</returns>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.GetItem(System.String)">
+            <summary>
+            指定したID文字列のUR情報を返す。
+            </summary>
+            <param name="id">ID名</param>
+            <returns>UserRestrictItem</returns>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.GetItemValue(System.String)">
+            <summary>
+            指定したID文字列のUR値(value)を返す。
+            表示用にはToStringで文字列化する。
+            </summary>
+            <param name="id">ID名</param>
+            <returns>設定値</returns>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.SetItemValue(System.String,System.Object)">
+            <summary>
+            指定したID文字列のUR値(value)を設定する。
+            </summary>
+            <param name="id">ID名</param>
+            <param name="value">設定値</param>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.CreateItemList(System.Xml.XmlNode)">
+            <summary>
+            UserRestrictItemのListを作成する
+            </summary>
+            <param name="rootXmlNode">XmlDocumentのルート</param>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.URXmlDocument.DelSignNode">
+            <summary>
+            Signatureノードリストを削除する
+            </summary>
+        </member>
+        <member name="T:Shougun.UserRestrict.URXmlDocument.UserRestrictItem">
+            <summary>
+            UserRestrectItemクラス
+            </summary>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.#ctor">
+            <summary>
+            デフォルトコンストラクタ
+            </summary>
+        </member>
+        <member name="M:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.#ctor(System.String,System.String,System.String,System.String,System.Type)">
+            <summary>
+            コンストラクタ
+            </summary>
+        </member>
+        <member name="P:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.caption">
+            <summary>
+            Caption
+            </summary>
+        </member>
+        <member name="P:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.group">
+            <summary>
+            Group
+            </summary>
+        </member>
+        <member name="P:Shougun.UserRestrict.URXmlDocument.UserRestrictItem.type">
+            <summary>
+            Type
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>C1.Win.BarCode.4</name>
+  </assembly>
+  <members>
+    <member name="T:C1.BarCode.INotify">
+      <summary>これは内部使用専用です。 バーコードの通知インタフェース。</summary>
+    </member>
+    <member name="M:C1.BarCode.INotify.ChangeValue(System.Object)">
+      <summary>これは内部使用専用です。 プロパティが変更されると呼び出されます。</summary>
+      <param name="sender">プロパティが変更されたオブジェクト。</param>
+    </member>
+    <member name="T:C1.BarCode.BarCodeException">
+      <summary>バーコードコントロールに適用できない値によってエラーが発生した場合に生成される例外。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarCodeException.#ctor">
+      <summary>System.ApplicationException クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarCodeException.#ctor(System.String)">
+      <summary>指定されたエラーメッセージを使用して、System.ApplicationException クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">エラーについて説明するメッセージ。</param>
+    </member>
+    <member name="M:C1.BarCode.BarCodeException.#ctor(System.String,System.Exception)">
+      <summary>指定されたエラーメッセージとこの例外の原因となった内部例外への参照を使用して、System.ApplicationException クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">この例外の理由について説明するエラーメッセージ。</param>
+      <param name="innerException">現在の例外の原因になった例外。innerException パラメータが null 参照でない場合、現在の例外は、内部の例外を処理した catch ブロックで生成されました。</param>
+    </member>
+    <member name="M:C1.BarCode.BarCodeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>
+        <see cref="T:C1.BarCode.BarCodeException" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="info"></param>
+      <param name="context"></param>
+    </member>
+    <member name="P:C1.BarCode.BarCodeException.Message">
+      <summary>現在の例外について説明するメッセージを取得します。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarCodeException.ErrorCode">
+      <summary>内部エラーコード</summary>
+    </member>
+    <member name="T:C1.BarCode.BarCodeException.EnumErrorCode">
+      <summary>内部 EnumErrorCode</summary>
+    </member>
+    <member name="T:C1.BarCode.QRCodeErrorLevel">
+      <summary>QRCode のエラー修正レベルを指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeErrorLevel.Low">
+      <summary>低</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeErrorLevel.Medium">
+      <summary>中</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeErrorLevel.Quality">
+      <summary>良</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeErrorLevel.High">
+      <summary>高</summary>
+    </member>
+    <member name="T:C1.BarCode.QRCodeModel">
+      <summary>QRCode のモデルを指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeModel.Model1">
+      <summary>Model1。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeModel.Model2">
+      <summary>Model2。</summary>
+    </member>
+    <member name="T:C1.BarCode.QRCodeMask">
+      <summary>QRCode のマスクパターン参照を指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Auto">
+      <summary>自動設定。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask000">
+      <summary>パターン 000。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask001">
+      <summary>パターン 001。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask010">
+      <summary>パターン 010。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask011">
+      <summary>パターン 011。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask100">
+      <summary>パターン 100。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask101">
+      <summary>パターン 101。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask110">
+      <summary>パターン 110。</summary>
+    </member>
+    <member name="F:C1.BarCode.QRCodeMask.Mask111">
+      <summary>パターン 111。</summary>
+    </member>
+    <member name="T:C1.BarCode.PDF417Type">
+      <summary>PDF417 のバーコードタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.PDF417Type.Normal">
+      <summary>標準。</summary>
+    </member>
+    <member name="F:C1.BarCode.PDF417Type.Simple">
+      <summary>コンパクト（右のインジケータが表示/印刷されません）。</summary>
+    </member>
+    <member name="T:C1.BarCode.BarCodeOptionsBase">
+      <summary>BarCode の基本オプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarCodeOptionsBase.NotifyChangeValue">
+      <summary>値の変更を通知します。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarCodeOptionsBase.Clone">
+      <summary>現在のオプションをコピーした新しいオブジェクトを作成します。</summary>
+      <returns>このインスタンスをコピーした新しいオブジェクト。</returns>
+    </member>
+    <member name="M:C1.BarCode.BarCodeOptionsBase.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="M:C1.BarCode.BarCodeOptionsBase.GetHashCode">
+      <summary>このインスタンスのハッシュコードを返します。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarCodeOptionsBase.Equals(System.Object)">
+      <summary>
+        指定された
+        <see cref="T:System.Object" />が現在の
+        <see cref="T:System.Object" />と等しいかどうかを判定します。
+      </summary>
+      <param name="obj">
+        現在の
+        <see cref="T:System.Object" />と比較する
+        <see cref="T:System.Object" />。
+      </param>
+      <returns>
+        指定された
+        <see cref="T:System.Object" />が現在の
+        <see cref="T:System.Object" />と等しい場合は True、そうでない場合は False。
+      </returns>
+    </member>
+    <member name="T:C1.BarCode.Code49Options">
+      <summary>Code49 のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.#ctor">
+      <summary>
+        <see cref="T:C1.BarCode.Code49" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.BarCode.Code49" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code49Options.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.Code49Options.Grouping">
+      <summary>バーコードにグループが設定されるかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.Code49Options.Group">
+      <summary>グループ番号を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.Ean128Fnc1Options">
+      <summary>Code128 のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.Ean128Fnc1Options.#ctor">
+      <summary>
+        <see cref="T:C1.BarCode.Ean128Fnc1Options" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.Ean128Fnc1Options.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.BarCode.Ean128Fnc1Options" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="options">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.Ean128Fnc1Options.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.Ean128Fnc1Options.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.Ean128Fnc1Options.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.Ean128Fnc1Options.Dpi">
+      <summary>プリンタの解像度を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.Ean128Fnc1Options.BarAdjust">
+      <summary>ドット単位の調整サイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.Ean128Fnc1Options.ModuleSize">
+      <summary>バーコードモジュールの水平方向のサイズを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.Code25intlvOptions">
+      <summary>Code25intlv のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code25intlvOptions.#ctor">
+      <summary>
+        <see cref="!:Code25intlv" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.Code25intlvOptions.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.Code25intlvOptions.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code25intlvOptions.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.Code25intlvOptions.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.Code25intlvOptions.BearBar">
+      <summary>ITF バーコードにベアラバーを表示するかどうか。</summary>
+    </member>
+    <member name="P:C1.BarCode.Code25intlvOptions.LineStrokeThickness">
+      <summary>ベアラバーの線幅。</summary>
+    </member>
+    <member name="P:C1.BarCode.Code25intlvOptions.LineStroke">
+      <summary>ベアラバーの色。</summary>
+    </member>
+    <member name="T:C1.BarCode.PDF417Options">
+      <summary>PDF417 のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.#ctor">
+      <summary>
+        <see cref="T:C1.BarCode.PDF417" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.BarCode.PDF417" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.PDF417Options.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.PDF417Options.ErrorLevel">
+      <summary>バーコードのエラー修正レベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.PDF417Options.Column">
+      <summary>バーコードの列番号を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.PDF417Options.Row">
+      <summary>バーコードの行番号を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.PDF417Options.Type">
+      <summary>PDF417 バーコードのタイプを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.QRCodeOptions">
+      <summary>QRCode のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.#ctor">
+      <summary>
+        <see cref="T:C1.BarCode.QRCode" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.BarCode.QRCode" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str"></param>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.QRCodeOptions.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.ErrorLevel">
+      <summary>バーコードのエラー修正レベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.Model">
+      <summary>QRCode のモデルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.Version">
+      <summary>QRCode のバージョンを取得または設定します。</summary>
+      <remarks>Model プロパティが Model1 に設定されている場合は 1 ～ 14 の値を、Model2 の場合は 1 ～ 40 の値を指定してください。 -1 が指定された場合は、この値に最適なバージョンが自動的に決定されます。</remarks>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.Mask">
+      <summary>バーコードのマスクに使用されるパターンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.Connection">
+      <summary>バーコードにコネクションを使用するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QRCodeOptions.ConnectionNumber">
+      <summary>バーコードのコネクション番号を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.RssExpandedStackedOptions">
+      <summary>RSSExpandedStacked のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.#ctor">
+      <summary>
+        <see cref="!:RssExpandedStacked" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.#ctor(System.String)">
+      <summary>
+        <see cref="!:RssExpandedStacked" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.RssExpandedStackedOptions.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.RssExpandedStackedOptions.RowCount">
+      <summary>スタックする行の数を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.DataMatrixOptions">
+      <summary>DataMatrix のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.#ctor">
+      <summary>
+        <see cref="!:DataMatrix" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.#ctor(System.String)">
+      <summary>
+        <see cref="!:DataMatrix" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.DataMatrixOptions.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.EccMode">
+      <summary>ECC モードを取得または設定します。</summary>
+      <value>ECC モード。</value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.Ecc200SymbolSize">
+      <summary>ECC200 シンボルのサイズを取得または設定します。</summary>
+      <value>ECC200 シンボルのサイズ。</value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.Ecc200EncodingMode">
+      <summary>ECC200 エンコーディングモードを取得または設定します。</summary>
+      <value>ECC200 エンコーディングモード。</value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.Ecc000_140SymbolSize">
+      <summary>ECC000-140 シンボルのサイズを取得または設定します。</summary>
+      <value>ECC000-140 シンボルのサイズ。</value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.StructuredAppend">
+      <summary>現在のシンボルが構造的連接シンボルの一部かどうかを示す値を取得または設定します。</summary>
+      <remarks>構造的連接は、ECC200 でのみサポートされます。</remarks>
+      <value>
+        現在のシンボルが構造的連接シンボルの一部である場合は
+        <c>true</c>、そうでない場合は
+        <c>false</c>。
+      </value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.StructureNumber">
+      <summary>構造的連接シンボル内の現在のシンボルの構造番号を取得または設定します。</summary>
+      <remarks>
+        構造番号は、ECC モードが
+        <see cref="T:DataMatrixEccMode.ECC200" />である場合にのみ使用されます。
+      </remarks>
+      <value>構造的連接シンボル内の現在のシンボルの構造番号。 構造番号は０から始まり、シンボル量および最大シンボル数（16）より小さくなければなりません。</value>
+    </member>
+    <member name="P:C1.BarCode.DataMatrixOptions.FileIdentifier">
+      <summary>関連する構造的連接シンボルグループのファイル識別子を取得または設定します。</summary>
+      <remarks>有効なファイル識別子値は [1,254] 以内である必要があります。 ファイル識別子を０に設定すると、シンボルのファイル識別子が自動的に計算されます。</remarks>
+      <value>ファイル識別子。</value>
+    </member>
+    <member name="T:C1.BarCode.DataMatrixEccMode">
+      <summary>ECC モードの列挙。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC000">
+      <summary>ECC000。このモードは、CRC チェックサムだけを付けてデータをエンコードします。その他の誤り検出ビットは含まれません。 通常、この ECC モードでエンコードされたデータは、最小限のシンボルサイズしか必要としません。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC050">
+      <summary>ECC050。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC080">
+      <summary>ECC080。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC100">
+      <summary>ECC100。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC140">
+      <summary>ECC140。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEccMode.ECC200">
+      <summary>ECC200。これは推奨の ECC モードです。 この ECC モードでエンコードされたデータは、リード・ソロモン誤り検出/訂正アルゴリズムによって保護されます。</summary>
+    </member>
+    <member name="T:C1.BarCode.DataMatrixEcc200SymbolSize">
+      <summary>ECC200 モードのシンボルサイズの列挙。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.SquareAuto">
+      <summary>SquareAuto。 データが入る最小の正方形シンボルサイズが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.RectangularAuto">
+      <summary>RectangularAuto。 データが入る最小の長方形シンボルサイズが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square10">
+      <summary>Square10。10×10 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square12">
+      <summary>Square12。12×12 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square14">
+      <summary>Square14。14×14 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square16">
+      <summary>Square16。16×16 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square18">
+      <summary>Square18。18×18 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square20">
+      <summary>Square20。20×20 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square22">
+      <summary>Square22。22×22 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square24">
+      <summary>Square24。24×24 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square26">
+      <summary>Square26。26×26 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square32">
+      <summary>Square32。32×32 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square36">
+      <summary>Square36。36×36 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square40">
+      <summary>Square40。40×40 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square44">
+      <summary>Square44。44×44 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square48">
+      <summary>Square48。48×48 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square52">
+      <summary>Square52。52×52 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square64">
+      <summary>Square64。64×64 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square72">
+      <summary>Square72。72×72 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square80">
+      <summary>Square80。80×80 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square88">
+      <summary>Square88。88×88 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square96">
+      <summary>Square96。96×96 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square104">
+      <summary>Square104。104×104 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square120">
+      <summary>Square120。120×120 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square132">
+      <summary>Square132。132×132 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Square144">
+      <summary>Square144。144×144 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular8x18">
+      <summary>Rectangular8x18。8×18 長方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular8x32">
+      <summary>Rectangular8x32。8×32 長方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular12x26">
+      <summary>Rectangular12x26。12×26 長方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular12x36">
+      <summary>Rectangular12x36。12×36 長方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular16x36">
+      <summary>Rectangular16x36。16×36 長方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200SymbolSize.Rectangular16x48">
+      <summary>Rectangular16x48。16×48 長方形シンボルを表します。</summary>
+    </member>
+    <member name="T:C1.BarCode.DataMatrixEcc200EncodingMode">
+      <summary>ECC200 モードで使用されるエンコーディング文字セットの列挙。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.Auto">
+      <summary>自動。エンコーディング文字セットは、圧縮効率が上がるように自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.ASCII">
+      <summary>ASCII。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.C40">
+      <summary>C40。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.Text">
+      <summary>テキスト。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.X12">
+      <summary>X12。この文字セットは、40 個の X12 文字だけをサポートします。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.EDIFACT">
+      <summary>EDIFACT。この文字セットは、63 個の EDIFACT 文字だけをサポートします。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc200EncodingMode.Base256">
+      <summary>Base256。</summary>
+    </member>
+    <member name="T:C1.BarCode.DataMatrixEcc000_140SymbolSize">
+      <summary>ECC000-140 モードのシンボルサイズの列挙。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Auto">
+      <summary>自動。 データが入る最小のシンボルサイズが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square9">
+      <summary>Square9。9×9 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square11">
+      <summary>Square11。11×11 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square13">
+      <summary>Square13。13×13 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square15">
+      <summary>Square15。15×15 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square17">
+      <summary>Square17。17×17 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square19">
+      <summary>Square19。19×19 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square21">
+      <summary>Square21。21×21 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square23">
+      <summary>Square23。23×23 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square25">
+      <summary>Square25。25×25 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square27">
+      <summary>Square27。27×27 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square29">
+      <summary>Square29。29×29 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square31">
+      <summary>Square31。31×31 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square33">
+      <summary>Square33。33×33 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square35">
+      <summary>Square35。35×35 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square37">
+      <summary>Square37。37×37 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square39">
+      <summary>Square39。39×39 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square41">
+      <summary>Square41。41×41 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square43">
+      <summary>Square43。43×43 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square45">
+      <summary>Square45。45×45 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square47">
+      <summary>Square47。47×47 正方形シンボルを表します。</summary>
+    </member>
+    <member name="F:C1.BarCode.DataMatrixEcc000_140SymbolSize.Square49">
+      <summary>Square49。49×49 正方形シンボルを表します。</summary>
+    </member>
+    <member name="T:C1.BarCode.MicroPDF417Options">
+      <summary>MicroPDF417 のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.#ctor">
+      <summary>
+        <see cref="T:C1.BarCode.MicroPDF417Options" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.BarCode.MicroPDF417Options" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="str">シリアライズされたデータ文字列。</param>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.MicroPDF417Options.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.MicroPDF417Options.CompactionMode">
+      <summary>CompactionMode を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.MicroPDF417Options.Version">
+      <summary>シンボルサイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.MicroPDF417Options.SegmentIndex">
+      <summary>構造的連接シンボルのセグメントインデックスを取得または設定します。</summary>
+      <remarks>有効な値は０以上 99998 以下で、SegmentCount 未満です。</remarks>
+    </member>
+    <member name="P:C1.BarCode.MicroPDF417Options.SegmentCount">
+      <summary>構造的連接シンボルのセグメント数を取得または設定します。</summary>
+      <remarks>有効な値は０以上 99999 以下です。</remarks>
+    </member>
+    <member name="P:C1.BarCode.MicroPDF417Options.FileID">
+      <summary>構造的連接シンボルのファイル ID を取得または設定します。</summary>
+      <remarks>有効な値は０以上 899 以下です。</remarks>
+    </member>
+    <member name="T:C1.BarCode.MicroPDF417SymbolCompactionMode">
+      <summary>MicroPDF417 エンコーディングのコンパクションモード。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolCompactionMode.Auto">
+      <summary>自動。コンパクションモードは、圧縮効率が上がるように自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolCompactionMode.TextCompactionMode">
+      <summary>テキストコンパクションモード。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolCompactionMode.NumericCompactionMode">
+      <summary>数値コンパクションモード。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolCompactionMode.ByteCompactionMode">
+      <summary>バイトコンパクションモード。</summary>
+    </member>
+    <member name="T:C1.BarCode.MicroPDF417SymbolVersion">
+      <summary>MicroPDF417 エンコーディングのバージョン。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.ColumnPriorAuto">
+      <summary>シンボルサイズ自動。 データが入る最小の列優先シンボルサイズが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.RowPriorAuto">
+      <summary>シンボルサイズ自動。 データが入る最小の行優先シンボルサイズが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X11">
+      <summary>バージョン 1X11。1 列 11 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X14">
+      <summary>バージョン 1X14。1 列 14 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X17">
+      <summary>バージョン 1X17。1 列 17 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X20">
+      <summary>バージョン 1X20。1 列 20 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X24">
+      <summary>バージョン 1X24。1 列 24 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version1X28">
+      <summary>バージョン 1X28。1 列 28 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X8">
+      <summary>バージョン 2X8。2 列 8 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X11">
+      <summary>バージョン 2X11。2 列 11 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X14">
+      <summary>バージョン 2X14。2 列 14 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X17">
+      <summary>バージョン 2X17。2 列 17 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X20">
+      <summary>バージョン 2X20。2 列 20 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X23">
+      <summary>バージョン 2X23。2 列 23 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version2X26">
+      <summary>バージョン 2X26。2 列 26 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X6">
+      <summary>バージョン 3X6。3 列 6 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X8">
+      <summary>バージョン 3X8。3 列 8 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X10">
+      <summary>バージョン 3X10。3 列 10 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X12">
+      <summary>バージョン 3X12。3 列 12 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X15">
+      <summary>バージョン 3X15。3 列 15 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X20">
+      <summary>バージョン 3X20。3 列 20 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X26">
+      <summary>バージョン 3X26。3 列 26 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X32">
+      <summary>バージョン 3X32。3 列 32 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X38">
+      <summary>バージョン 3X38。3 列 38 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version3X44">
+      <summary>バージョン 3X44。3 列 44 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X4">
+      <summary>バージョン 4X4。4 列 4 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X6">
+      <summary>バージョン 4X6。4 列 6 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X8">
+      <summary>バージョン 4X8。4 列 8 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X10">
+      <summary>バージョン 4X10。4 列 10 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X12">
+      <summary>バージョン 4X12。4 列 12 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X15">
+      <summary>バージョン 4X15。4 列 15 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X20">
+      <summary>バージョン 4X20。4 列 20 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X26">
+      <summary>バージョン 4X26。4 列 26 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X32">
+      <summary>バージョン 4X32。4 列 32 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X38">
+      <summary>バージョン 4X38。4 列 38 行のシンボルです。</summary>
+    </member>
+    <member name="F:C1.BarCode.MicroPDF417SymbolVersion.Version4X44">
+      <summary>バージョン 4X44。4 列 44 行のシンボルです。</summary>
+    </member>
+    <member name="T:C1.BarCode.GS1CompositeOptions">
+      <summary>GS1Composite のオプション。</summary>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.#ctor">
+      <summary>GS1CompositeOptions クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.ShouldSerialize">
+      <summary>このオブジェクトのいずれかのプロパティがデフォルト値から変更されたかどうかを示します。</summary>
+      <returns>
+        オブジェクトがデフォルト値から変更された場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.Reset">
+      <summary>すべてのプロパティをデフォルト値にリセットします。</summary>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.ToString">
+      <summary>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />を返します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:System.Object" />を表す
+        <see cref="T:System.String" />。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.Clone">
+      <summary>オブジェクトのコピーを作成します。</summary>
+    </member>
+    <member name="M:C1.BarCode.GS1CompositeOptions.AssignFrom(C1.BarCode.BarCodeOptionsBase)">
+      <summary>
+        プロパティを別の
+        <see cref="T:C1.BarCode.BarCodeOptionsBase" />から現在のオブジェクトに割り当てます（コピーします）。
+      </summary>
+      <param name="source">プロパティのコピー元のオブジェクト。</param>
+    </member>
+    <member name="P:C1.BarCode.GS1CompositeOptions.Type">
+      <summary>合成シンボルタイプを取得または設定します。デフォルト値は None です。</summary>
+    </member>
+    <member name="P:C1.BarCode.GS1CompositeOptions.Value">
+      <summary>CCA または CCB 文字データを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.GS1CompositeType">
+      <summary>合成シンボルタイプ。</summary>
+    </member>
+    <member name="F:C1.BarCode.GS1CompositeType.None">
+      <summary>GS1 バーコードを付加バーコードと合成しません。</summary>
+    </member>
+    <member name="F:C1.BarCode.GS1CompositeType.CCA">
+      <summary>GS1 バーコードを CC-A 付加バーコードと合成します。</summary>
+    </member>
+    <member name="T:C1.BarCode.BarStyle">
+      <summary>これは内部使用専用です。 内部バーコードスタイルを定義します。</summary>
+    </member>
+    <member name="T:C1.BarCode.CodeType">
+      <summary>バーコードコントロールがバーコードの生成に使用するコードのタイプ。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.None">
+      <summary>なし。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Ansi39">
+      <summary>ANSI 3 of 9（Code 39）は、大文字、数字、- , * $ / + % を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Ansi39x">
+      <summary>ANSI Extended 3 of 9（Extended Code 39）は、ASCII 文字セット全体を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_2_of_5">
+      <summary>Code 2 of 5 は数字だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code25intlv">
+      <summary>Interleaved 2 of 5 は数字だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Matrix_2_of_5">
+      <summary>Matrix 2 of 5 は、３本の黒バーと２本の白バーから成る比較的高密度のバーコードです。 Matrix_2_of_5 は数字だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code39">
+      <summary>Code 39 は、大文字、数字、% * $ /. , - + を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code39x">
+      <summary>Extended Code 39 は、ASCII 文字セット全体を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_128_A">
+      <summary>Code 128 A は、制御文字、数字、句読点、大文字を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_128_B">
+      <summary>Code 128 B は、数字、句読点、大文字、小文字を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_128_C">
+      <summary>Code 128 C は数字だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_128auto">
+      <summary>Code 128 Auto は、ASCII 文字セット全体を使用します。 最小のバーコードになるように、Code 128 A、B、および C から１つが自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code_93">
+      <summary>Code 93 は、大文字、数字、% $ * / , + - を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code93x">
+      <summary>Extended Code 93 は、ASCII 文字セット全体を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.MSI">
+      <summary>MSI Code は数字だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.PostNet">
+      <summary>PostNet は、数字とチェックデジットを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Codabar">
+      <summary>Codabar は、A B C D + - : , / および数字を使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.EAN_8">
+      <summary>EAN-8 は、数字（７個の数字とチェックデジット）だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.EAN_13">
+      <summary>EAN-13 は、数字（12 個の数字とチェックデジット）だけを使用します。 文字列内に数字が 12 個だけある場合は、チェックサムを計算し、それを 13 番目の位置に付加します。 13 個の数字がある場合は、チェックサムを検証し、それが正しくない場合はエラーを生成します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.UPC_A">
+      <summary>UPC-A は、数字（11 個の数字とチェックデジット）だけを使用します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.UPC_E0">
+      <summary>UPC-E0 は数字だけを使用します。 Zero Suppression の UPC シンボルに使用されます。 Caption プロパティには、６桁の UPC-E コードまたは完全な 11 桁（必須のコードタイプ０を含む）の UPC-A コードを入力する必要があります。 11 桁のコードが入力された場合、バーコードコントロールは、可能であればそれを６桁の UPC-E コードに変換します。 11 桁のコードを６桁のコードに変換できない場合は、何も表示されません。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.UPC_E1">
+      <summary>UPC-E1 は数字だけを使用します。主に小売業界で在庫ラベルに使用されます。 UPC-E1 の入力文字列の長さは数字６個です。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RM4SCC">
+      <summary>Royal Mail RM4SCC は、文字と数字（チェックデジット付き）だけを使用します。 これは、イギリスのロイヤルメールで使用されるバーコードです。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.UCCEAN128">
+      <summary>UCC/EAN –128 は、ASCII 文字セット全体を使用します。 HIBC アプリケーションで使用される特殊な Code 128 です。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.QRCode">
+      <summary>QRCode は、英数字やバイトデータに加えて、日本語の漢字やかな文字も扱うことができる２次元バーコードです。 このバーコードは最大 7,366 文字をエンコードできます。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Code49">
+      <summary>Code 49 は、２次元高密度スタック型バーコードです。ASCII 文字セット全体をエンコードします。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.JapanesePostal">
+      <summary>これは、日本の郵便制度で使用されるバーコードです。 20 桁の英数字をエンコードします。これには、７桁の郵便番号の後に、必要に応じて番地や部屋番号などの情報が含まれます。 エンコードするデータはハイフンを含むことができます。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.Pdf417">
+      <summary>Pdf417 は、よく使用されている２次元高密度バーコードです。最大 1,108 バイトの情報をエンコードできます。 このバーコードは、小さなバーコードを積み重ねて構成されます。 ASCII 文字セット全体をエンコードします。 最大 2,725 データ文字をエンコードできます。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.EAN128FNC1">
+      <summary>EAN128FNC1 は UCC/EAN-128（EAN128）バーコードタイプの１つで、任意の場所に FNC1 文字を挿入したり、バーサイズを調整することができるなど、UCC/EAN-128 にはない機能をサポートしています。 FNC1 文字を挿入するには、実行時に Text プロパティに "\n"（C# の場合）または "vbLf"（VB の場合）を設定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSS14">
+      <summary>RSS14 は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、全方向型 POS スキャナと共に使用される 14 桁の EAN.UCC 品目識別用です。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSS14Truncated">
+      <summary>RSS14Truncated は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、小さな品目に使用される、インジケータデジット付きの 14 桁の EAN.UCC 品目識別用です。POS スキャナ用ではありません。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSS14Stacked">
+      <summary>RSS14Stacked は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、RSS14Truncated では広すぎる場合に２段に積み重ねられること以外は、RSS14Truncated と同じです。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSS14StackedOmnidirectional">
+      <summary>RSS14StackedOmnidirectional は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、RSS14 では広すぎる場合に２段に積み重ねられること以外は、RSS14 と同じです。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSSExpanded">
+      <summary>RSSExpanded は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、全方向型 POS スキャナと共に使用される、AI 要素文字列（有効期限、重量など）付きの 14 桁の EAN.UCC 品目識別用です。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSSExpandedStacked">
+      <summary>RSSExpandedStacked は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、RSSExpanded では広すぎる場合に２段に積み重ねられること以外は、RSSExpanded と同じです。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.RSSLimited">
+      <summary>RSS Limited は、コンポジットコンポーネント（CC）で拡張された EAN および UPC 情報を小さなスペースにエンコードできる省スペースシンボル（Reduced Space Symbology：RSS）の１つです。 このバージョンは、０または１のインジケータデジット付きの 14 桁の EAN.UCC 品目識別用です。POS スキャナでスキャンされない小さなシンボルに使用されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.DataMatrix">
+      <summary>Data Matrix は、正方形または長方形のマトリックスパターンに並べられた正方形モジュールから成る２次元高密度バーコードです。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.MicroPDF417">
+      <summary>MicroPDF417 は、PDF417 から派生された２次元多段バーコードです。 Micro-PDF417 は、データをできる限り小さなサイズの２次元シンボル（最大 150 バイト、英数字 250 文字、数字 366 桁）にエンコードする必要があるアプリケーション用に設計されています。</summary>
+    </member>
+    <member name="F:C1.BarCode.CodeType.IntelligentMail">
+      <summary>Intelligent Mail（以前の 4-State Customer Barcode）は、米国内の郵便に使用される 65 本のバーコードです。</summary>
+    </member>
+    <member name="T:C1.BarCode.BarEngine">
+      <summary>これは内部使用専用です。 バーコードレンダリングエンジンの実装。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.CheckFixLength(System.String,C1.BarCode.BarStyle,System.Int32)">
+      <summary>Text プロパティにテキストを設定する前に、固定長をチェックしてください。</summary>
+      <param name="value"></param>
+      <param name="codeType"></param>
+      <param name="fixLength"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.DrawEx(C1.BarCode.IDrawingDevice,C1.Win.Interop.Rect,System.String)">
+      <summary>これは内部使用専用です。 バーコードを描画します。</summary>
+      <param name="dc">描画するデバイス。範囲を計算するには null を渡します</param>
+      <param name="bounds">範囲。</param>
+      <param name="tstrData">データ。</param>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.CalculateSize2(C1.BarCode.IDrawingDevice,System.String)">
+      <summary>これは内部使用専用です。 バーコードのサイズを計算します。</summary>
+      <param name="measureDevice"></param>
+      <param name="tstrData"></param>
+      <returns>計算されたサイズを返します。</returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.CalculateSize(C1.BarCode.IDrawingDevice,System.String,C1.Win.Interop.Size)">
+      <summary>これは内部使用専用です。 バーコードを自動サイズ変更します。</summary>
+      <param name="measureDevice"></param>
+      <param name="tstrData"></param>
+      <param name="barSize"></param>
+      <returns>サイズを変更できない場合は、SizeF.Empty を返します</returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.MeasureBarWidth(C1.BarCode.IDrawingDevice,C1.Win.Interop.Rect,System.String)">
+      <summary>ツイップ単位で測定します。</summary>
+      <param name="bounds"></param>
+      <param name="tstrData"></param>
+      <param name="dc"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.GetCaption(System.String)">
+      <summary>バーエンジンのキャプションラベルを取得します。</summary>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.IsRssStackedBarcode(C1.BarCode.CodeType)">
+      <summary>これは内部使用専用です。 バーコードが RSS スタック型バーコードかどうかを示す値を取得します。</summary>
+      <param name="codeType"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.IsBarBarcode(C1.BarCode.BarStyle)">
+      <summary>バーコードが「バー」バーコード（複数の線の並び）かどうかを示す値を取得します。</summary>
+      <param name="barStyle"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.IsMatrixBarcode(C1.BarCode.CodeType)">
+      <summary>これは内部使用専用です。 バーコードが「マトリックス」バーコード（QRCode、DataMatrix など）かどうかを示す値を取得します。</summary>
+      <param name="codeType"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.ContainsSupplementBarcode(C1.BarCode.CodeType,System.String)">
+      <summary>指定されたパラメータが補助バーコードを持つバーコードを定義している場合は true を返します。</summary>
+      <param name="codeType"></param>
+      <param name="additionalNumber"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.IsCompositeBarcode(C1.BarCode.CodeType,C1.BarCode.GS1CompositeOptions)">
+      <summary>指定されたバーコードが合成バーコードかどうかをチェックします。</summary>
+      <param name="codeType">バーコードの種類。</param>
+      <param name="GS1CompositeOptions">合成バーコードのオプション。</param>
+      <returns>
+        指定されたパラメータが合成バーコードを表す場合は
+        <b>true</b>を返し、そうでない場合は
+        <b>false</b>を返します。
+      </returns>
+    </member>
+    <member name="M:C1.BarCode.BarEngine.CalculateCompositeBarcodeSize(C1.BarCode.IDrawingDevice,C1.Win.Interop.Rect,C1.BarCode.BarCodeCaptionPosition,System.Single,C1.BarCode.BarCodeDirection,C1.BarCode.BarEngine[],System.String[],System.Boolean,C1.Win.Interop.Rect[]@,System.Double@)">
+      <summary>合成バーコードの範囲内の各子バーコードの範囲を計算します。</summary>
+      <remarks>1) 固定モジュールサイズを使用して、各子バーコードのサイズを計算します。 2) 実際の合成範囲に合わせてバーコードサイズを拡大縮小します。</remarks>
+      <param name="measureDevice">計算に使用される IMesureDevice インタフェース。</param>
+      <param name="bounds">合成バーコードの範囲。これは回転されていない範囲です。</param>
+      <param name="captionPosition">キャプションラベルの位置。</param>
+      <param name="captionHeight">キャプションラベルの高さ。</param>
+      <param name="direction">合成バーコードの回転。</param>
+      <param name="engines">各子バーコードのバーエンジン。最後の１つがメインバーコードです。</param>
+      <param name="values">各子バーコードのテキスト。</param>
+      <param name="isAutoSize">高さを自動サイズ変更するかどうか。</param>
+      <param name="boundsEngines">各子バーコードの範囲。</param>
+      <param name="fixedModuleSize">拡大縮小後の固定モジュールサイズ。</param>
+      <returns>合成バーコードの新しい範囲。</returns>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.BarWidth">
+      <summary>バーの幅（ツイップ単位）。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.CaptionGrouping">
+      <summary>特定のバーコード（EAN 8/13、UPC-A/E）の分離型のキャプションを描画します。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.NWRatio">
+      <summary>ユーザー NW 比</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.GS1CompositeType">
+      <summary>合成バーコードの一部である場合に、合成シンボルタイプを示します。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.GS1CompositeColumn">
+      <summary>現在のバーコードが合成バーコードの一部である場合は、依存 CCA/CCB バーコードの列。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.IsAutoModuleSize">
+      <summary>モジュールサイズが自動計算されるかどうかを示します。</summary>
+      <remarks>IsAutoModuleSize が true の場合は、OnCalculateSize および OnRender の前にモジュールサイズが自動計算されます。 IsAutoModuleSize が false の場合は、モジュールサイズとして FixedModuleSize が使用されます。</remarks>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.FixedModuleSize">
+      <summary>IsAutoModuleSize が false の場合に、固定されたモジュールサイズを使用してサイズを計算し、レンダリングします。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.Code25IntlvBearBar">
+      <summary>ITF バーコードにベアラバーを表示するかどうかを示します。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.Code25IntlvLineStrokeThickness">
+      <summary>アウトラインの幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.Code25IntlvLineStroke">
+      <summary>アウトラインの色を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.ComplexProperty">
+      <summary>WINFORMS で QuietZone や ModuleZite などのクラスを複合プロパティとして使用する場合にのみ使用されます。INotifyPropertyChanged インタフェースの実装です。</summary>
+    </member>
+    <member name="M:C1.BarCode.ComplexProperty.OnPropertyChanged(System.String)">
+      <summary>イベントチェーンを呼び出します。</summary>
+      <param name="propertyName">プロパティの名前。</param>
+    </member>
+    <member name="M:C1.BarCode.ComplexProperty.SetField``1(``0@,``0,System.String)">
+      <summary>汎用のフィールドセッター。</summary>
+    </member>
+    <member name="E:C1.BarCode.ComplexProperty.PropertyChanged">
+      <summary>イベント</summary>
+    </member>
+    <member name="T:C1.BarCode.BarCodeDirection">
+      <summary>バーコードシンボルの印刷方向を指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeDirection.LeftToRight">
+      <summary>バーコードシンボルを左から右に印刷します（デフォルト）。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeDirection.RightToLeft">
+      <summary>バーコードシンボルを右から左に印刷します。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeDirection.TopToBottom">
+      <summary>バーコードシンボルを上から下に印刷します。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeDirection.BottomToTop">
+      <summary>バーコードシンボルを下から上に印刷します。</summary>
+    </member>
+    <member name="T:C1.BarCode.TextAlignment">
+      <summary>バーコードコントロール内でのテキストの配置。</summary>
+    </member>
+    <member name="F:C1.BarCode.TextAlignment.Left">
+      <summary>テキストは、バーコードコントロールの左端に揃えられます。</summary>
+    </member>
+    <member name="F:C1.BarCode.TextAlignment.Center">
+      <summary>テキストは、バーコードコントロール領域内の中央に配置されます。</summary>
+    </member>
+    <member name="F:C1.BarCode.TextAlignment.Right">
+      <summary>テキストは、バーコードコントロールの右端に揃えられます。</summary>
+    </member>
+    <member name="T:C1.BarCode.BarCodeCaptionPosition">
+      <summary>バーコードシンボルに対するバーコードキャプションの相対位置を指定します。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeCaptionPosition.None">
+      <summary>キャプションを印刷しません。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeCaptionPosition.Above">
+      <summary>キャプションをバーコードシンボルの上に印刷します。</summary>
+    </member>
+    <member name="F:C1.BarCode.BarCodeCaptionPosition.Below">
+      <summary>キャプションをバーコードシンボルの下に印刷します。</summary>
+    </member>
+    <member name="T:C1.BarCode.ModuleSize">
+      <summary>狭いバーや広いバーの幅を表します。</summary>
+    </member>
+    <member name="M:C1.BarCode.ModuleSize.#ctor">
+      <summary>ModuleSize の新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:C1.BarCode.ModuleSize.#ctor(System.Int32,System.Int32)">
+      <summary>ModuleSize の新しいインスタンスを初期化します。</summary>
+      <param name="barNarrow">バーコードの狭いバーの幅。</param>
+      <param name="barWide">バーコードの広いバーの幅。</param>
+    </member>
+    <member name="M:C1.BarCode.ModuleSize.NotifyChangeValue">
+      <summary>値の変更を通知します。</summary>
+    </member>
+    <member name="M:C1.BarCode.ModuleSize.ToString">
+      <summary>プロパティグリッドの書式設定テキスト。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.BarCode.ModuleSize.BarWide">
+      <summary>バーコードの広いバーの幅。</summary>
+    </member>
+    <member name="P:C1.BarCode.ModuleSize.BarNarrow">
+      <summary>バーコードの狭いバーの幅。</summary>
+    </member>
+    <member name="T:C1.BarCode.QuietZone">
+      <summary>クワイエットゾーンは、バーコードがどこから始まってどこで終わるかをスキャナが認識できるようにバーコードの左右に置かれた空き領域です。</summary>
+    </member>
+    <member name="M:C1.BarCode.QuietZone.NotifyChangeValue">
+      <summary>値の変更を通知します。</summary>
+    </member>
+    <member name="M:C1.BarCode.QuietZone.ToString">
+      <summary>プロパティグリッドの書式設定テキスト。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.BarCode.QuietZone.#ctor(System.Double,System.Double,System.Double,System.Double)">
+      <summary>QuietZone クラスの新しいインスタンスを初期化します。</summary>
+      <param name="left">バーコードの QuietZone の Left 値。</param>
+      <param name="top">バーコードの QuietZone の Top 値。</param>
+      <param name="right">バーコードの QuietZone の Right 値。</param>
+      <param name="bottom">バーコードの QuietZone の Bottom 値。</param>
+    </member>
+    <member name="M:C1.BarCode.QuietZone.#ctor">
+      <summary>QuietZone クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QuietZone.Left">
+      <summary>バーコードの QuietZone の Left 値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QuietZone.Right">
+      <summary>バーコードの QuietZone の Right 値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QuietZone.Top">
+      <summary>バーコードの QuietZone の Top 値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.BarCode.QuietZone.Bottom">
+      <summary>バーコードの QuietZone の Bottom 値を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.BarCode.WholeSize">
+      <summary>バーコードコントロール全体のサイズを表します。</summary>
+    </member>
+    <member name="M:C1.BarCode.WholeSize.#ctor">
+      <summary>WholeSize の新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:C1.BarCode.WholeSize.#ctor(System.Single,System.Single)">
+      <summary>WholeSize の新しいインスタンスを初期化します。</summary>
+      <param name="wholeWidth">バーコード全体の幅。</param>
+      <param name="wholeHeight">バーコード全体の高さ。</param>
+    </member>
+    <member name="P:C1.BarCode.WholeSize.WholeWidth">
+      <summary>バーコード全体の幅。</summary>
+    </member>
+    <member name="P:C1.BarCode.WholeSize.WholeHeight">
+      <summary>バーコード全体の高さ。</summary>
+    </member>
+    <member name="T:C1.BarCode.IDrawingDevice">
+      <summary>これは内部使用専用です。 何らかのコンテキストで実際の描画に使用される共通インタフェースを定義します。</summary>
+    </member>
+    <member name="M:C1.BarCode.IDrawingDevice.MeasureString(System.String)">
+      <summary>これは内部使用専用です。 指定された文字列を測定します。</summary>
+      <param name="text">測定する文字列。</param>
+      <returns>文字列のサイズを返します。</returns>
+    </member>
+    <member name="M:C1.BarCode.IDrawingDevice.FillRectangle(C1.Win.Interop.Rect)">
+      <summary>これは内部使用専用です。 四角形の内部を塗りつぶします。</summary>
+      <param name="bounds">塗りつぶす四角形。</param>
+    </member>
+    <member name="M:C1.BarCode.IDrawingDevice.DrawRectangle(C1.Win.Interop.Rect,System.Int32,System.Drawing.Color)">
+      <summary>これは内部使用専用です。 四角形を描画します。</summary>
+      <param name="bounds">描画する四角形。</param>
+      <param name="strokeThickness">ストロークの太さ。</param>
+      <param name="stroke">ストロークの色。</param>
+    </member>
+    <member name="M:C1.BarCode.IDrawingDevice.DrawString(System.String,C1.Win.Interop.Point)">
+      <summary>これは内部使用専用です。 指定されたテキスト文字列を描画します。</summary>
+      <param name="text">描画する文字列。</param>
+      <param name="point">描画されるテキストの左上隅。</param>
+    </member>
+    <member name="T:C1.Win.BarCode.C1BarCode">
+      <summary>テキスト値をバーコード画像にエンコードする Winforms コントロール</summary>
+    </member>
+    <member name="M:C1.Win.BarCode.C1BarCode.OnEncodingError(C1.Win.BarCode.EncodingErrorEventArgs)">
+      <summary>EncodingError イベントを発生させます。</summary>
+      <param name="e">イベントデータを含む EncodingErrorEventArgs。</param>
+    </member>
+    <member name="M:C1.Win.BarCode.C1BarCode.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>バーコード画像を描画します。</summary>
+    </member>
+    <member name="M:C1.Win.BarCode.C1BarCode.#ctor">
+      <summary>
+        <see cref="T:C1.Win.BarCode.C1BarCode" />の新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.BarCode.C1BarCode.Dispose(System.Boolean)">
+      <summary>使用されているリソースをすべてクリーンアップします。</summary>
+      <param name="disposing">マネージリソースを破棄する場合は true、そうでない場合は false。</param>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.Text">
+      <summary>バーコード画像としてエンコードされる値を取得または設定します。</summary>
+      <remarks>
+        <para>
+          一部のエンコーディングは任意の長さの英数字値をサポートします。その他の エンコーディングは、数値または特定の文字セットに制限されます。 詳細については、
+          <see cref="P:C1.Win.BarCode.C1BarCode.CodeType" />列挙を 参照してください。
+        </para>
+        <para>現在のエンコーディングに対して無効な文字を使用すると、 コントロールには空白の画像が表示されます。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.CaptionPosition">
+      <summary>バーコードシンボルに相対的なキャプションの垂直位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.CaptionAlignment">
+      <summary>バーコードシンボルに対するバーコードキャプションの相対的な配置。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.CodeType">
+      <summary>バーコード画像の生成時に使用するエンコーディングのタイプ。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.BarDirection">
+      <summary>バーコードの方向を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.QuietZone">
+      <summary>クワイエットゾーンは、バーコードがどこから始まってどこで終わるかをスキャナが認識できるようにバーコードの左右に置かれた空き領域です。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.ModuleSize">
+      <summary>狭いバーの画面ピクセル単位の幅。デフォルト値は、1 画面ピクセル幅（1/96 インチ）です。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.WholeSize">
+      <summary>バーコード全体のサイズ。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.AutoSize">
+      <summary>True に設定した場合、バーコードはコントロールにちょうど収まるように自動的に拡大されます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.BarHeight">
+      <summary>画面ピクセル単位のバーの高さ。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.TextFixedLength">
+      <summary>バーコードの値の固定桁数。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.QRCodeOptions">
+      <summary>QRCode のオプションは、QRCode バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.PDF417Options">
+      <summary>PDF417 のオプションは、Pdf417 バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.Code49Options">
+      <summary>Code49 のオプションは、Code49 バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.RssExpandedStackedOptions">
+      <summary>RssExpandedStacked のオプションは、RSSExpandedStacked バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.MicroPDF417Options">
+      <summary>MicroPDF417 のオプションは、MicroPDF417 バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.Code25intlvOptions">
+      <summary>Code25 Interleaved のオプションは、Code25 Interleved バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.GS1CompositeOptions">
+      <summary>GS1Composite のオプションは、RSS14Stacked および RSSLimited バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.DataMatrixOptions">
+      <summary>DataMatrix のオプションは、DataMatrix バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="E:C1.Win.BarCode.C1BarCode.EncodingError">
+      <summary>C1BarCode に入力されたテキストをバーコード画像にエンコードできない場合に発生します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.AdditionalNumber">
+      <summary>補助バーコードのための付加数。</summary>
+    </member>
+    <member name="T:C1.Win.BarCode.EncodingErrorEventArgs">
+      <summary>EncodingError イベントのデータを提供します。</summary>
+    </member>
+    <member name="M:C1.Win.BarCode.EncodingErrorEventArgs.#ctor(C1.BarCode.BarCodeException)">
+      <summary>EncodingErrorEventArgs クラスの新しいインスタンスを初期化します。</summary>
+      <param name="exception">最初に EncodingError イベントを発生させた例外。</param>
+    </member>
+    <member name="P:C1.Win.BarCode.EncodingErrorEventArgs.Exception">
+      <summary>最初に EncodingError イベントを発生させた例外を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.EncodingErrorEventArgs.Text">
+      <summary>例外のテキストを取得します。このテキストは、ユーザーが変更できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.EncodingErrorEventArgs.ErrorCode">
+      <summary>エラーの内部コードを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.EncodingErrorEventArgs.ThrowException">
+      <summary>例外を生成するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.BarCode.Strings">
+      <summary>デザイナによって使用される UI 文字列を含む静的クラス。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.Ean128Fnc1Options">
+      <summary>EAN128FNC1 のオプションは、EAN128FNC1 バーコードスタイルで使用できます。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.CheckSumEnabled">
+      <summary>適切な場合にバーコードのチェックサムを計算してバーコードに含めるかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.CaptionGrouping">
+      <summary>特定のバーコード（EAN 8/13、UPC-A/E）の分離型のキャプションを描画します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.Image">
+      <summary>コントロールのビットマップ画像を返します。</summary>
+    </member>
+    <member name="P:C1.Win.BarCode.C1BarCode.WideToNarrowRatio">
+      <summary>太いバーと細いバーの比率。</summary>
+    </member>
+    <member name="P:C1.BarCode.BarEngine.UsedFromReports">
+      <summary>BarEngine が C1FlexReport または C1Document から使用されるかどうかを示します。</summary>
+    </member>
+  </members>
+</doc>

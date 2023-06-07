@@ -1,0 +1,3448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>C1.Win.FlexChart.4</name>
+  </assembly>
+  <members>
+    <member name="T:C1.Chart.BaseRenderEventArgs">
+      <summary>基本レンダリングイベント引数。</summary>
+    </member>
+    <member name="P:C1.Chart.BaseRenderEventArgs.Engine">
+      <summary>レンダリングエンジンを取得します。</summary>
+    </member>
+    <member name="T:C1.Chart.IDataLabel">
+      <summary>IDataLabel インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IDataLabel.Content">
+      <summary>ラベルの内容を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IDataLabel.Position">
+      <summary>ラベルの位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IDataLabel.Border">
+      <summary>データラベルに境界線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IDataLabel.ConnectingLine">
+      <summary>データラベルに接続線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IDataLabel.Offset">
+      <summary>データラベルのオフセットを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.IPieDataLabel">
+      <summary>IPieDataLabel インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IPieDataLabel.Content">
+      <summary>ラベルの内容を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IPieDataLabel.Position">
+      <summary>ラベルの位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IPieDataLabel.Border">
+      <summary>データラベルに境界線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IPieDataLabel.ConnectingLine">
+      <summary>データラベルに接続線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IPieDataLabel.Offset">
+      <summary>データラベルのオフセットを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.SeriesBase">
+      <summary>データ系列の基本クラスです。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.ChartType">
+      <summary>系列のチャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.Visibility">
+      <summary>系列の表示/非表示を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.Name">
+      <summary>系列の表示名を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.SymbolSize">
+      <summary>この Series をレンダリングするために使用されるシンボルのサイズ（ピクセル単位）を取得または設定します。 Scatter、LineSymbols、および SplineSymbols チャートタイプに適用されます。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.SymbolMarker">
+      <summary>系列の各データポイントで使用するマーカーの形状を取得または設定します。 Scatter、LineSymbols、および SplineSymbols チャートタイプに適用されます。</summary>
+    </member>
+    <member name="T:C1.Chart.ChartType">
+      <summary>チャートタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Column">
+      <summary>縦棒を表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Bar">
+      <summary>横棒を表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Line">
+      <summary>一定期間のトレンドまたはカテゴリ間のトレンドを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Scatter">
+      <summary>X 座標と Y 座標を使用して、データに含まれるパターンを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.LineSymbols">
+      <summary>各データポイントにシンボルを使用する折れ線グラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Area">
+      <summary>線の下の領域が色で塗りつぶされた折れ線グラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Spline">
+      <summary>角度が付いた線ではなく曲線でデータポイント間をプロットする折れ線グラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.SplineSymbols">
+      <summary>各データポイントにシンボルを使用するスプライングラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.SplineArea">
+      <summary>線の下の領域が色で塗りつぶされたスプライングラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Bubble">
+      <summary>シンボルのサイズが 3 番目のデータ値によって決定される散布図を表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Candlestick">
+      <summary>高値、安値、始値、終値を持つ項目を表示します。 ヒゲ線のサイズは高値と安値で決定され、 棒のサイズは、始値と終値で決定されます。 棒は、終値が始値より高いか安いかに応じて、 異なる色で表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.HighLowOpenClose">
+      <summary>ローソク足チャートと同じ情報を表示しますが、 始値が左向きの線、終値が右向きの線 で表されます。</summary>
+    </member>
+    <member name="T:C1.Chart.Stacking">
+      <summary>グラフのデータ値を積み上げるかどうかと、積み上げる場合はその方法を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Stacking.None">
+      <summary>積み上げません。各系列オブジェクトは個別にプロットされます。</summary>
+    </member>
+    <member name="F:C1.Chart.Stacking.Stacked">
+      <summary>各値が全体にどの程度影響するかを示す積層グラフにします。</summary>
+    </member>
+    <member name="F:C1.Chart.Stacking.Stacked100pc">
+      <summary>各値が全体にどの程度影響するかを示す 100% 積層グラフにします。 全体に対する各系列の割合を相対サイズで表します。</summary>
+    </member>
+    <member name="T:C1.Chart.SeriesVisibility">
+      <summary>系列を表示するかどうかと、表示する場合はその場所を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesVisibility.Visible">
+      <summary>系列はプロット領域内と凡例内に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesVisibility.Plot">
+      <summary>系列はプロット領域内にのみ表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesVisibility.Legend">
+      <summary>系列は凡例内にのみ表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesVisibility.Hidden">
+      <summary>系列は非表示です。</summary>
+    </member>
+    <member name="T:C1.Chart.DataType">
+      <summary>チャートのデータ型を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.DataType.Number">
+      <summary>数値データ。</summary>
+    </member>
+    <member name="F:C1.Chart.DataType.Date">
+      <summary>日付または時刻データ。</summary>
+    </member>
+    <member name="T:C1.Chart.ChartElement">
+      <summary>HitTest メソッドによって検出できるチャート要素を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.PlotArea">
+      <summary>軸内の領域。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.AxisX">
+      <summary>X 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.AxisY">
+      <summary>Y 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.ChartArea">
+      <summary>コントロールの内部で軸の外部の領域。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.Legend">
+      <summary>チャートの凡例。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.Header">
+      <summary>チャートのヘッダー。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.Footer">
+      <summary>チャートのフッター。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.Series">
+      <summary>チャート系列。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.SeriesSymbol">
+      <summary>チャート系列のシンボル。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.DataLabel">
+      <summary>データラベル。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartElement.None">
+      <summary>チャート要素なし。</summary>
+    </member>
+    <member name="T:C1.Chart.LabelPosition">
+      <summary>チャートデータのラベル位置を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.None">
+      <summary>データラベルを表示しません。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.Left">
+      <summary>ラベルをデータポイントの左に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.Top">
+      <summary>ラベルをデータポイントの上に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.Right">
+      <summary>ラベルをデータポイントの右に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.Bottom">
+      <summary>ラベルをデータポイントの下に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.LabelPosition.Center">
+      <summary>ラベルをデータポイントの中央に表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.PieLabelPosition">
+      <summary>円グラフ上のデータラベルの位置を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.None">
+      <summary>データラベルなし。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.Inside">
+      <summary>ラベルを円グラフセグメント内に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.Center">
+      <summary>項目を円グラフセグメントの中心に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.Outside">
+      <summary>項目を円グラフセグメント外に表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.ChartSelectionMode">
+      <summary>利用可能な選択モード。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartSelectionMode.None">
+      <summary>選択は無効です。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartSelectionMode.Series">
+      <summary>系列選択。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartSelectionMode.Point">
+      <summary>ポイント選択。</summary>
+    </member>
+    <member name="T:C1.Chart.ElementSizeType">
+      <summary>ElementSize オブジェクトのサイズの型を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ElementSizeType.Percentage">
+      <summary>利用可能な空間に対する割合（パーセント）で指定されたサイズ。</summary>
+    </member>
+    <member name="F:C1.Chart.ElementSizeType.Absolute">
+      <summary>ピクセル単位で指定されたサイズ。</summary>
+    </member>
+    <member name="T:C1.Chart.SymbolMarker">
+      <summary>SymbolMarker プロパティに使用するマーカーのタイプを指定します。 Scatter、LineSymbols、および SplineSymbols チャートタイプに適用されます。</summary>
+    </member>
+    <member name="F:C1.Chart.SymbolMarker.Dot">
+      <summary>円を使用して各データポイントをマークします。</summary>
+    </member>
+    <member name="F:C1.Chart.SymbolMarker.Box">
+      <summary>正方形を使用して各データポイントをマークします。</summary>
+    </member>
+    <member name="T:C1.Chart.ElementSize">
+      <summary>要素サイズを表します。</summary>
+    </member>
+    <member name="P:C1.Chart.ElementSize.SizeType">
+      <summary>サイズタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ElementSize.Value">
+      <summary>値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.ElementSize.op_Equality(C1.Chart.ElementSize,C1.Chart.ElementSize)">
+      <summary></summary>
+      <param name="size1"></param>
+      <param name="size2"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ElementSize.op_Inequality(C1.Chart.ElementSize,C1.Chart.ElementSize)">
+      <summary></summary>
+      <param name="size1"></param>
+      <param name="size2"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ElementSize.Equals(System.Object)">
+      <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判定します。</summary>
+      <param name="obj"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ElementSize.GetHashCode">
+      <summary>インスタンスのハッシュコードを返します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.OverlappingLabels">
+      <summary>重なっているラベルを処理する方法を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.OverlappingLabels.Auto">
+      <summary>重なっているラベルを非表示にします。</summary>
+    </member>
+    <member name="F:C1.Chart.OverlappingLabels.Show">
+      <summary>重なっているラベルを含むすべてのラベルを表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.HitTestInfo">
+      <summary>指定された座標にある FlexChart コントロールのパーツに関する 情報を保持します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.Series">
+      <summary>指定された座標にあるチャート系列を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.PointIndex">
+      <summary>指定された座標にあるデータポイントインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.ChartElement">
+      <summary>指定された座標にあるチャート要素を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.Distance">
+      <summary>最も近いデータポイントからの距離を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.Item">
+      <summary>最も近いデータポイントに対応するデータオブジェクトを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.X">
+      <summary>最も近いデータポイントの x 値を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.HitTestInfo.Y">
+      <summary>最も近いデータポイントの y 値を取得します。</summary>
+    </member>
+    <member name="T:C1.Chart.Position">
+      <summary>チャート上のチャート要素の位置を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.Left">
+      <summary>要素は左側に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.Right">
+      <summary>要素は右側に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.Top">
+      <summary>項目は上に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.Bottom">
+      <summary>項目は下に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.Auto">
+      <summary>要素は自動的に配置されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Position.None">
+      <summary>要素は表示されません。</summary>
+    </member>
+    <member name="T:C1.Chart.AxisType">
+      <summary>軸タイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisType.X">
+      <summary>X 軸、水平方向。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisType.Y">
+      <summary>Y 軸、垂直方向。</summary>
+    </member>
+    <member name="T:C1.Chart.TickMark">
+      <summary>軸の目盛りマークを表示するかどうかと、表示する場合はその場所を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.TickMark.None">
+      <summary>目盛りマークを表示しません。</summary>
+    </member>
+    <member name="F:C1.Chart.TickMark.Outside">
+      <summary>目盛りマークをプロットエリア外に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.TickMark.Inside">
+      <summary>目盛りマークをプロットエリア内に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.TickMark.Cross">
+      <summary>軸に交差する目盛りマークを表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.AxisLabelAlignment">
+      <summary>軸ラベルの位置を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisLabelAlignment.Center">
+      <summary>中央。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisLabelAlignment.Left">
+      <summary>左。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisLabelAlignment.Right">
+      <summary>右。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisLabelAlignment.Top">
+      <summary>上。</summary>
+    </member>
+    <member name="F:C1.Chart.AxisLabelAlignment.Bottom">
+      <summary>下。</summary>
+    </member>
+    <member name="T:C1.Chart.IAxis">
+      <summary>IAxis インタフェース。</summary>
+    </member>
+    <member name="M:C1.Chart.IAxis.Convert(System.Double)">
+      <summary>データ座標をピクセル座標に変換します。</summary>
+      <param name="val"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IAxis.ConvertBack(System.Double)">
+      <summary>ピクセル座標をデータ座標に変換します。</summary>
+      <param name="val"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.IAxis.Position">
+      <summary>軸の位置を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.AxisType">
+      <summary>軸タイプを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Origin">
+      <summary>軸の原点を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Reversed">
+      <summary>軸が反転されているかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Labels">
+      <summary>ラベルを描画するかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MajorTickMarks">
+      <summary>大目盛りマークの位置を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MajorGrid">
+      <summary>主グリッドを描画するかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MajorUnit">
+      <summary>ラベル単位を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MinorTickMarks">
+      <summary>大目盛りマークの位置を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MinorGrid">
+      <summary>主グリッドを描画するかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.MinorUnit">
+      <summary>ラベル単位を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.LogBase">
+      <summary>対数の底を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.AxisLine">
+      <summary>軸線を描画するかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.LabelAlignment">
+      <summary>ラベルの配置を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.LabelAngle">
+      <summary>ラベルの回転角度を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Min">
+      <summary>軸の最小値を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Max">
+      <summary>軸の最大値を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IAxis.GetMin">
+      <summary>実際の最小値を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IAxis.GetMax">
+      <summary>実際の最大値を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.IAxis.Format">
+      <summary>軸ラベルの書式を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Title">
+      <summary>軸タイトルを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.OverlappingLabels">
+      <summary>重なった軸ラベルの処理方法を示す値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IAxis.GetHeight(C1.Chart.IRenderEngine,System.Double)">
+      <summary>軸の高さを取得します。</summary>
+      <param name="engine"></param>
+      <param name="maxWidth"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.IAxis.AnnoSize">
+      <summary>注釈ラベルのサイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.HasOrigin">
+      <summary>原点が設定されているかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.DesiredSize">
+      <summary>目的の軸サイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Chart">
+      <summary>親チャートを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IAxis.Rect">
+      <summary>軸四角形を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IAxis.Layout(C1.Chart._Rect,C1.Chart._Rect)">
+      <summary>軸レイアウトを実行します。</summary>
+      <param name="axisRect"></param>
+      <param name="plotRect"></param>
+    </member>
+    <member name="M:C1.Chart.IAxis.Render(C1.Chart.IRenderEngine)">
+      <summary>軸をレンダリングします。</summary>
+      <param name="engine"></param>
+    </member>
+    <member name="M:C1.Chart.IAxis.UpdateActualLimits(System.Nullable{C1.Chart.DataType},System.Double,System.Double,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Double})">
+      <summary>軸制限を更新します。</summary>
+      <param name="dataType"></param>
+      <param name="dataMin"></param>
+      <param name="dataMax"></param>
+      <param name="labels"></param>
+      <param name="values"></param>
+    </member>
+    <member name="T:C1.Chart.IChartBase">
+      <summary>IChartBase インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IChartBase.Legend">
+      <summary>グラフの凡例を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChartBase.Header">
+      <summary>チャートヘッダーを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChartBase.Footer">
+      <summary>チャートフッターを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChartBase.SelectedIndex">
+      <summary>選択インデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChartBase.SelectionMode">
+      <summary>選択モードを取得します。</summary>
+    </member>
+    <member name="T:C1.Chart.IChart">
+      <summary>IChart インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IChart.ChartType">
+      <summary>チャートタイプを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChart.Stacking">
+      <summary>チャート積層を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChart.AxisX">
+      <summary>主 x 軸を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChart.AxisY">
+      <summary>主 y 軸を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IChart.DataLabel">
+      <summary>チャートデータラベルを取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IChart.GetAxes">
+      <summary>チャート軸を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.IChart.Series">
+      <summary>系列リストを取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IChart.GetPlotRect">
+      <summary>プロット四角形を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.GetPlotMargin">
+      <summary>プロットマージンを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.IsRotated">
+      <summary>チャートが回転されたかどうかを示す値を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.GetXItems">
+      <summary>x 軸項目のリストを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.GetOption(System.String)">
+      <summary>チャートオプションを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.OnRenderingData(C1.Chart.IRenderEngine)">
+      <summary>チャートデータのレンダリング開始前に呼び出されます。</summary>
+      <param name="engine"></param>
+    </member>
+    <member name="T:C1.Chart.ILegend">
+      <summary>ILegend インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.ILegend.Position">
+      <summary>凡例の位置を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.ILegend.GetPosition(System.Double,System.Double)">
+      <summary>自動位置を取得します。</summary>
+      <param name="w"></param>
+      <param name="h"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ILegend.GetDesiredSize(C1.Chart.IRenderEngine,System.Double,System.Double)">
+      <summary>目的の凡例サイズを取得します。</summary>
+      <param name="engine"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ILegend.Render(C1.Chart.IRenderEngine,C1.Chart.Position,C1.Chart._Rect)">
+      <summary>凡例をレンダリングします。</summary>
+      <param name="engine"></param>
+      <param name="pos"></param>
+      <param name="rect"></param>
+    </member>
+    <member name="M:C1.Chart.ILegend.HitTest(System.Double,System.Double)">
+      <summary>ヒットテスト。</summary>
+      <param name="x"></param>
+      <param name="y"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.IRenderEngine">
+      <summary>レンダリングエンジン。</summary>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetStroke(System.Object)">
+      <summary>現在のストロークブラシを設定します。</summary>
+      <param name="brush">ネイティブブラシまたは ARGB 色を表す整数。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetStrokeThickness(System.Double)">
+      <summary>ストロークの太さを設定します。</summary>
+      <param name="thickness"></param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetStrokePattern(System.Double[])">
+      <summary>ストロークのパターンを設定します。</summary>
+      <param name="pattern"></param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetFill(System.Object)">
+      <summary>塗りつぶしブラシを設定します。</summary>
+      <param name="brush"></param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetOpacity(System.Object,System.Double)">
+      <summary>ブラシの不透明度を変更します。</summary>
+      <param name="brush">ブラシオブジェクト</param>
+      <param name="opacity">不透明度</param>
+      <returns>ブラシオブジェクト</returns>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetFont(System.Object)">
+      <summary>フォントを設定します。</summary>
+      <param name="font">ネイティブフォントオブジェクト。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawLine(System.Double,System.Double,System.Double,System.Double)">
+      <summary>現在のストローク属性を使用して 2 つの点の間に線を描画します。</summary>
+      <param name="x1">最初の点の x 座標。</param>
+      <param name="y1">最初の点の y 座標。</param>
+      <param name="x2">2 番目の点の x 座標。</param>
+      <param name="y2">2 番目の点の y 座標。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawLines(System.Double[],System.Double[])">
+      <summary>指定された座標を使用して線を描画します。</summary>
+      <param name="xs">x 座標の配列。</param>
+      <param name="ys">y 座標の配列。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawRect(System.Double,System.Double,System.Double,System.Double)">
+      <summary>現在のストロークと塗りつぶしで四角形を描画します。</summary>
+      <param name="x">四角形の x 座標。</param>
+      <param name="y">四角形の y 座標。</param>
+      <param name="w">四角形の幅。</param>
+      <param name="h">四角形の高さ。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawPolygon(System.Double[],System.Double[])">
+      <summary>現在のストロークと塗りつぶしで多角形を描画します。</summary>
+      <param name="xs">x 座標の配列。</param>
+      <param name="ys">y 座標の配列。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawEllipse(System.Double,System.Double,System.Double,System.Double)">
+      <summary>現在のストロークと塗りつぶしで楕円を描画します。</summary>
+      <param name="cx">楕円の中心の x 座標。</param>
+      <param name="cy">楕円の中心の y 座標。</param>
+      <param name="rx">x 半径。</param>
+      <param name="ry">y 半径。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.MeasureString(System.String)">
+      <summary>文字列のサイズを測定します。</summary>
+      <param name="s">測定する文字列。</param>
+      <returns>サイズ。</returns>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawString(System.String,C1.Chart._Point)">
+      <summary>文字列を指定位置に描画します。</summary>
+      <param name="s">描画する文字列。</param>
+      <param name="pos">位置。</param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawStringRotated(System.String,C1.Chart._Point,C1.Chart._Point,System.Double)">
+      <summary>回転した文字列を指定位置に描画します。</summary>
+      <param name="s"></param>
+      <param name="pos"></param>
+      <param name="center"></param>
+      <param name="angle"></param>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.SetClipRect(System.Nullable{C1.Chart._Rect})">
+      <summary>クリッピング四角形を設定します。</summary>
+      <param name="rect">クリッピング四角形。クリッピング四角形をヌルクリアします。</param>
+    </member>
+    <member name="T:C1.Chart.ISeries">
+      <summary>ISeries インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.ChartType">
+      <summary>チャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.Visibility">
+      <summary>系列の表示/非表示を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.Name">
+      <summary>系列名を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.AxisX">
+      <summary>系列の x 軸を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.AxisY">
+      <summary>系列の y 軸を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.Chart">
+      <summary>チャートを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetValues(System.Int32)">
+      <summary>データ値を取得します。</summary>
+      <param name="dim"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetDataType(System.Int32)">
+      <summary>データ型を取得します。</summary>
+      <param name="dim"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.ISeries.SymbolSize">
+      <summary>系列のシンボルサイズを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.SymbolMarker">
+      <summary>系列のシンボルマーカーを取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetItem(System.Int32)">
+      <summary>インデックスに基づいてデータ項目を取得します。</summary>
+      <param name="i"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.IStyleProvider">
+      <summary>IStyle プロバイダインタフェース。</summary>
+    </member>
+    <member name="M:C1.Chart.IStyleProvider.GetStyle(System.String)">
+      <summary>名前に基づいてスタイルを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.IPalette">
+      <summary>IPalette インタフェース。</summary>
+    </member>
+    <member name="M:C1.Chart.IPalette.GetColor(System.Int32)">
+      <summary>インデックスに基づいてパレット色を取得します。</summary>
+      <param name="i"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.Palette">
+      <summary>チャートパレットを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Standard">
+      <summary>標準。</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Cocoa">
+      <summary>Cocoa</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Coral">
+      <summary>Coral</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Dark">
+      <summary>Dark</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Highcontrast">
+      <summary>Highcontrast</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Light">
+      <summary>Light</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Midnight">
+      <summary>Midnight</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Modern">
+      <summary>Modern</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Organic">
+      <summary>Organic</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Slate">
+      <summary>Slate</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Zen">
+      <summary>Zen</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Cyborg">
+      <summary>Cyborg</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Superhero">
+      <summary>Superhero</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Flatly">
+      <summary>Flatly</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Darkly">
+      <summary>Darkly</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Custom">
+      <summary>カスタムパレット。</summary>
+    </member>
+    <member name="T:C1.Chart._Rect">
+      <summary>四角形を表します。</summary>
+    </member>
+    <member name="F:C1.Chart._Rect.Left">
+      <summary>左座標。</summary>
+    </member>
+    <member name="F:C1.Chart._Rect.Top">
+      <summary>上座標。</summary>
+    </member>
+    <member name="F:C1.Chart._Rect.Width">
+      <summary>四角形の幅。</summary>
+    </member>
+    <member name="F:C1.Chart._Rect.Height">
+      <summary>四角形の高さ。</summary>
+    </member>
+    <member name="P:C1.Chart._Rect.Right">
+      <summary>四角形の右座標を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart._Rect.Bottom">
+      <summary>四角形の下座標を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart._Rect.#ctor(System.Double,System.Double,System.Double,System.Double)">
+      <summary>四角形のインスタンスを作成します。</summary>
+      <param name="l"></param>
+      <param name="t"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="M:C1.Chart._Rect.Contains(System.Double,System.Double)">
+      <summary>座標で指定された点が四角形の内部であるかどうかを返します。</summary>
+      <param name="x"></param>
+      <param name="y"></param>
+      <returns></returns>
+    </member>
+    <member name="F:C1.Chart._Rect.Empty">
+      <summary>空の四角形。</summary>
+    </member>
+    <member name="M:C1.Chart._Rect.op_Equality(C1.Chart._Rect,C1.Chart._Rect)">
+      <summary>等価演算子。</summary>
+      <param name="rect1"></param>
+      <param name="rect2"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart._Rect.op_Inequality(C1.Chart._Rect,C1.Chart._Rect)">
+      <summary>非等価演算子。</summary>
+      <param name="rect1"></param>
+      <param name="rect2"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart._Rect.Equals(System.Object)">
+      <summary>指定されたオブジェクトがこのインスタンスと等しいかどうかを判定します。</summary>
+      <param name="obj"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart._Rect.GetHashCode">
+      <summary>インスタンスのハッシュコードを返します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart._Rect.Intersect(C1.Chart._Rect)">
+      <summary>四角形が、指定された四角形と交差するかどうかを示す値を返します。</summary>
+      <param name="rect"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart._Size">
+      <summary>サイズを表します。</summary>
+    </member>
+    <member name="F:C1.Chart._Size.Width">
+      <summary>幅。</summary>
+    </member>
+    <member name="F:C1.Chart._Size.Height">
+      <summary>高さ。</summary>
+    </member>
+    <member name="M:C1.Chart._Size.#ctor(System.Double,System.Double)">
+      <summary>_Size のインスタンスを作成します。</summary>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="T:C1.Chart._Margin">
+      <summary></summary>
+    </member>
+    <member name="F:C1.Chart._Margin.Left">
+      <summary>左マージン。</summary>
+    </member>
+    <member name="F:C1.Chart._Margin.Right">
+      <summary>右マージン。</summary>
+    </member>
+    <member name="F:C1.Chart._Margin.Top">
+      <summary>上マージン。</summary>
+    </member>
+    <member name="F:C1.Chart._Margin.Bottom">
+      <summary>下マージン。</summary>
+    </member>
+    <member name="M:C1.Chart._Margin.Apply(C1.Chart._Rect)">
+      <summary>指定された四角形にマージンを適用します。</summary>
+      <param name="rect"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart._Point">
+      <summary>点を表します。</summary>
+    </member>
+    <member name="F:C1.Chart._Point.X">
+      <summary>X 座標。</summary>
+    </member>
+    <member name="F:C1.Chart._Point.Y">
+      <summary>Y 座標。</summary>
+    </member>
+    <member name="M:C1.Chart._Point.#ctor(System.Double,System.Double)">
+      <summary>_Point のインスタンスを作成します。</summary>
+      <param name="x"></param>
+      <param name="y"></param>
+    </member>
+    <member name="M:C1.Chart._Point.Clone">
+      <summary>指定されたポイントのクローンを作成します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart._Style">
+      <summary>スタイルを表します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.Stroke">
+      <summary>ストロークオブジェクトを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.StrokeThickness">
+      <summary>ストロークの太さを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.StrokePattern">
+      <summary>ストロークパターンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.Fill">
+      <summary>塗りつぶしオブジェクトを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.Font">
+      <summary>フォントオブジェクトを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart._Style.HAlign">
+      <summary>水平方向の配置を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart._Style.Combine(C1.Chart._Style)">
+      <summary>スタイルを結合します。</summary>
+      <param name="parentStyle"></param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Axis">
+      <summary>チャート内の軸を表します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Axis.#ctor">
+      <summary>Axis オブジェクトの新しいインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Axis.Convert(System.Double)">
+      <summary>指定された値をデータ座標からピクセル座標に変換します。</summary>
+      <param name="val">変換するデータ値。</param>
+      <returns>コントロールのピクセル座標の値。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.Axis.ConvertBack(System.Double)">
+      <summary>指定された値をピクセル座標からデータ座標に変換します。</summary>
+      <param name="val">変換するピクセル座標。</param>
+      <returns>データ座標の値。</returns>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Position">
+      <summary>軸位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.AxisType">
+      <summary>軸タイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Origin">
+      <summary>軸が直交軸と交差する位置の値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Reversed">
+      <summary>軸を反転（上から下または右から左）するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Labels">
+      <summary>軸ラベルを表示すかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.LabelAngle">
+      <summary>軸ラベルの回転角度を取得または設定します。</summary>
+      <remarks>この角度は、-90 から 90 の有効な値で測定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Format">
+      <summary>軸ラベルに使用される書式文字列を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Title">
+      <summary>軸の横に表示されるタイトルテキストを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MajorTickMarks">
+      <summary>軸の目盛りマークの場所を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MajorGrid">
+      <summary>軸にグリッド線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MajorGridStyle">
+      <summary>主グリッドのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MajorUnit">
+      <summary>軸ラベル間の単位数を取得または設定します。</summary>
+      <remarks>軸に日付値が含まれる場合、単位は日数です。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MinorTickMarks">
+      <summary>小目盛りマークの場所を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MinorGrid">
+      <summary>軸に副グリッド線を表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MinorGridStyle">
+      <summary>副グリッドのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.MinorUnit">
+      <summary>小目盛りとグリッド線の間の単位数を取得または設定します。</summary>
+      <remarks>軸に日付値が含まれる場合、単位は日数です。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.LogBase">
+      <summary>軸の対数の底を取得または設定します。</summary>
+      <remarks>底が NaN（デフォルト値）の場合、軸は線形目盛りを使用します。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.AxisLine">
+      <summary>軸線が表示されているかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.LabelAlignment">
+      <summary>軸ラベルの配置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Min">
+      <summary>軸に表示される最小値を取得または設定します。</summary>
+      <remarks>最小値が NaN（デフォルト値）の場合、最小値は自動的に計算されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Max">
+      <summary>軸に表示される最大値を取得または設定します。</summary>
+      <remarks>最大値が NaN（デフォルト値）の場合、最大値は自動的に計算されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Style">
+      <summary>軸スタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.ActualMin">
+      <summary>現在の軸の最小を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.ActualMax">
+      <summary>現在の軸の最大を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.OverlappingLabels">
+      <summary>重なった軸ラベルの処理方法を示す値を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartOptions">
+      <summary>チャートのオプションを指定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.ClusterSize">
+      <summary>縦棒グラフと横棒グラフのクラスタのサイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.BubbleMinSize">
+      <summary>バブルチャートの最小シンボルサイズを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.BubbleMaxSize">
+      <summary>バブルチャートの最大シンボルサイズを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartStyle">
+      <summary>チャート要素のビジュアルスタイルを指定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.Stroke">
+      <summary>要素のストロークブラシを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.StrokeColor">
+      <summary>ストローク色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.Fill">
+      <summary>要素の塗りつぶしブラシを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.FillColor">
+      <summary>塗りつぶし色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.StrokeWidth">
+      <summary>ストロークの幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.StrokeDashPattern">
+      <summary>ストロークの破線パターンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartStyle.Font">
+      <summary>チャート要素のフォントを取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.ChartStyle.PropertyChanged">
+      <summary>プロパティ値が変更されたときに発生します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.DataLabelBase">
+      <summary>データラベルの基本クラスです。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.Content">
+      <summary>データラベルのコンテンツを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.Border">
+      <summary>ラベルが境界線を持つかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.ConnectingLine">
+      <summary>データラベルが、対応するデータポイントとの接続線を持つかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.Offset">
+      <summary>対応するデータポイントからのデータラベルのオフセットを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.Style">
+      <summary>データラベルのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabelBase.BorderStyle">
+      <summary>データラベルの境界線スタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.DataLabel.Position">
+      <summary>データラベルの位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PieDataLabel.Position">
+      <summary>データラベルの位置を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ImageFormat">
+      <summary>画像形式を指定します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ImageFormat.Png">
+      <summary>PNG 画像。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ImageFormat.Jpg">
+      <summary>JPEG 画像</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ImageFormat.Svg">
+      <summary>SVG 画像。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.RenderMode">
+      <summary>チャートのレンダリングモードを指定します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.RenderMode.Default">
+      <summary>デフォルトレンダリングモード。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.RenderMode.DirectX">
+      <summary>高パフォーマンスの DirectX レンダリング。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartSmoothingMode">
+      <summary>スムージングモードを指定します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ChartSmoothingMode.Auto">
+      <summary>自動選択。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ChartSmoothingMode.HighQuality">
+      <summary>アンチエイリアスが有効になります。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.ChartSmoothingMode.HighSpeed">
+      <summary>アンチエイリアスが無効になります。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.RenderEventArgs">
+      <summary>レンダリングイベント引数。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderEventArgs.Graphics">
+      <summary>グラフィックを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.FlexChartBase">
+      <summary>チャートコントロールの基本クラス。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.Legend">
+      <summary>グラフの凡例を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.Palette">
+      <summary>チャートパレットを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.Header">
+      <summary>チャートヘッダーを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.Footer">
+      <summary>チャートフッターを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.ToolTip">
+      <summary>チャートのツールチップを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.SelectionMode">
+      <summary>チャートの選択モードを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.SelectedIndex">
+      <summary>チャートで選択された要素のインデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.SelectionStyle">
+      <summary>選択要素のスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.PlotStyle">
+      <summary>プロット領域（軸内の領域）のスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.CustomPalette">
+      <summary>カスタムパレットを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.SmoothingMode">
+      <summary>チャートのスムージングモードを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.BeginUpdate">
+      <summary>次に EndUpdate が呼び出されるまで、通知を一時停止します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.EndUpdate">
+      <summary>BeginUpdate への呼び出しによって一時停止された通知を再開します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.HitTest(System.Drawing.Point)">
+      <summary>指定されたポイントに関する情報を含む HitTestInfo オブジェクトを取得します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <returns>ポイントに関する情報を含む HitTestInfo オブジェクト。</returns>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChartBase.Rendering">
+      <summary>チャートのレンダリング開始前に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChartBase.Rendered">
+      <summary>チャートのレンダリング終了後に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChartBase.SelectionChanged">
+      <summary>選択された要素が変更された後に発生します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChartBase.DefaultSize">
+      <summary>コントロールのデフォルトのサイズを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.FlexPie">
+      <summary>円グラフのコントロール。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.DataSource">
+      <summary>円グラフのデータを含むオブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.DataMember">
+      <summary>データソースの DataMember の名前を取得または設定します（存在する場合）。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.Binding">
+      <summary>円グラフセグメントの数値を含むプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.BindingName">
+      <summary>円グラフセグメントと凡例のラベルを含むプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.StartAngle">
+      <summary>円グラフセグメントの開始角度（度単位）を取得または設定します。</summary>
+      <remarks>角度は、9 時の位置から時計回りに測定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.InnerRadius">
+      <summary>円の内側半径のサイズを取得または設定します。</summary>
+      <remarks>内側半径は、円の半径に対する割合として測定されます。 このプロパティのデフォルト値は 0 で、この場合は 1 つの円になります。 このプロパティを 0 より大きい値に設定すると、中央に穴のある円が 作成されます。これは、ドーナツグラフとも呼ばれます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.Offset">
+      <summary>円の中心からのセグメントのオフセットを取得または設定します。</summary>
+      <remarks>オフセットは、円の半径に対する割合として測定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.Reversed">
+      <summary>角度を反転（反時計回り）するかどうかを決定する値を取得または設定します。</summary>
+      <remarks>デフォルト値は false です。この場合、角度は時計回りに測定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.SelectedItemPosition">
+      <summary>選択されたセグメントの位置を取得または設定します。</summary>
+      <remarks>このプロパティを 'None' 以外の設定すると、項目が選択されたときに円が回転します。 グラフをクリックしてセグメントを選択するには、SelectionMode プロパティを "Point" に設定する必要があります。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.SelectedItemOffset">
+      <summary>円の中心からの選択されたセグメントのオフセットを取得または設定します。</summary>
+      <remarks>オフセットは、円の半径に対する割合として測定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPie.DataLabel">
+      <summary>チャートデータラベルを取得します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.HitTest(System.Drawing.Point)">
+      <summary>指定されたポイントに関する情報を含む HitTestInfo オブジェクトを取得します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <returns>ポイントに関する情報を含む HitTestInfo オブジェクト。</returns>
+    </member>
+    <member name="T:C1.Win.Chart.FlexChart">
+      <summary>FlexChart コントロールは、データを視覚化する強力で柔軟な方法を提供します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.#ctor">
+      <summary>FlexChart コントロールのインスタンスを作成します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.Binding">
+      <summary>系列の Y 値を含むプロパティの名前を取得または設定します。</summary>
+      <remarks>複合グラフタイプの場合は、カンマ区切りで複数の名前が含まれます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.BindingX">
+      <summary>系列の X 値を含むプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.DataMember">
+      <summary>データソースの DataMember の名前を取得または設定します（存在する場合）。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.DataSource">
+      <summary>系列データを含むオブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.AxisX">
+      <summary>メインチャートの x 軸を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.AxisY">
+      <summary>メインチャートの y 軸を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.Series">
+      <summary>系列のリストを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.Stacking">
+      <summary>データ積層を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.ChartType">
+      <summary>チャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.RenderMode">
+      <summary>レンダリングモードを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.Rotated">
+      <summary>X が垂直、Y が水平になるように軸を反転するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.LegendToggle">
+      <summary>凡例項目をクリックすると、チャート内の系列の表示/非表示が切り替わるか どうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.DataLabel">
+      <summary>チャートデータラベルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.Options">
+      <summary>さまざまなチャートオプションを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.PlotMargin">
+      <summary>プロット領域のマージンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.PlotRect">
+      <summary>プロット領域の四角形（チャート軸の内側の四角形）を返します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.HitTest(System.Drawing.Point)">
+      <summary>指定されたポイントに関する情報を含む HitTestInfo オブジェクトを取得します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <returns>ポイントに関する情報を含む HitTestInfo オブジェクト。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.PointToData(System.Drawing.PointF)">
+      <summary>Point をコントロール座標からチャートデータ座標に変換します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <returns>チャートデータ座標内のポイント。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.DataToPoint(System.Drawing.PointF)">
+      <summary>Point をデータ座標からコントロール座標に変換します。</summary>
+      <param name="pt">データ座標内のポイント。</param>
+      <returns>コントロール座標のポイント。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.SaveImage(System.IO.Stream,C1.Win.Chart.ImageFormat,System.Int32,System.Int32)">
+      <summary>指定されたストリームにチャートを画像として保存します。</summary>
+      <param name="stream">ストリーム。</param>
+      <param name="fmt">画像形式。</param>
+      <param name="w">画像の幅。</param>
+      <param name="h">画像の高さ。</param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.Dispose(System.Boolean)">
+      <summary>使用されているリソースをすべてクリーンアップします。</summary>
+      <param name="disposing">マネージリソースを破棄する場合は true、そうでない場合は false。</param>
+    </member>
+    <member name="T:C1.Win.Chart.Series">
+      <summary>チャートに表示する一連のデータポイントを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.Binding">
+      <summary>系列の Y 値を含むプロパティの名前を取得または設定します。</summary>
+      <remarks>複合グラフタイプの場合は、カンマ区切りで複数の名前が含まれます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Series.BindingX">
+      <summary>系列の X 値を含むプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.DataMember">
+      <summary>データソースの DataMember の名前を取得または設定します（存在する場合）。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.DataSource">
+      <summary>系列データを含むオブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.Style">
+      <summary>系列のスタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.SymbolStyle">
+      <summary>系列のシンボルスタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.AxisX">
+      <summary>系列の x 軸を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.AxisY">
+      <summary>系列の y 軸を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.LoadBoundData">
+      <summary>連結データを内部チャート配列に強制的にロードします。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.Rebind">
+      <summary>ItemsSource 内のすべてのデータを強制的に評価し、チャートを再描画します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.SetData(System.Double[],System.Double[][])">
+      <summary>チャート化するポイントデータを設定します。</summary>
+      <param name="XValues">XValues の配列を指定します。</param>
+      <param name="YValues">YValues の配列を指定します。</param>
+    </member>
+    <member name="M:C1.Win.Chart.Series.ClearData">
+      <summary>SetData を使用して追加された系列からすべてのポイントデータを削除します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartTitle">
+      <summary>チャートタイトル（ヘッダーまたはフッター）を表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartTitle.Content">
+      <summary>タイトルのコンテンツを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartTitle.Border">
+      <summary>タイトルが境界線を持つかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartTitle.HorizontalAlignment">
+      <summary>タイトルの水平方向の配置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartTitle.Style">
+      <summary>タイトルのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartTitle.BorderStyle">
+      <summary>タイトルの境界線スタイルを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartToolTip">
+      <summary>チャートのツールチップを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ChartToolTip.Content">
+      <summary>チャートのツールチップのコンテンツを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IChartBase.OnRendering(C1.Chart.IRenderEngine,System.Double,System.Double)">
+      <summary>チャートのレンダリング開始前に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="M:C1.Chart.IChartBase.OnRendered(C1.Chart.IRenderEngine,System.Double,System.Double)">
+      <summary>チャートのレンダリング終了後に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="P:C1.Chart.IChart.SelectedSeries">
+      <summary>選択されている系列を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.HasCustomSymbol">
+      <summary>系列にカスタムのシンボルレンダリングがあるかどうか。</summary>
+    </member>
+    <member name="M:C1.Chart.ISeries.OnSymbolRendering(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>シンボルをレンダリングする前に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="i">データポイントのインデックス。</param>
+      <param name="x">X ピクセル座標。</param>
+      <param name="y">Y ピクセル座標。</param>
+      <returns>デフォルトのシンボルレンダリングを行うかどうか。</returns>
+    </member>
+    <member name="M:C1.Chart.ISeries.OnSymbolRendered(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>シンボルをレンダリングした後に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="i">データポイントのインデックス。</param>
+      <param name="x">X ピクセル座標。</param>
+      <param name="y">Y ピクセル座標。</param>
+    </member>
+    <member name="T:C1.Win.Chart.RenderSymbolEventArgs">
+      <summary>シンボルのレンダリングイベント引数。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSymbolEventArgs.Point">
+      <summary>コントロールのピクセル座標でシンボルのポイントを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSymbolEventArgs.Index">
+      <summary>データポイントインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSymbolEventArgs.Item">
+      <summary>データ項目を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.SelectedSeries">
+      <summary>選択されている系列を取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Series.SymbolRendering">
+      <summary>シンボルをレンダリングする前に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Series.SymbolRendered">
+      <summary>シンボルをレンダリングした後に発生します。</summary>
+    </member>
+    <member name="T:C1.Chart.MeasureOption">
+      <summary>測定する方向を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.MeasureOption.X">
+      <summary>X 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.MeasureOption.Y">
+      <summary>Y 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.MeasureOption.XY">
+      <summary>X 軸と Y 軸の両方。</summary>
+    </member>
+    <member name="T:C1.Chart.FitType">
+      <summary>傾向線のフィッティングタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Linear">
+      <summary>次の計算式による回帰フィッティング。Y(x) = C0 + C1*x</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Polynom">
+      <summary>次の計算式による回帰フィッティング。Y(x) = C0 + C1*x + C2*x2 + : + Cn-1*xn-1（ここで、n は項の数）</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Exponent">
+      <summary>次の計算式による回帰フィッティング。Y(x) = C0 * exp( C1*x)</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Logarithmic">
+      <summary>次の計算式による回帰フィッティング。Y(x) = C0 * ln(C1*x)</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Power">
+      <summary>次の計算式による回帰フィッティング。Y(x) = C0 * pow(x, C1)</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.Fourier">
+      <summary>次の式による回帰フィッティング。Y(x) = C0 + C1 * cos(x) + C2 * sin(x) + C3 * cos(2*x) + C4 * sin(2*x) + ...</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.MinX">
+      <summary>最小 X 値。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.MinY">
+      <summary>最小 Y 値。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.MaxX">
+      <summary>最大 X 値。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.MaxY">
+      <summary>最大 Y 値。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.AverageX">
+      <summary>平均 X 値。</summary>
+    </member>
+    <member name="F:C1.Chart.FitType.AverageY">
+      <summary>平均 Y 値。</summary>
+    </member>
+    <member name="T:C1.Chart.MovingAverageType">
+      <summary>MovingAverage 系列のタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.MovingAverageType.Simple">
+      <summary>最後の n 個の値の平均。</summary>
+    </member>
+    <member name="F:C1.Chart.MovingAverageType.Weighted">
+      <summary>最後の n 個の値の加重平均で、1 つ前の値の重みが 1 ずつ減ります。</summary>
+    </member>
+    <member name="F:C1.Chart.MovingAverageType.Exponential">
+      <summary>最後の n 個の値の加重平均で、1 つ前の値の重みが指数関数的に減ります。</summary>
+    </member>
+    <member name="F:C1.Chart.MovingAverageType.Triangular">
+      <summary>最後の n 個の値の加重平均で、結果は 2 回の平滑化を行った単純移動平均と同じです。</summary>
+    </member>
+    <member name="T:C1.Chart.Orientation">
+      <summary>チャート要素の向きを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Orientation.Auto">
+      <summary>向きは自動的に選択されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Orientation.Horizontal">
+      <summary>水平方向。</summary>
+    </member>
+    <member name="F:C1.Chart.Orientation.Vertical">
+      <summary>垂直方向。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.TitleStyle">
+      <summary>軸タイトルのスタイルを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Legend">
+      <summary>チャート凡例を表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.Style">
+      <summary>凡例のスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.TitleStyle">
+      <summary>凡例タイトルのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.Title">
+      <summary>凡例タイトルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.Orientation">
+      <summary>凡例の方向を取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChart.SeriesVisibilityChanged">
+      <summary>チャート系列の表示/非表示が変更されたときに発生します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.AltStyle">
+      <summary>系列の代替スタイルを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.SeriesEventArgs">
+      <summary>系列関連イベントの引数を提供します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.SeriesEventArgs.Series">
+      <summary>チャート系列を取得します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.TrendLine">
+      <summary>FlexChart および FinancialChart の傾向線を表します。</summary>
+      <remarks>傾向線は、データの全体的な傾向をチャートに重ねてわかりやすく示すための線です。 fitType プロパティを設定して、@see:FlexChart 系列コレクションに追加された @see:TrendLine オブジェクトごとに異なるフィッティングタイプを定義できます。</remarks>
+    </member>
+    <member name="M:C1.Win.Chart.TrendLine.#ctor">
+      <summary>TrendLine クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.FitType">
+      <summary>傾向線のフィッティングタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.Order">
+      <summary>傾向線の次数を取得または設定します。次数によって多項式の項数が決まります。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.SampleCount">
+      <summary>関数計算のためのサンプル数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.MinX">
+      <summary>x の最小値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.MaxX">
+      <summary>x の最大値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TrendLine.Coefficients">
+      <summary>計算式の係数を取得します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.TrendLine.GetValues(System.Int32)">
+      <summary>データ値の配列を取得します。</summary>
+      <param name="dim">ディメンション。</param>
+      <returns>データ値の配列。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.TrendLine.OnDataSourceChanged">
+      <summary>データソースが変更されたときに発生します。</summary>
+    </member>
+    <member name="F:C1.Chart.Palette.Cerulean">
+      <summary>Cerulean</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.HitTest(System.Drawing.Point,C1.Chart.MeasureOption,System.Int32)">
+      <summary>指定されたポイントに関する情報を含む HitTestInfo オブジェクトを取得します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <param name="options">測定オプション。</param>
+      <param name="seriesIndex">オプションの系列インデックス。インデックスが指定された場合、このメソッドは、指定された系列の最も近いデータポイントに関する情報を返します。</param>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.AxisScrollbar">
+      <summary>追加のビジュアルスタイルをサポートする FlexChart 範囲スライダコントロールを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.LowerValue">
+      <summary>範囲コントロールの現在の小さい方の値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.UpperValue">
+      <summary>範囲コントロールの現在の大きい方の値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.Minimum">
+      <summary>範囲コントロールの設定可能な最小値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.Maximum">
+      <summary>範囲コントロールの設定可能な最大値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.Orientation">
+      <summary>C1RangeSlider が水平方向と垂直方向のどちらであるかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.AxisScrollbar.ValueChanged">
+      <summary>LowerValue プロパティまたは UpperValue プロパティが変更されたときに発生します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.AxisScrollbar.OnValueChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.AxisScrollbar.OrientationChanged">
+      <summary>
+        <see cref="P:C1.Win.Chart.Interaction.AxisScrollbar.Orientation" />プロパティが変化すると発生します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.AxisScrollbar.OnOrientationChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.AxisScrollbar.Remove">
+      <summary>親コントロールから自身を削除します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.AxisScrollbar.Dispose(System.Boolean)">
+      <summary>使用されているリソースをすべてクリーンアップします。</summary>
+      <param name="disposing">マネージリソースを破棄する場合は true、そうでない場合は false。</param>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.RangeSelector">
+      <summary>追加のビジュアルスタイルをサポートする FlexChart 範囲スライダコントロールを表します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.RangeSelector.Remove">
+      <summary>親コントロールから自身を削除します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.RangeSelector.Dispose(System.Boolean)">
+      <summary>使用されているリソースをすべてクリーンアップします。</summary>
+      <param name="disposing">マネージリソースを破棄する場合は true、そうでない場合は false。</param>
+    </member>
+    <member name="T:C1.Win.Chart.Sunburst">
+      <summary>Sunburst チャートコントロール。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Sunburst.ChildItemsPath">
+      <summary>
+        階層化データで子項目の生成に使用される 1 つ以上のプロパティの名前を取得または設定します。 このプロパティには、項目の子項目を含むプロパティの名前を指定する文字列を設定します（たとえば、
+        <code>Items</code>）。 異なるレベルに異なる名前を持つ子項目がある場合は、このプロパティに、 各レベルの子項目を含むプロパティの名前から成る配列を設定します （たとえば、
+        <code>"accounts,checks,earnings"</code>）。
+      </summary>
+    </member>
+    <member name="M:C1.Chart.IChartBase.GetMargin">
+      <summary>プロットマージンを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.Annotation.AnnotationAttachment">
+      <summary>注釈の添付方法を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationAttachment.DataIndex">
+      <summary>注釈ポイントの座標は、データ系列インデックスとデータポイントインデックスで 定義されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationAttachment.DataCoordinate">
+      <summary>注釈ポイントは、データ座標で指定されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationAttachment.Relative">
+      <summary>注釈ポイントはコントロール内の相対位置として指定されます。 (0,0) が左上隅、(1,1) が右下隅になります。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationAttachment.Absolute">
+      <summary>注釈ポイントは、コントロールのピクセル座標で指定されます。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.AnnotationPosition">
+      <summary>注釈の位置を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationPosition.Center">
+      <summary>注釈がターゲットポイントの中心に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationPosition.Top">
+      <summary>注釈がターゲットポイントの上に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationPosition.Bottom">
+      <summary>注釈がターゲットポイントの下に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationPosition.Left">
+      <summary>注釈がターゲットポイントの左に表示されます。</summary>
+    </member>
+    <member name="F:C1.Chart.Annotation.AnnotationPosition.Right">
+      <summary>注釈がターゲットポイントの右に表示されます。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IAnnotationBase">
+      <summary>IBaseAnnotation インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.Attachment">
+      <summary>注釈の添付方法を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.Position">
+      <summary>注釈の位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.Location">
+      <summary>注釈の場所を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.PointIndex">
+      <summary>
+        注釈のデータポイントインデックスを取得または設定します。
+        <see cref="P:C1.Chart.Annotation.IAnnotationBase.Attachment" />プロパティが DataIndex に設定されている場合にのみ適用されます。
+      </summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.SeriesIndex">
+      <summary>
+        注釈のデータ系列インデックスを取得または設定します。
+        <see cref="P:C1.Chart.Annotation.IAnnotationBase.Attachment" />が DataIndex に設定されている場合にのみ適用されます。
+      </summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationBase.TooltipText">
+      <summary>注釈のツールチップを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.Annotation.IAnnotationBase.GetSize">
+      <summary>注釈のサイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.Annotation.IAnnotationLayer">
+      <summary>注釈レイヤインタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IAnnotationLayer.Annotations">
+      <summary>注釈コレクションを取得します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.ICircle">
+      <summary>ICircle インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.ICircle.Radius">
+      <summary>円注釈の半径を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IEllipse">
+      <summary>IEllipse インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IEllipse.Width">
+      <summary>楕円注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IEllipse.Height">
+      <summary>楕円注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IImage">
+      <summary>IImage インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IImage.SourceImage">
+      <summary>画像注釈のソースを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IImage.Width">
+      <summary>画像注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IImage.Height">
+      <summary>画像注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.ILine">
+      <summary>ILine インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.ILine.Start">
+      <summary>線注釈の開始点を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.ILine.End">
+      <summary>線注釈の終了点を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IPolygon">
+      <summary>IPolygon インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IPolygon.Points">
+      <summary>多角形注釈のポイントのコレクションを取得します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IRectangle">
+      <summary>IRectangle インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IRectangle.Width">
+      <summary>四角形注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IRectangle.Height">
+      <summary>四角形注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IShape">
+      <summary>IShape インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IShape.Content">
+      <summary>図形注釈のテキストを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.ISquare">
+      <summary>ISquare インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.ISquare.Length">
+      <summary>正方形注釈の長さを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Chart.Annotation.IText">
+      <summary>IText インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IText.Content">
+      <summary>注釈のテキストを取得または設定します。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesBase._axisX">
+      <summary>X 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesBase._axisY">
+      <summary>Y 軸。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesBase._binding">
+      <summary>連結プロパティ名。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesBase._bindingX">
+      <summary>X 連結プロパティ名。</summary>
+    </member>
+    <member name="F:C1.Chart.SeriesBase._itemsSource">
+      <summary>項目ソース。</summary>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.OnVisibilityChanged">
+      <summary>表示/非表示が変更されたときに呼び出されます。</summary>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.GetStyle(System.String)">
+      <summary>名前に基づいてスタイルを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.GetItem(System.Int32)">
+      <summary>データ項目を取得します。</summary>
+      <param name="i"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.GetValues(System.Int32)">
+      <summary>データ値を取得します。</summary>
+      <param name="dim"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.GetDataType(System.Int32)">
+      <summary>データ型を取得します。</summary>
+      <param name="dim"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.HasCustomSymbol">
+      <summary>カスタムシンボルのレンダリングを使用するかどうか。</summary>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.OnSymbolRendering(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>系列のレンダリング中に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="i"></param>
+      <param name="x"></param>
+      <param name="y"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.OnSymbolRendered(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>シンボルのレンダリング後に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="i"></param>
+      <param name="x"></param>
+      <param name="y"></param>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.Invalidate">
+      <summary>系列を無効にします。</summary>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.GetChartType">
+      <summary>チャートタイプを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.SetStyle(C1.Chart._Style,System.String)">
+      <summary>系列スタイルを設定します。</summary>
+      <param name="style">スタイル。</param>
+      <param name="name">スタイルの名前。</param>
+    </member>
+    <member name="T:C1.Chart.RadarChartType">
+      <summary>FlexRadar コントロールのチャートタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.RadarChartType.Line">
+      <summary>一定期間のトレンドまたはカテゴリ間のトレンドを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.RadarChartType.Scatter">
+      <summary>X 座標と Y 座標を使用して、データに含まれるパターンを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.RadarChartType.LineSymbols">
+      <summary>各データポイントにシンボルを使用する折れ線グラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.RadarChartType.Area">
+      <summary>線の下の領域が色で塗りつぶされた折れ線グラフを表示します。</summary>
+    </member>
+    <member name="M:C1.Chart.HitTestInfo.Format(System.String)">
+      <summary>文字列を書式設定します。</summary>
+      <param name="s">入力文字列。</param>
+      <returns>書式設定された文字列。</returns>
+    </member>
+    <member name="M:C1.Chart.IAxis.RenderPolar(C1.Chart.IRenderEngine,C1.Chart.IRadarChart)">
+      <summary>ポーラ軸またはレーダー軸をレンダリングします。</summary>
+      <param name="engine"></param>
+      <param name="radarChart"></param>
+    </member>
+    <member name="M:C1.Chart.IAxis.FormatValue(System.Double)">
+      <summary>指定された値を書式設定します。</summary>
+      <param name="value"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IAxis.SetCustomConversion(System.Func{System.Double,System.Double,System.Double,System.Double},System.Func{System.Double,System.Double,System.Double,System.Double})">
+      <summary>カスタム変換を設定します。</summary>
+      <param name="convert"></param>
+      <param name="convertBack"></param>
+    </member>
+    <member name="P:C1.Chart.IAxis.CustomLabels">
+      <summary>カスタム軸ラベルを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IAxis.GetValues">
+      <summary>ラベルの値を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.IBrushConverter">
+      <summary>ブラシコンバータインタフェース</summary>
+    </member>
+    <member name="M:C1.Chart.IBrushConverter.Convert(System.Object)">
+      <summary>ブラシを文字列に変換します。</summary>
+      <param name="brush"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IBrushConverter.ConvertBack(System.String)">
+      <summary>文字列をブラシに変換します。</summary>
+      <param name="s"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.CreateSeries">
+      <summary>系列のインスタンスを作成します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Chart.ISupportCustomRenderEngine">
+      <summary>外部レンダリングエンジンのサポート。</summary>
+    </member>
+    <member name="M:C1.Chart.ISupportCustomRenderEngine.Attach(C1.Chart.ICustomRenderEngine)">
+      <summary>外部レンダリングエンジンをアタッチします。</summary>
+      <param name="engine"></param>
+    </member>
+    <member name="M:C1.Chart.ISupportCustomRenderEngine.Render(C1.Chart.IRenderEngine,System.Int32,System.Int32)">
+      <summary>チャートを外部レンダリングエンジンにレンダリングします。</summary>
+      <param name="engine"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="M:C1.Chart.ISupportCustomRenderEngine.Detach">
+      <summary>外部レンダリングエンジンをデタッチします。</summary>
+    </member>
+    <member name="T:C1.Chart.ICustomRenderEngine">
+      <summary>外部レンダリングエンジンインタフェース。</summary>
+    </member>
+    <member name="M:C1.Chart.ICustomRenderEngine.Attach(C1.Chart.IChart)">
+      <summary>チャートにレンダリングエンジンをアタッチします。</summary>
+      <param name="chart"></param>
+    </member>
+    <member name="M:C1.Chart.ICustomRenderEngine.Detach">
+      <summary>チャートからレンダリングエンジンをデタッチします。</summary>
+    </member>
+    <member name="T:C1.Chart.IRadarChart">
+      <summary>レーダーチャートインタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IRadarChart.Center">
+      <summary>中心を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IRadarChart.Convert(C1.Chart._Point)">
+      <summary>ポイントを変換します。</summary>
+      <param name="pt"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IRadarChart.ConvertAngle(System.Double)">
+      <summary>角度を変換します。</summary>
+      <param name="val"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.IRadarChart.Radius">
+      <summary>半径を取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.IRadarChart.StartAngle">
+      <summary>開始角度を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IRadarChart.Reversed">
+      <summary>チャートが反転されているかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.IRadarChart.IsPolar">
+      <summary>チャートがポーラであるかどうか。</summary>
+    </member>
+    <member name="P:C1.Chart.ILegend.Title">
+      <summary>凡例タイトルを取得します。</summary>
+    </member>
+    <member name="P:C1.Chart.ILegend.Orientation">
+      <summary>凡例の方向を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawImage(System.Object,System.Double,System.Double,System.Double,System.Double)">
+      <summary>特別なソースを使用して画像を描画します。</summary>
+      <param name="source">画像のソース。</param>
+      <param name="x">画像の x 座標。</param>
+      <param name="y">画像の y 座標。</param>
+      <param name="w">画像の幅。</param>
+      <param name="h">画像の高さ。</param>
+    </member>
+    <member name="P:C1.Chart.ISeries.DataSource">
+      <summary>データソースを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.Binding">
+      <summary>連結を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.BindingX">
+      <summary>x 連結を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IStyleProvider.SetStyle(C1.Chart._Style,System.String)">
+      <summary>指定された名前を使用してスタイルを設定します。</summary>
+      <param name="style"></param>
+      <param name="name"></param>
+    </member>
+    <member name="T:C1.Chart.IWaterfall">
+      <summary>IWaterfall インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.ConnectorLines">
+      <summary>接続線を表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.IntermediateTotalLabels">
+      <summary>小計バーのラベルを含むプロパティの値を取得または設定します。この値は配列または文字列である必要があります。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.IntermediateTotalPositions">
+      <summary>小計バーの位置のインデックスを含むプロパティの値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.RelativeData">
+      <summary>指定されたデータが相対的かどうかを判定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.ShowIntermediateTotal">
+      <summary>小計バーを表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.ShowTotal">
+      <summary>合計バーを表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.Start">
+      <summary>開始バーの値を決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.StartLabel">
+      <summary>Start 依存プロパティを識別します。</summary>
+    </member>
+    <member name="P:C1.Chart.IWaterfall.TotalLabel">
+      <summary>合計バーのラベルを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IWaterfall.GetYValues">
+      <summary>y 軸値のリストを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IWaterfall.IsIntermediateTotal(System.Int32)">
+      <summary>項目が小計かどうかを確認します。</summary>
+      <param name="index"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IWaterfall.UpdateXItems(System.Collections.Generic.List{System.Object})">
+      <summary>x 軸項目のリストを更新します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.AnnotationBase">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の注釈の基本クラスを表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.Attachment">
+      <summary>注釈の添付方法を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.Position">
+      <summary>注釈の位置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.Location">
+      <summary>注釈の場所を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.PointIndex">
+      <summary>注釈のデータポイントインデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.SeriesIndex">
+      <summary>注釈のデータ系列インデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.TooltipText">
+      <summary>注釈のツールチップを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.ContentStyle">
+      <summary>注釈の図形スタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationBase.Style">
+      <summary>注釈のスタイルを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.AnnotationBase.#ctor">
+      <summary>BaseAnnotation のインスタンスを作成します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Annotation.AnnotationBase.PropertyChanged">
+      <summary>注釈値のプロパティが変化したことを通知します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.AnnotationBase.OnPropertyChanged(System.String)">
+      <summary>プロパティ値が変化したときに呼び出されます。</summary>
+      <param name="propertyName"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.AnnotationBase.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.AnnotationLayer">
+      <summary>
+        <see cref="T:C1.Win.Chart.FlexChart" />の注釈レイヤを表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.AnnotationLayer.Annotations">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />内の注釈要素のコレクションを取得します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.AnnotationLayer.#ctor(C1.Win.Chart.FlexChart)">
+      <summary>AnnotationLayer のインスタンスを作成します。</summary>
+      <param name="chart"></param>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Circle">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の円注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Circle.Radius">
+      <summary>円注釈の半径を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Circle.#ctor">
+      <summary>Circle のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Circle.#ctor(System.String)">
+      <summary>Circle のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Circle.#ctor(System.String,System.Int32)">
+      <summary>Circle のインスタンスを作成します。</summary>
+      <param name="content"></param>
+      <param name="radius"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Circle.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Ellipse">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の楕円注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Ellipse.Width">
+      <summary>楕円注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Ellipse.Height">
+      <summary>楕円注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Ellipse.#ctor">
+      <summary>Ellipse のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Ellipse.#ctor(System.String)">
+      <summary>Ellipse のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Ellipse.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>Ellipse のインスタンスを作成します。</summary>
+      <param name="content"></param>
+      <param name="width"></param>
+      <param name="height"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Ellipse.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Image">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の画像注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Image.SourceImage">
+      <summary>画像注釈のソース画像を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Image.Width">
+      <summary>画像注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Image.Height">
+      <summary>画像注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Image.#ctor">
+      <summary>Image のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Image.#ctor(System.Drawing.Image)">
+      <summary>Image のインスタンスを作成します。</summary>
+      <param name="sourceImage"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Image.#ctor(System.Drawing.Image,System.Int32,System.Int32)">
+      <summary>Image のインスタンスを作成します。</summary>
+      <param name="sourceImage"></param>
+      <param name="width"></param>
+      <param name="height"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Image.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Line">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の線注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Line.Content">
+      <summary>要素の内容を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Line.Start">
+      <summary>線注釈の開始点を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Line.End">
+      <summary>線注釈の終了点を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Line.#ctor">
+      <summary>Line のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Line.#ctor(System.String)">
+      <summary>Line のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Line.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Polygon">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の多角形注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Polygon.Points">
+      <summary>多角形注釈のポイントのコレクションを取得します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Polygon.#ctor">
+      <summary>Polygon のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Polygon.#ctor(System.String)">
+      <summary>Polygon のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Polygon.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Rectangle">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の四角形注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Rectangle.Width">
+      <summary>四角形注釈の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Rectangle.Height">
+      <summary>四角形注釈の高さを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Rectangle.#ctor">
+      <summary>Rectangle のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Rectangle.#ctor(System.String)">
+      <summary>Rectangle のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Rectangle.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>Rectangle のインスタンスを作成します。</summary>
+      <param name="content"></param>
+      <param name="width"></param>
+      <param name="height"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Rectangle.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Shape">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の図形注釈の基本クラスを表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Shape.Content">
+      <summary>注釈のテキストを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Shape.#ctor">
+      <summary>Shape のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Shape.#ctor(System.String)">
+      <summary>Shape のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Square">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />の正方形注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Square.Length">
+      <summary>正方形注釈の長さを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Square.#ctor">
+      <summary>Square のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Square.#ctor(System.String)">
+      <summary>Square のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Square.#ctor(System.String,System.Int32)">
+      <summary>Square のインスタンスを作成します。</summary>
+      <param name="content"></param>
+      <param name="length"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Square.GetSize">
+      <summary>要素サイズを取得します。</summary>
+      <returns>要素のサイズ。</returns>
+    </member>
+    <member name="T:C1.Win.Chart.Annotation.Text">
+      <summary>
+        <see cref="T:C1.Win.Chart.Annotation.AnnotationLayer" />のテキスト注釈を表します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Text.Content">
+      <summary>注釈のテキストを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Text.#ctor">
+      <summary>Text のインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Text.#ctor(System.String)">
+      <summary>Text のインスタンスを作成します。</summary>
+      <param name="content"></param>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.InterpolateNulls">
+      <summary>欠損値の解釈方法を示す値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.ChartOptions.Invalidate">
+      <summary>チャートを無効にします。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.ChartStyle.#ctor">
+      <summary>ChartStyle クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ChartStyleConverter">
+      <summary>ChartStyle 型コンバータ。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.ChartStyleConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])">
+      <summary>型のプロパティのコレクションを取得します。</summary>
+      <param name="context"></param>
+      <param name="value"></param>
+      <param name="attributes"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.DataLabelBase.Invalidate">
+      <summary>チャートを無効にします。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.DataLabel">
+      <summary>データポイントに関連付けられたラベルを表します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.PieDataLabel">
+      <summary>FlexPie のデータラベルを表します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.GetStyle(System.String)">
+      <summary>名前に基づいてスタイルを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.OnSelectionChanged(System.EventArgs)">
+      <summary>SelectionChanged イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+      <summary>MouseMove イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="F:C1.Win.Chart.FlexPie._dirty">
+      <summary>データキャッシュがダーティかどうか。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.#ctor">
+      <summary>FlexChart クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>Paint イベントを発生させます。</summary>
+      <param name="pe"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.OnSizeChanged(System.EventArgs)">
+      <summary>SizeChanged イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.OnMouseClick(System.Windows.Forms.MouseEventArgs)">
+      <summary>MouseClicked イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPie.Bind">
+      <summary>データ連結を実行します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.FlexPieSlice">
+      <summary>円グラフ内のセグメントを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPieSlice.Name">
+      <summary>名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexPieSlice.Value">
+      <summary>値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPieSlice.#ctor(System.Double,System.String)">
+      <summary>FlexPieSlice クラスのインスタンスを作成します。</summary>
+      <param name="value"></param>
+      <param name="name"></param>
+    </member>
+    <member name="T:C1.Win.Chart.FlexRadar">
+      <summary>レーダーチャートとポーラチャートのチャートコントロール。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexRadar.ChartType">
+      <summary>チャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexRadar.StartAngle">
+      <summary>開始角度を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexRadar.Reversed">
+      <summary>プロットの方向を示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.AxisScrollbar.ScrollButtonsVisible">
+      <summary>スクロールボタンを表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.AxisScrollbar.#ctor(C1.Win.Chart.Axis)">
+      <summary>AxisScrollbar クラスのインスタンスを作成し、それを指定された軸にアタッチします。</summary>
+      <param name="axis"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.RangeSelector.#ctor(C1.Win.Chart.FlexChart)">
+      <summary>RangeSlider クラスのインスタンスを作成し、それを指定されたチャートにアタッチします。</summary>
+      <param name="chart">チャートコントロール。</param>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.RangeSelector.OnValueChanged(System.EventArgs)">
+      <summary>値が変化したときに呼び出されます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.RangeSelector.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>コントロールが描画されたときに呼び出されます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.Position">
+      <summary>凡例の位置を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.RadarSeries">
+      <summary>FlexRadar コントロールの系列を表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RadarSeries.ChartType">
+      <summary>チャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.RadarSeries.GetChartType">
+      <summary>チャートタイプを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.BindingMode">
+      <summary>連結モードを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.Rebind">
+      <summary>データ連結を実行します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.Render(C1.Chart.IRenderEngine,System.Int32,System.Int32)">
+      <summary>チャートをレンダリングします。</summary>
+      <param name="engine"></param>
+      <param name="w"></param>
+      <param name="h"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>Paint イベントを発生させます。</summary>
+      <param name="pe"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+      <summary>コントロールの背景を描画します。</summary>
+      <param name="pevent"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.OnPaintChart(System.Windows.Forms.PaintEventArgs)">
+      <summary>チャートを描画します。</summary>
+      <param name="pe"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.OnSizeChanged(System.EventArgs)">
+      <summary>SizeChanged イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.Series_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+      <summary>CollectionChanged イベントハンドラ。</summary>
+      <param name="sender"></param>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChart.OnMouseClick(System.Windows.Forms.MouseEventArgs)">
+      <summary>MouseClick イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="T:C1.Win.Chart.BindingMode">
+      <summary>連結モードを指定します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.BindingMode.NotSet">
+      <summary>デフォルトの設定です。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.BindingMode.CurrencyManager">
+      <summary>カレンシーマネージャーを使用します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.BindingMode.Direct">
+      <summary>直接連結。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.#ctor">
+      <summary>系列クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.Finalize">
+      <summary>リソースを解放します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.Dispose">
+      <summary>リソースを解放します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.Dispose(System.Boolean)">
+      <summary></summary>
+      <param name="disposing"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Series.OnDataSourceChanged">
+      <summary>データソースが変更されたときに呼び出されます。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.BindingMode">
+      <summary>連結モードを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.GetStyle(System.String)">
+      <summary>名前に基づいてスタイルを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.Series.SetStyle(C1.Chart._Style,System.String)">
+      <summary>系列スタイルを設定します。</summary>
+      <param name="style">スタイル。</param>
+      <param name="name">スタイルの名前。</param>
+    </member>
+    <member name="M:C1.Win.Chart.Series.Invalidate">
+      <summary>系列を無効にします。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.ActualBinding">
+      <summary>実際の連結を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.ActualBindingX">
+      <summary>実際の x 連結を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.ActualDataMember">
+      <summary>実際のデータメンバを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.ActualItemsSource">
+      <summary>実際の項目ソースを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Series.Chart">
+      <summary>親チャートを取得します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.GetDataType(System.Int32)">
+      <summary>データ型を取得します。</summary>
+      <param name="dim"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.Series.GetItem(System.Int32)">
+      <summary>データ項目を取得します。</summary>
+      <param name="i"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.Chart.Series.HasCustomSymbol">
+      <summary>カスタムシンボルのレンダリングを使用するかどうか。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Series.OnSymbolRendering(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>系列のレンダリング中に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="i"></param>
+      <param name="x"></param>
+      <param name="y"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.Series.OnSymbolRendered(C1.Chart.IRenderEngine,System.Int32,System.Double,System.Double)">
+      <summary>シンボルのレンダリング後に呼び出されます。</summary>
+      <param name="engine"></param>
+      <param name="i"></param>
+      <param name="x"></param>
+      <param name="y"></param>
+    </member>
+    <member name="M:C1.Win.Chart.Series.OnVisibilityChanged">
+      <summary>表示/非表示が変更されたときに呼び出されます。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Sunburst.Bind">
+      <summary>データ連結を実行します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.TrendLine.GetChartType">
+      <summary>チャートタイプを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="T:C1.Win.Chart.Waterfall">
+      <summary>FlexChart のウォータフォール系列を表します。</summary>
+      <remarks>
+        通常、
+        <see cref="T:C1.Win.Chart.Waterfall" />系列は、開始位置からの増加または減少の様子を一連の 変化量によって表示するために使用されます。
+      </remarks>
+    </member>
+    <member name="M:C1.Win.Chart.Waterfall.#ctor">
+      <summary>Waterfall のインスタンスを作成します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.ConnectorLines">
+      <summary>接続線を表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.IntermediateTotalLabels">
+      <summary>小計バーのテキストラベルのリストを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.IntermediateTotalPositions">
+      <summary>小計バーの位置のリストを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.RelativeData">
+      <summary>指定されたデータが相対的かどうかを判定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.ShowIntermediateTotal">
+      <summary>小計バーを表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.ShowTotal">
+      <summary>合計バーを表示するかどうかを決定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.Start">
+      <summary>開始データ値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.StartLabel">
+      <summary>開始データポイントのテキストラベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.TotalLabel">
+      <summary>集計値を表すデータポイントのテキストラベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.StartStyle">
+      <summary>開始値を表すデータポイントのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.TotalStyle">
+      <summary>集計値を表すデータポイントのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.RisingStyle">
+      <summary>上昇値を表すデータポイントのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.FallingStyle">
+      <summary>下落値を表すデータポイントのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.IntermediateTotalStyle">
+      <summary>小計値を表すデータポイントのスタイルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Waterfall.ConnectorLineStyle">
+      <summary>接続線のスタイルを取得します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Waterfall.GetStyle(System.String)">
+      <summary>指定された名前に基づいてスタイルを取得します。</summary>
+      <param name="name"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.Chart.Waterfall.SetStyle(C1.Chart._Style,System.String)">
+      <summary>名前付きスタイルを設定します。</summary>
+      <param name="style">スタイル。</param>
+      <param name="name">スタイルの名前。</param>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.OnRendering(C1.Chart.IRenderEngine)">
+      <summary>系列のレンダリング中に呼び出されます。</summary>
+      <param name="engine"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.SeriesBase.OnRendered(C1.Chart.IRenderEngine)">
+      <summary>系列のレンダリング後に呼び出されます。</summary>
+      <param name="engine"></param>
+    </member>
+    <member name="F:C1.Chart.ChartType.Funnel">
+      <summary>ファンネルグラフを表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.FunnelChartType">
+      <summary>ファンネルグラフのタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.FunnelChartType.Default">
+      <summary>台形グラフを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.FunnelChartType.Rectangle">
+      <summary>横棒グラフを表示します。</summary>
+    </member>
+    <member name="M:C1.Chart.IPieChart.OnSliceRendering(C1.Chart.IRenderEngine,System.Double,System.Double,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+      <summary>セグメントをレンダリングする前に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="index">データポイントのインデックス。</param>
+      <param name="centerX">円の中心の座標。</param>
+      <param name="centerY">円の中心の座標。</param>
+      <param name="radius">円の半径。</param>
+      <param name="innerRadius">円の内側半径。</param>
+      <param name="angle">セグメントの角度。</param>
+      <param name="sweep">セグメントの移動。</param>
+      <returns>デフォルトのシンボルレンダリングを行うかどうか。</returns>
+    </member>
+    <member name="M:C1.Chart.IPieChart.OnSliceRendered(C1.Chart.IRenderEngine,System.Double,System.Double,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+      <summary>セグメントをレンダリングした後に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="index">データポイントのインデックス。</param>
+      <param name="centerX">円の中心の X 座標。</param>
+      <param name="centerY">円の中心の Y 座標。</param>
+      <param name="radius">円の半径。</param>
+      <param name="innerRadius">円の内側半径。</param>
+      <param name="angle">セグメントの角度。</param>
+      <param name="sweep">セグメントの移動。</param>
+    </member>
+    <member name="M:C1.Win.Chart.Annotation.Line.#ctor(System.String,System.Drawing.PointF,System.Drawing.PointF)">
+      <summary>Line のインスタンスを作成します。</summary>
+      <param name="content"></param>
+      <param name="start"></param>
+      <param name="end"></param>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.FunnelNeckWidth">
+      <summary>ファンネルグラフのネックの幅を取得または設定します。</summary>
+      <remarks>
+        <see cref="P:C1.Win.Chart.ChartOptions.FunnelType" />が
+        <see cref="F:C1.Chart.FunnelChartType.Rectangle" />に設定されている場合、NeckWidth は機能しません。
+      </remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.FunnelNeckHeight">
+      <summary>ファンネルグラフのネックの高さを取得または設定します。</summary>
+      <remarks>
+        <see cref="P:C1.Win.Chart.ChartOptions.FunnelType" />が
+        <see cref="F:C1.Chart.FunnelChartType.Rectangle" />に設定されている場合、NeckHeight は機能しません。
+      </remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ChartOptions.FunnelType">
+      <summary>ファンネルグラフのタイプを取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexPie.SliceRendering">
+      <summary>セグメントをレンダリングする前に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexPie.SliceRendered">
+      <summary>セグメントをレンダリングした後に発生します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.RenderSliceEventArgs">
+      <summary>レンダリングイベント引数クラスを表します</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.Index">
+      <summary>データポイントのインデックス。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.CenterX">
+      <summary>円の中心の X 座標。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.CenterY">
+      <summary>円の中心の Y 座標。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.Radius">
+      <summary>円の半径。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.InnerRadius">
+      <summary>円の内側半径。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.Angle">
+      <summary>セグメントの角度。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderSliceEventArgs.Sweep">
+      <summary>セグメントの移動。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Interaction">
+      <summary>LineMarker の操作モードを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Lines">
+      <summary>LineMarker 行の表示/非表示を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Alignment">
+      <summary>LineMarker コンテンツの配置を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Content">
+      <summary>LineMarker のテキストコンテンツをカスタマイズするためのコンテンツ関数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.LineColor">
+      <summary>線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.X">
+      <summary>現在の x 値を表すチャートデータ座標を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Y">
+      <summary>現在の y 値を表すチャートデータ座標を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.DragContent">
+      <summary>操作モードが Drag の場合に、マーカーのコンテンツがドラッグ可能かどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.DragLines">
+      <summary>操作モードが Drag の場合に、水平線または垂直線がドラッグされたときに線がリンクされるかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.DragThreshold">
+      <summary>マーカーをドラッグできる水平線または垂直線からの最大距離を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Visible">
+      <summary>LineMarker の表示/非表示を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.Font">
+      <summary>コンテンツのフォントを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.BackColor">
+      <summary>コンテンツの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.ForeColor">
+      <summary>コンテンツのフォントの色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.LineMarker.LineWidth">
+      <summary>線の幅を取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.LineMarker.PositionChanged">
+      <summary>マーカー位置が変更されたときに発生し、コンテンツの更新を可能にします。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.LineMarker.Paint">
+      <summary>カスタム描画を行います。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.LineMarker.Remove">
+      <summary>親コントロールから自身を削除します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.C1RangeSlider">
+      <summary>追加のビジュアルスタイルをサポートする Windows 範囲スライダコントロールを表します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.#ctor">
+      <summary>C1RangeSlider クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.Dispose(System.Boolean)">
+      <summary>C1RangeSlider によって使用されたリソースを解放します。</summary>
+      <param name="disposing">
+        マネージリソースとアンマネージリソースの両方を解放する場合は
+        <b>true</b>。 アンマネージリソースだけを解放する場合は
+        <b>false</b>。
+      </param>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.LowerValue">
+      <summary>範囲コントロールの現在の小さい方の値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.UpperValue">
+      <summary>範囲コントロールの現在の大きい方の値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.Minimum">
+      <summary>範囲コントロールの設定可能な最小値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.Maximum">
+      <summary>範囲コントロールの設定可能な最大値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.SmallChange">
+      <summary>下限値または上限値スクロールボックスが小さく移動したときに、LowerValue プロパティまたは UpperValue プロパティを加算または減算する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.LargeChange">
+      <summary>下限値または上限値スクロールボックスが大きく移動したときに、LowerValue プロパティまたは UpperValue プロパティを加算または減算する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.IsRangeBarVisible">
+      <summary>C1RangeSlider バーを表示するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.Orientation">
+      <summary>C1RangeSlider が水平方向と垂直方向のどちらであるかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.IsDirectionReversed">
+      <summary>値を増やす方向を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.ScrollBehavior">
+      <summary>選択された領域の外でマウスクリックが行われたときに、スクロールボックスがどのように移動するかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.LowerThumbPath">
+      <summary>小さい方の値のカスタムスクロールボックスのパスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.UpperThumbPath">
+      <summary>大きい方の値のカスタムスクロールボックスのパスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.Enabled">
+      <summary>コントロールがユーザーの操作に応答できるかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.Styles">
+      <summary>名前付き Style オブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection">
+      <summary>コントロールの基本のビジュアルスタイルを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection">
+      <summary>バーの名前付き Style オブジェクトのコレクションを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection.BackColor">
+      <summary>バーの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection.BorderColor">
+      <summary>バーの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection.DisabledBackColor">
+      <summary>コントロールが無効の状態におけるバーの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection.DisabledBorderColor">
+      <summary>コントロールが無効の状態におけるバーの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyleCollection.SelectedAreaColor">
+      <summary>選択された領域の色を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection">
+      <summary>スクロールボックスの名前付き Style オブジェクトのコレクションを表します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.BackColor">
+      <summary>スクロールボックスの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.BorderColor">
+      <summary>スクロールボックスの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.HotBackColor">
+      <summary>スクロールボックスにマウスが置かれたときの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.HotBorderColor">
+      <summary>スクロールボックスにマウスが置かれたときの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.PressedBackColor">
+      <summary>ユーザーがスクロールボックス上でマウスをクリックしたときの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.PressedBorderColor">
+      <summary>ユーザーがスクロールボックス上でマウスをクリックしたときの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.DisabledBackColor">
+      <summary>コントロールが無効の状態におけるスクロールボックスの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.DisabledBorderColor">
+      <summary>コントロールが無効の状態におけるスクロールボックスの境界線色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.CornerRadius">
+      <summary>スクロールボックスの角の丸みを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyleCollection.Padding">
+      <summary>スクロールボックス内のパディングを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.BarStyle">
+      <summary>バーの名前付き Style オブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Interaction.C1RangeSlider.RangeSliderStyleCollection.ThumbStyle">
+      <summary>スクロールボックスの名前付き Style オブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.C1RangeSlider.LowerValueChanged">
+      <summary>
+        <see cref="P:C1.Win.Chart.Interaction.C1RangeSlider.LowerValue" />プロパティが変化すると発生します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.OnLowerValueChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.C1RangeSlider.UpperValueChanged">
+      <summary>
+        <see cref="P:C1.Win.Chart.Interaction.C1RangeSlider.UpperValue" />プロパティが変化すると発生します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.OnUpperValueChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.C1RangeSlider.ValueChanged">
+      <summary>LowerValue プロパティまたは UpperValue プロパティが変更されたときに発生します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.OnValueChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.C1RangeSlider.OrientationChanged">
+      <summary>
+        <see cref="P:C1.Win.Chart.Interaction.C1RangeSlider.Orientation" />プロパティが変化すると発生します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.OnOrientationChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="E:C1.Win.Chart.Interaction.C1RangeSlider.DirectionChanged">
+      <summary>
+        <see cref="P:C1.Win.Chart.Interaction.C1RangeSlider.IsDirectionReversed" />プロパティが変化すると発生します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.Chart.Interaction.C1RangeSlider.OnDirectionChanged(System.EventArgs)">
+      <summary>このメソッドは内部使用専用です。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="T:C1.Win.Chart.Interaction.RangeSliderScrollBehavior">
+      <summary>選択された領域の外でマウスクリックが行われたときに、スクロールボックスがどのように移動するかを指定します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.Interaction.RangeSliderScrollBehavior.None">
+      <summary>スクロールボックスは両方とも移動しません。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.Interaction.RangeSliderScrollBehavior.Thumb">
+      <summary>近い方のスクロールボックスがマウスの方向に大きく移動します。</summary>
+    </member>
+    <member name="F:C1.Win.Chart.Interaction.RangeSliderScrollBehavior.Range">
+      <summary>両方のスクロールボックスがマウスの方向に大きく移動します。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.Radial">
+      <summary>項目を円グラフセグメント内でセグメントの角度に応じた方向に表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.PieLabelPosition.Circular">
+      <summary>項目を円グラフセグメント内で円周方向に表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.QuartileCalculation">
+      <summary>箱ひげ図系列の四分位数の計算方法を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.QuartileCalculation.InclusiveMedian">四分位数の計算時に中央値を含めます。</member>
+    <member name="F:C1.Chart.QuartileCalculation.ExclusiveMedian">四分位数の計算時に中央値を除外します。</member>
+    <member name="T:C1.Chart.IBoxWhisker">
+      <summary>IBoxWhisker インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.ShowMeanLine">
+      <summary>箱ひげ図系列の平均線を表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.QuartileCalculation">
+      <summary>箱ひげ図系列の四分位数計算を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.GapWidth">
+      <summary>箱ひげ図系列のギャップ幅をパーセント値で指定する値を取得または設定します。</summary>
+      <remarks>このプロパティのデフォルト値は 0.1 です。最小値は 0 で、最大値は 1 です。</remarks>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.GroupWidth">
+      <summary>箱ひげ図系列のグループ幅をパーセント値で指定する値を取得または設定します。</summary>
+      <remarks>このプロパティのデフォルト値は 0.8 です。最小値は 0 で、最大値は 1 です。</remarks>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.ShowMeanMarks">
+      <summary>箱ひげ図系列の平均マーカーを表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.ShowInnerPoints">
+      <summary>箱ひげ図系列の内側ポイントを表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IBoxWhisker.ShowOutliers">
+      <summary>箱ひげ図系列の異常値を表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IBoxWhisker.UpdateXItems(System.Collections.Generic.List{System.Object})">
+      <summary>x 軸項目のリストを更新します。</summary>
+      <param name="items">x 軸の項目</param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IBoxWhisker.GetXItemCount">
+      <summary>x 軸項目の数を取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IBoxWhisker.GetBoxData">
+      <summary>箱ひげ図のデータを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.IChart.OnLabelRendering(C1.Chart.IRenderEngine,System.String@,C1.Chart.ISeries,System.Int32,System.Single,System.Single)">
+      <summary>ラベルをレンダリングする前に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="text">ラベルテキスト。</param>
+      <param name="series">チャート系列。</param>
+      <param name="index">系列インデックス。</param>
+      <param name="x">X 座標。</param>
+      <param name="y">Y 座標。</param>
+    </member>
+    <member name="M:C1.Chart.IChart.OnLabelRendered(C1.Chart.IRenderEngine,System.String,C1.Chart.ISeries,System.Int32,System.Single,System.Single)">
+      <summary>ラベルをレンダリングした後に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="text">ラベルテキスト。</param>
+      <param name="series">チャート系列。</param>
+      <param name="index">系列インデックス。</param>
+      <param name="x">X 座標。</param>
+      <param name="y">Y 座標。</param>
+    </member>
+    <member name="T:C1.Chart.ErrorAmount">
+      <summary>系列の誤差量を指定します。標準誤差量、パーセント値、または標準偏差を使用できます。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorAmount.FixedValue">
+      <summary>誤差を固定値で示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorAmount.Percentage">
+      <summary>誤差をパーセント値で示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorAmount.StandardDeviation">
+      <summary>誤差を標準偏差で示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorAmount.StandardError">
+      <summary>誤差を標準誤差で示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorAmount.Custom">
+      <summary>誤差をカスタム値で示します。</summary>
+    </member>
+    <member name="T:C1.Chart.ErrorBarEndStyle">
+      <summary>誤差範囲バーの終点スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorBarEndStyle.Cap">
+      <summary>キャップありの誤差範囲バー。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorBarEndStyle.NoCap">
+      <summary>キャップなしの誤差範囲バー。</summary>
+    </member>
+    <member name="T:C1.Chart.ErrorBarDirection">
+      <summary>誤差範囲バーの方向を指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorBarDirection.Both">
+      <summary>両方向を表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorBarDirection.Minus">
+      <summary>負方向だけを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorBarDirection.Plus">
+      <summary>正方向だけを表示します。</summary>
+    </member>
+    <member name="T:C1.Chart.ErrorValueType">
+      <summary>誤差値のタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorValueType.Minus">
+      <summary>負の誤差値。</summary>
+    </member>
+    <member name="F:C1.Chart.ErrorValueType.Plus">
+      <summary>正の誤差値。</summary>
+    </member>
+    <member name="T:C1.Chart.IErrorBar">
+      <summary>IErrorBar インタフェース。</summary>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.Direction">
+      <summary>誤差の方向を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.EndStyle">
+      <summary>系列の終点スタイルを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.ErrorAmount">
+      <summary>系列の誤差量を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.ErrorValue">
+      <summary>系列の誤差値を指定する値を取得または設定します。</summary>
+      <remarks>このプロパティは、errorAmount プロパティと組み合わせて使用する必要があります。 ErrorAmount が ErrorAmount.FixedValue の場合、value プロパティは固定値になります。 ErrorAmount が ErrorAmount.Percentage の場合、value プロパティは 0 から 1 までのパーセント値になります。 ErrorAmount が ErrorAmount.StandardDeviation の場合、value プロパティは計算された標準偏差値のパーセント数値になります。</remarks>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.CustomPlusErrorValue">
+      <summary>正のカスタム誤差値を指定する値を取得または設定します。</summary>
+      <remarks>この値は、ErrorAmount が ErrorAmount.Custom の場合に使用されます。</remarks>
+    </member>
+    <member name="P:C1.Chart.IErrorBar.CustomMinusErrorValue">
+      <summary>負のカスタム誤差値を指定する値を取得または設定します。</summary>
+      <remarks>この値は、ErrorAmount が ErrorAmount.Custom の場合に使用されます。</remarks>
+    </member>
+    <member name="P:C1.Chart.ILegend.Reversed">
+      <summary>凡例の逆順を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IPieChart.OnLabelRendering(C1.Chart.IRenderEngine,System.String@,System.Double,System.Double,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+      <summary>ラベルをレンダリングする前に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="text">ラベルテキスト。</param>
+      <param name="centerX">円の中心の X 座標。</param>
+      <param name="centerY">円の中心の Y 座標。</param>
+      <param name="index">ポイントのインデックス。</param>
+      <param name="radius">円の半径。</param>
+      <param name="innerRadius">円の内側半径。</param>
+      <param name="angle">セグメントの角度。</param>
+      <param name="sweep">セグメントの移動。</param>
+    </member>
+    <member name="M:C1.Chart.IPieChart.OnLabelRendered(C1.Chart.IRenderEngine,System.String,System.Double,System.Double,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+      <summary>ラベルをレンダリングした後に呼び出されます。</summary>
+      <param name="engine">レンダリングエンジン。</param>
+      <param name="text">ラベルテキスト。</param>
+      <param name="centerX">円の中心の X 座標。</param>
+      <param name="centerY">円の中心の Y 座標。</param>
+      <param name="index">ポイントのインデックス。</param>
+      <param name="radius">円の半径。</param>
+      <param name="innerRadius">円の内側半径。</param>
+      <param name="angle">セグメントの角度。</param>
+      <param name="sweep">セグメントの移動。</param>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetLegendItemName(System.Int32)">
+      <summary>凡例の名前を取得します。</summary>
+      <param name="index"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetLegendItemStyle(System.Int32)">
+      <summary>凡例のスタイルを取得します。</summary>
+      <param name="index"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetLegendItemLength">
+      <summary>凡例内の系列項目の数を取得します。</summary>
+    </member>
+    <member name="M:C1.Chart.ISeries.GetDataRect(C1.Chart._Rect)">
+      <summary>データ座標の境界四角形を取得します。</summary>
+      <param name="currentRect">チャートの現在の四角形</param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.DataSource">
+      <summary>軸ラベルの項目ソースを取得または設定します。</summary>
+      <remarks>プロパティの名前は、Binding プロパティによって指定されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.Binding">
+      <summary>軸ラベルで使用する DataSource プロパティのカンマ区切りのプロパティ名を取得または設定します。</summary>
+      <remarks>最初の名前は軸の値を指定し、2 番目は対応する軸ラベルを表します。 デフォルト値は "Value,Text" です。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.Axis.PlotAreaName">
+      <summary>軸のプロット領域の名前を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.BoxWhisker">
+      <summary>FlexChart の箱ひげ図系列を表します。</summary>
+      <remarks>
+        通常、
+        <see cref="T:C1.Win.Chart.BoxWhisker" />系列は、複数の数値データセット間の分布を比較するために使用されます。
+      </remarks>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.ShowMeanLine">
+      <summary>箱ひげ図系列の平均線を表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.QuartileCalculation">
+      <summary>箱ひげ図系列の四分位数計算を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.ShowOutliers">
+      <summary>箱ひげ図系列の異常値を表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.GapWidth">
+      <summary>箱ひげ図系列のギャップ幅をパーセント値で指定する値を取得または設定します。</summary>
+      <remarks>このプロパティのデフォルト値は 0.1 です。最小値は 0 で、最大値は 1 です。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.GroupWidth">
+      <summary>箱ひげ図系列のグループ幅をパーセント値で指定する値を取得または設定します。</summary>
+      <remarks>このプロパティのデフォルト値は 0.8 です。最小値は 0 で、最大値は 1 です。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.ShowMeanMarks">
+      <summary>箱ひげ図系列の平均マーカーを表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.BoxWhisker.ShowInnerPoints">
+      <summary>箱ひげ図系列の内側ポイントを表示するかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.ErrorBar">
+      <summary>
+        <see cref="T:C1.Win.Chart.FlexChart" />の誤差範囲（ErrorBar）系列を表します。
+      </summary>
+      <remarks>
+        <see cref="T:C1.Win.Chart.ErrorBar" />系列を使用すると、誤差の範囲や標準偏差を一目で確認することができます。 これらは、標準誤差量、パーセント値、または標準偏差として表示することができます。 必要に応じて、正確な誤差量を表示するために独自の値を設定することもできます。
+      </remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.Direction">
+      <summary>誤差の方向を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.EndStyle">
+      <summary>系列の終点スタイルを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.ErrorAmount">
+      <summary>系列の誤差量を指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.CustomPlusErrorValue">
+      <summary>正のカスタム誤差値を指定する値を取得または設定します。</summary>
+      <remarks>この値は、ErrorAmount が ErrorAmount.Custom の場合に使用されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.CustomMinusErrorValue">
+      <summary>負のカスタム誤差値を指定する値を取得または設定します。</summary>
+      <remarks>この値は、ErrorAmount が ErrorAmount.Custom の場合に使用されます。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.ErrorValue">
+      <summary>系列の誤差値を指定する値を取得または設定します。</summary>
+      <remarks>このプロパティは、errorAmount プロパティと組み合わせて使用する必要があります。 errorAmount が ErrorAmount.FixedValue の場合、value プロパティは固定値になります。 errorAmount が ErrorAmount.Percentage の場合、value プロパティは 0 から 1 までのパーセント値になります。 errorAmount が ErrorAmount.StandardDeviation の場合、value プロパティは計算された標準偏差値のパーセント数値になります。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.ErrorBar.ErrorBarStyle">
+      <summary>誤差範囲のスタイルを取得します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexPie.LabelRendering">
+      <summary>ラベルをレンダリングする前に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexPie.LabelRendered">
+      <summary>ラベルをレンダリングした後に発生します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderPieDataLabelEventArgs.Text">
+      <summary>データラベルのテキスト。これは、イベントハンドラで変更できます。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.Reversed">
+      <summary>凡例の逆順を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PlotArea.Column">
+      <summary>プロット領域の列インデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PlotArea.Row">
+      <summary>プロット領域の行インデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PlotArea.Name">
+      <summary>プロット領域の名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PlotArea.Width">
+      <summary>プロット領域の幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.PlotArea.Height">
+      <summary>プロット領域の高さを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.FlexChart.PlotAreas">
+      <summary>チャートプロット領域のコレクションを取得します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChart.LabelRendering">
+      <summary>ラベルをレンダリングする前に発生します。</summary>
+    </member>
+    <member name="E:C1.Win.Chart.FlexChart.LabelRendered">
+      <summary>ラベルをレンダリングした後に発生します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RenderDataLabelEventArgs.Text">
+      <summary>データラベルのテキスト。これは、イベントハンドラで変更できます。</summary>
+    </member>
+    <member name="P:C1.Chart.Annotation.IPolygon.ContentCenter">
+      <summary>コンテンツの中心とする位置を取得または設定します。 これを null（デフォルト値）にした場合、コンテンツは自動的に配置されます。</summary>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.StackingGroup">
+      <summary>系列のグループインデックスを取得または設定します。横棒および縦棒グラフタイプでのみ有効です。</summary>
+    </member>
+    <member name="T:C1.Chart.TextWrapping">
+      <summary>チャート凡例のテキスト折り返しモード。</summary>
+    </member>
+    <member name="P:C1.Chart.ILegend.ItemMaxWidth">
+      <summary>凡例の最大幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Chart.ILegend.TextWrapping">
+      <summary>凡例のテキスト折り返しモードを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.MeasureString(System.String,C1.Chart._Size)">
+      <summary>レイアウト領域内の文字列のサイズを測定します。</summary>
+      <param name="s">測定する文字列。</param>
+      <returns>サイズ。</returns>
+    </member>
+    <member name="M:C1.Chart.IRenderEngine.DrawString(System.String,C1.Chart._Rect,C1.Chart.TextWrapping)">
+      <summary>文字列を指定された領域に描画します。</summary>
+      <param name="s">描画する文字列。</param>
+      <param name="pos">位置。</param>
+    </member>
+    <member name="P:C1.Chart.ISeries.StackingGroup">
+      <summary>系列のグループインデックスを取得または設定します。横棒および縦棒グラフタイプでのみ有効です。</summary>
+    </member>
+    <member name="T:C1.Chart.TreeMapType">
+      <summary>ツリーマップタイプを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.TreeMapType.Squarified">
+      <summary>正方形のツリーマップを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.TreeMapType.Horizontal">
+      <summary>横長長方形のツリーマップを表示します。</summary>
+    </member>
+    <member name="F:C1.Chart.TreeMapType.Vertical">
+      <summary>縦長長方形のツリーマップを表示します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Annotation.Polygon.ContentCenter">
+      <summary>注釈のコンテンツの中心を取得または設定します。 このプロパティ値が null（デフォルト値）の場合、コンテンツの位置は自動的に選択されます。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexChartBase.OnMouseLeave(System.EventArgs)">
+      <summary>OnMouseLeave イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.ItemMaxWidth">
+      <summary>凡例項目の最大幅を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.TextWrapping">
+      <summary>凡例のテキスト折り返しモードを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.TreeMap">
+      <summary>ツリーマップチャートコントロール。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.#ctor">
+      <summary>TreeMap クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.Binding">
+      <summary>チャートの値を含むデータ項目のプロパティの名前を取得または設定します。</summary>
+      <remarks>連結プロパティは、他のノードの値と比較してノードのサイズを計算するために使用されます。 このプロパティには、数値データを設定する必要があります。</remarks>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.BindingName">
+      <summary>データ項目の名前を含むプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.ChildItemsPath">
+      <summary>子項目を含むコレクションのプロパティの名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.DataSource">
+      <summary>ツリーマップチャートのデータを含むオブジェクトのコレクションを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.ChartType">
+      <summary>チャートタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.DataLabel">
+      <summary>データ項目のデータラベルを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.SelectedItem">
+      <summary>選択されているデータ項目を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.TreeMap.MaxDepth">
+      <summary>表示されるノードレベルの最大数を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.HitTest(System.Drawing.Point)">
+      <summary>指定されたポイントに関する情報を含む HitTestInfo オブジェクトを取得します。</summary>
+      <param name="pt">コントロール座標のポイント。</param>
+      <returns>ポイントに関する情報を含む HitTestInfo オブジェクト。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>Paint イベントを発生させます。</summary>
+      <param name="pe"></param>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.OnSizeChanged(System.EventArgs)">
+      <summary>SizeChanged イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.OnMouseClick(System.Windows.Forms.MouseEventArgs)">
+      <summary>MouseClicked イベントを発生させます。</summary>
+      <param name="e"></param>
+    </member>
+    <member name="M:C1.Win.Chart.TreeMap.GetContent(C1.Chart.HitTestInfo,System.String)">
+      <summary>指定されたテンプレートに基づいてコンテンツを取得します。</summary>
+      <param name="hti"></param>
+      <param name="s"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Chart.SeriesBase.LegendGroup">
+      <summary>系列が含まれる凡例グループタイトルを取得または設定します。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Histogram">
+      <summary>メモ：この型の命名と構造については検討中です。現時点では無視してください。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.RangedHistogram">
+      <summary>メモ：この型の命名と構造については検討中です。現時点では無視してください。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.Step">
+      <summary>階段グラフ。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.StepSymbols">
+      <summary>階段グラフ（シンボル付き）。</summary>
+    </member>
+    <member name="F:C1.Chart.ChartType.StepArea">
+      <summary>階段面グラフ。</summary>
+    </member>
+    <member name="T:C1.Chart.HistogramBinning">
+      <summary>ヒストグラムのビンを定義するビンモードを指定します。</summary>
+    </member>
+    <member name="F:C1.Chart.HistogramBinning.Automatic">
+      <summary>ビン幅は自動的に計算されます。</summary>
+    </member>
+    <member name="F:C1.Chart.HistogramBinning.BinWidth">
+      <summary>ビンの範囲の正の 10 進値。</summary>
+    </member>
+    <member name="F:C1.Chart.HistogramBinning.NumberOfBins">
+      <summary>オーバーフロービンおよびアンダーフロービンを含むヒストグラムのビンの数。</summary>
+    </member>
+    <member name="P:C1.Chart.ISeries.LegendGroup">
+      <summary>系列が含まれる凡例グループタイトルを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.FlexPieSlice.#ctor">
+      <summary>FlexPieSlice クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.RangedHistogram">
+      <summary>ヒストグラムを表します。</summary>
+      <remarks></remarks>
+    </member>
+    <member name="M:C1.Win.Chart.RangedHistogram.#ctor">
+      <summary>Histogram クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.RangedHistogram.GetValues(System.Int32)">
+      <summary>データ値の配列を取得します。</summary>
+      <param name="dim">ディメンション。</param>
+      <returns>データ値の配列。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.RangedHistogram.OnDataSourceChanged">
+      <summary>データソースが変更されたときに発生します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.RangedHistogram.GetChartType">
+      <summary>チャートタイプを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.BinMode">
+      <summary>ヒストグラムビンのモードを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.BinWidth">
+      <summary>ビンの範囲の正の 10 進値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.OverflowBin">
+      <summary>これより大きいすべての値のビンを作成するための値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.UnderflowBin">
+      <summary>これ以下のすべての値のビンを作成するための値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.NumberOfBins">
+      <summary>オーバーフロービンおよびアンダーフロービンを含むヒストグラムのビンの数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.ShowOverflowBin">
+      <summary>ヒストグラムにオーバーフロービンを表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.RangedHistogram.ShowUnderflowBin">
+      <summary>ヒストグラムにアンダーフロービンを表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.Chart.Histogram">
+      <summary>ヒストグラムを表します。</summary>
+      <remarks></remarks>
+    </member>
+    <member name="M:C1.Win.Chart.Histogram.#ctor">
+      <summary>Histogram クラスのインスタンスを作成します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Histogram.GetValues(System.Int32)">
+      <summary>データ値の配列を取得します。</summary>
+      <param name="dim">ディメンション。</param>
+      <returns>データ値の配列。</returns>
+    </member>
+    <member name="M:C1.Win.Chart.Histogram.OnDataSourceChanged">
+      <summary>データソースが変更されたときに発生します。</summary>
+    </member>
+    <member name="M:C1.Win.Chart.Histogram.GetChartType">
+      <summary>チャートタイプを取得します。</summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.Chart.Histogram.BinWidth">
+      <summary>ビンの範囲の正の 10 進値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.Chart.Legend.GroupHeaderStyle">
+      <summary>凡例グループヘッダーのスタイルを取得します。</summary>
+    </member>
+  </members>
+</doc>

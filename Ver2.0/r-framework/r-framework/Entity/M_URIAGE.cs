@@ -1,0 +1,13 @@
+using System.Data.SqlTypes;
+
+namespace r_framework.Entity
+{
+    public class M_URIAGE : SuperEntity
+    {
+        public string GURUUPU_CD { get; set; }
+        public string GURUUPU_MEI { get; set; }
+        public SqlBoolean DELETE_FLG { get; set; }
+        public SqlInt32 DENPYOU_KBN_CD { get; set; }
+
+    }
+}

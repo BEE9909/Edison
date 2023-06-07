@@ -1,0 +1,2141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>C1.Win.ImportServices.4</name>
+  </assembly>
+  <members>
+    <member name="T:C1.Win.C1Ssrs.SecurityException">
+      <summary>接続時に無効なユーザー資格情報によって発生した例外。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.SecurityException.#ctor(System.String,System.Exception)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.SecurityException" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="path">例外になったパスアクセス。</param>
+      <param name="ex">現在の例外の原因になった例外。または、内部の例外が指定されていない場合は null 参照（Visual Basic では Nothing）。</param>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.SecurityException.Path">
+      <summary>例外になったパスアクセスを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ConnectionBase">
+      <summary>SSRS サーバーへの接続を表す基本クラス。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.#ctor">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ConnectionBase" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.Finalize">
+      <summary>オブジェクトがガベージコレクションによって解放される前に、リソースを解放するなどのクリーンアップ操作を実行できるようにします。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.Dispose">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ConnectionBase" />オブジェクトによって使用されたすべてのリソースを解放します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.SetConnectionOptions(System.String,C1.Win.C1Ssrs.ConnectionOptions)">
+      <summary>現在の接続オプションを設定します。</summary>
+      <param name="reportServer">SSRS サーバーのアドレス（例：http://www.site.com/ReportServer）。</param>
+      <param name="connectionOptions">
+        認証や資格情報などのタイプを定義する
+        <see cref="P:C1.Win.C1Ssrs.ConnectionBase.ConnectionOptions" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.Combine(System.String,System.String)">
+      <summary>２つの文字列を１つのパスに組み合わせます。</summary>
+      <param name="addr1">組み合わせる最初のパス。</param>
+      <param name="addr2">組み合わせる２番目のパス。</param>
+      <returns>組み合わされたパス。指定されたパスの一方が長さ０の文字列である場合、このメソッドはもう一方のパスを返します。</returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionBase.ReportServer">
+      <summary>接続で使用される SSRS サーバーのアドレスを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionBase.ConnectionOptions">
+      <summary>
+        認証や資格情報などのタイプを指定する
+        <see cref="P:C1.Win.C1Ssrs.ConnectionBase.ConnectionOptions" />クラスを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.AuthenticationType">
+      <summary>
+        SSRS 認証タイプを定義します。 これらの値は、
+        <b>rsreportserver.config</b>ファイルの
+        <b>Authentication</b>セクションに対応します。
+      </summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.AuthenticationType.Negotiate">
+      <summary>
+        SSRS が以下の認証タイプをサポートする場合は、この設定を使用します。
+        <b>RSWindowsNegotiate</b>、
+        <b>RSWindowsKerberos</b></summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.AuthenticationType.NTLM">
+      <summary>
+        SSRS が
+        <b>RSWindowsNTLM</b>をサポートする場合は、この設定を使用します。
+      </summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.AuthenticationType.Basic">
+      <summary>
+        SSRS が
+        <b>RSWindowsBasic</b>をサポートする場合は、この設定を使用します。
+      </summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ConnectionOptions">
+      <summary>SSRS に接続する場合に使用されるオプションを定義します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionOptions.#ctor">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ConnectionOptions" />クラスの新しいインスタンスを初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionOptions.#ctor(System.Net.NetworkCredential)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ConnectionOptions" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="credential">
+        <see cref="P:C1.Win.C1Ssrs.ConnectionOptions.Credential" />プロパティの値。
+      </param>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionOptions.AuthenticationType">
+      <summary>SSRS 接続で使用される認証のタイプを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionOptions.Credential">
+      <summary>SSRS 接続で使用される資格情報を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ConnectionOptions.NetworkCredentialTypeConverter">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ConnectionOptions.NetworkCredentialTypeConverter" />クラスの
+        <see cref="T:System.ComponentModel.TypeConverter" />を提供します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionOptions.NetworkCredentialTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+      <summary>指定された型のオブジェクトをこのコンバータの型に変換できるかどうかをテストします。</summary>
+      <param name="context">
+        書式コンテキストを提供する
+        <see cref="T:System.ComponentModel.ITypeDescriptorContext" />。
+      </param>
+      <param name="type">
+        変換元の型を表す
+        <see cref="T:System.Type" />。
+      </param>
+      <returns>このコンバータが変換を実行できる場合は true、そうでない場合は false。</returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionOptions.NetworkCredentialTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+      <summary>所定の値オブジェクトを指定した型に変換します。</summary>
+      <param name="context">
+        書式コンテキストを提供する
+        <see cref="T:System.ComponentModel.ITypeDescriptorContext" />。
+      </param>
+      <param name="culture">
+        <see cref="T:System.Globalization.CultureInfo" />。null 参照（Visual Basic では Nothing）が渡された場合は、現在のカルチャと見なされます。
+      </param>
+      <param name="value">変換するオブジェクト。</param>
+      <param name="type">
+        <i>値</i>パラメータの変換先の
+        <see cref="T:System.Type" />。
+      </param>
+      <returns>
+        変換後の値を表す
+        <b>オブジェクト</b>。
+      </returns>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.IReaderLog">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReaderBase" />が SSRS ストリーム（RPL または RGDI）の解析中にログを作成できるようにします。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.IReaderLog.Log(System.String)">
+      <summary>メッセージをログに記録します。</summary>
+      <param name="message">ログに記録されたメッセージ。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.IReaderLog.Log(System.String,System.Object[])">
+      <summary>書式設定されたメッセージをログに記録します。</summary>
+      <param name="format">メッセージ書式設定文字列。</param>
+      <param name="args">書式設定文字列に提供されるパラメータのリスト。</param>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.IReaderLog.Indent">
+      <summary>ログのインデントを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReaderException">
+      <summary>SSRS ストリーム（RPL または RGDI）の解析中に発生した例外を表します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderException.#ctor">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReaderException" />クラスの新しいインスタンスを、共通 エラーメッセージ「Invalid stream」を使用して初期化します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderException.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReaderException" />クラスの新しいインスタンスを、 指定されたエラーメッセージを使用して初期化します。
+      </summary>
+      <param name="message">例外エラーメッセージ。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderException.#ctor(System.String,System.Object[])">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReaderException" />クラスの新しいインスタンスを、 書式設定されたエラーメッセージを使用して初期化します。
+      </summary>
+      <param name="message">例外メッセージ書式設定文字列。</param>
+      <param name="args">書式設定文字列に提供されるパラメータのリスト。</param>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReaderBase">
+      <summary>SSRS ストリーム（RPL または RGDI）の読み取りに使用されるクラスの抽象基本クラス。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.ReaderBase.m_Br">
+      <summary>内部使用専用。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderBase.#ctor(System.IO.Stream,C1.Win.C1Ssrs.IReaderLog)">
+      <summary>ReaderBase クラスの新しいインスタンスを初期化します。</summary>
+      <param name="stream">入力ストリーム。</param>
+      <param name="log">入力解析ログの作成に使用するオブジェクト。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderBase.Init">
+      <summary>これは内部使用専用です。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReaderBase.Dispose">
+      <summary>現在のインスタンスを破棄します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReaderBase.Eof">
+      <summary>基底のストリームの最後に到達したかどうかを示す値を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReaderBase.Stream">
+      <summary>基底のストリームを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReaderBase.Log">
+      <summary>
+        解析ログの作成に使用される
+        <see cref="T:C1.Win.C1Ssrs.IReaderLog" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReaderBase.Offset">
+      <summary>基底のストリームの現在のオフセットを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.PageLayout">
+      <summary>
+        レポートの生成時に使用されるページレイアウトを定義します。
+        <see cref="T:C1.Win.C1Ssrs.PageLayout" />によって指定される値は、レポートの元の設定より優先します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.Columns">
+      <summary>列の数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.ColumnSpacing">
+      <summary>列スペーシング（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.MarginLeft">
+      <summary>左マージン（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.MarginTop">
+      <summary>上マージン（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.MarginRight">
+      <summary>右マージン（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.MarginBottom">
+      <summary>下マージン（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.PageWidth">
+      <summary>ページの幅（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.PageLayout.PageHeight">
+      <summary>ページの高さ（ミリメートル単位）を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReportAddressBase">
+      <summary>レポートのアドレスを表す基本クラス。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReportAddress">
+      <summary>サーバー上のレポートの完全パスを使用してレポートのアドレスを定義します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportAddress.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReportAddress" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="reportPath">レポートの完全パス。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportAddress.ToString">
+      <summary>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.ReportAddress" />オブジェクトの値を同等の文字列表現に変換します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.ReportAddress" />オブジェクトの値の文字列表現。
+      </returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportAddress.ReportPath">
+      <summary>レポートの完全アドレスを取得します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.DrillthroughReportAddress">
+      <summary>ドリルスルーレポートのアドレスを定義します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.DrillthroughReportAddress.#ctor(System.String,System.String)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.DrillthroughReportAddress" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="executionID">マスターレポートの実行 ID。</param>
+      <param name="drillthroughID">ドリルスルーレポートを指定するドリルスルー ID。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.DrillthroughReportAddress.ToString">
+      <summary>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.DrillthroughReportAddress" />オブジェクトの値を同等の文字列表現に変換します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.DrillthroughReportAddress" />オブジェクトの値の文字列表現。
+      </returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.DrillthroughReportAddress.ExecutionID">
+      <summary>マスターレポートの実行 ID を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.DrillthroughReportAddress.DrillthroughID">
+      <summary>ドリルスルーレポートの ID を取得します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.SessionReportAddress">
+      <summary>レポートセッションのアドレスを定義します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.SessionReportAddress.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.SessionReportAddress" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="sessionID">レポートのセッション ID。</param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.SessionReportAddress.ToString">
+      <summary>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.SessionReportAddress" />オブジェクトの値を同等の文字列表現に変換します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:C1.Win.C1Ssrs.SessionReportAddress" />オブジェクトの値の文字列表現。
+      </returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.SessionReportAddress.SessionID">
+      <summary>レポートのセッション ID を取得します。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReportPosition">
+      <summary>レポート内の位置を定義します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportPosition.#ctor(System.String,System.Int32)">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReportPosition" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="reportItemID">レポート項目の ID。</param>
+      <param name="pageIndex">ページのインデックス。</param>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportPosition.ReportItemID">
+      <summary>レポート項目の ID を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportPosition.PageIndex">
+      <summary>ページインデックス。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ReportSession">
+      <summary>SSRS サーバー上のレポートへの接続を表します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.Dispose">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ReportSession" />オブジェクトによって使用されたすべてのリソースを解放します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.SetConnectionOptions(System.String,C1.Win.C1Ssrs.ConnectionOptions)">
+      <summary>現在の接続オプションを設定します。</summary>
+      <param name="reportServer">SSRS サーバーのアドレス（例：http://www.site.com/ReportServer）。</param>
+      <param name="connectionOptions">
+        認証や資格情報などのタイプを定義する
+        <see cref="T:C1.Win.C1Ssrs.ConnectionOptions" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.Open(C1.Win.C1Ssrs.ReportAddressBase,System.Threading.CancellationToken)">
+      <summary>
+        レポートをロードします。
+        <see cref="T:C1.Win.C1Ssrs.ReportSession" />の他のメソッドを呼び出す前に、このメソッドを呼び出す必要があります。
+      </summary>
+      <param name="reportAddress">
+        サーバー上のレポートの場所を指定する
+        <see cref="P:C1.Win.C1Ssrs.ReportSession.ReportAddress" />オブジェクト。
+      </param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.ApplyParameterValues(C1.Win.ImportServices.ReportExecution4.ParameterValue[],System.Threading.CancellationToken)">
+      <summary>ロードされたレポートに関連するパラメータ値を設定および検証します。</summary>
+      <param name="values">パラメータの値。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        <see cref="T:C1.Win.C1Ssrs.ParameterValueError" />オブジェクトのリスト。リストは、エラーがなかった場合は空、アクションがキャンセルされた場合は null になります。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.GetContent(System.Int32,System.Int32,C1.Win.C1Ssrs.ReportSession.ReportFormat,C1.Win.C1Ssrs.PageLayout,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+      <summary>
+        特定の形式でレポートを生成します。
+        <paramref name="startPageIndex" />および
+        <paramref name="pageCount" />は、 ページの範囲を指定します。
+        <paramref name="pageCount" />を０に設定すると、レポートのすべてページが要求されます。
+      </summary>
+      <param name="startPageIndex">レンダリングするレポートの最初のページ。</param>
+      <param name="pageCount">
+        ロードするページ数。このパラメータを０に設定すると、レポートのすべてのページが要求され、
+        <paramref name="startPageIndex" />は無視されます。
+      </param>
+      <param name="format">
+        レポート形式を指定する
+        <see cref="T:C1.Win.C1Ssrs.ReportSession.ReportFormat" />オブジェクト。
+      </param>
+      <param name="pageLayout">
+        ページ設定を指定する
+        <see cref="T:C1.Win.C1Ssrs.PageLayout" />オブジェクト。このパラメータは PDF および IMAGE 形式でのみ使用されます。
+      </param>
+      <param name="dpiX">印刷の水平 dpi を指定します。EMF 形式でのみ使用されます。SSRS ヘルプの PrintDpiX を参照してください。</param>
+      <param name="dpiY">印刷の垂直 dpi を指定します。EMF 形式でのみ使用されます。SSRS ヘルプの PrintDpiY を参照してください。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        生成されたコンテンツを含むバイト配列。アクションがキャンセルされた場合は
+        <b>null</b>。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.GetContent(System.String,System.String,System.Threading.CancellationToken)">
+      <summary>レポートコンテンツを特定の形式で取得します。</summary>
+      <param name="format">"PDF"、"IMAGE" などのレポート形式を指定する文字列。</param>
+      <param name="deviceInfo">追加のパラメータを指定するデバイス情報文字列。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>生成されたコンテンツを含むバイト配列。</returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.GetPageCount(C1.Win.C1Ssrs.ReportSession.ReportFormat,C1.Win.C1Ssrs.PageLayout,System.Threading.CancellationToken)">
+      <summary>レポートのページ数を返します。</summary>
+      <param name="format">
+        レポート形式を指定する
+        <see cref="T:C1.Win.C1Ssrs.ReportSession.ReportFormat" />オブジェクト。
+      </param>
+      <param name="pageLayout">
+        ページ設定を指定する
+        <see cref="T:C1.Win.C1Ssrs.PageLayout" />オブジェクト。このパラメータは PDF および IMAGE 形式でのみ使用されます。
+      </param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>ページ数。アクションがキャンセルされた場合は -1。</returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.GetDocumentMap(System.Threading.CancellationToken)">
+      <summary>
+        レポートの見出しマップ（レポートのアウトライン）を返します。
+        <see cref="M:C1.Win.C1Ssrs.ReportSession.GetContent(System.Int32,System.Int32,C1.Win.C1Ssrs.ReportSession.ReportFormat,C1.Win.C1Ssrs.PageLayout,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)" />メソッドの後でのみ呼び出すことができます。
+      </summary>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        レポートのアウトラインを表す
+        <see cref="T:C1.Win.ImportServices.ReportExecution4.DocumentMapNode" />。メソッドがキャンセルされた場合は
+        <b>null</b>。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.ToggleItem(System.String,System.Threading.CancellationToken)">
+      <summary>レポート内の表示/非表示項目を切り替えます。</summary>
+      <param name="toggleID">切り替える項目の ID。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        項目が正しく切り替えられた場合は
+        <b>true</b>、そうでない場合は
+        <b>false</b>。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.Sort(System.String,C1.Win.ImportServices.ReportExecution4.SortDirectionEnum,System.Boolean,System.Threading.CancellationToken)">
+      <summary>ユーザーのソートアクションに基づいてレポートのソートを適用または解除します。</summary>
+      <param name="sortID">ソートするレポート項目の ID。</param>
+      <param name="direction">ソートの方向を含む SortDirectionEnum 値。</param>
+      <param name="clear">他のすべての既存のソートをクリアするかどうかを示します。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        ソート後にビューアでフォーカスするレポート内の場所を指定する
+        <see cref="T:C1.Win.C1Ssrs.ReportPosition" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.NavigateBookmark(System.String,System.Threading.CancellationToken)">
+      <summary>レポートの特定のブックマークに移動します。</summary>
+      <param name="bookmarkID">ブックマークの ID。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        レポート内のブックマークの位置を指定する
+        <see cref="T:C1.Win.C1Ssrs.ReportPosition" />オブジェクト。メソッドがキャンセルされた場合は
+        <b>null</b>。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.NavigateDocumentMap(System.String,System.Threading.CancellationToken)">
+      <summary>レポートの特定のセクションに移動します。</summary>
+      <param name="docMapID">セクションの DocumentMapNode ID。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        レポート内の位置を指定する
+        <see cref="T:C1.Win.C1Ssrs.ReportPosition" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.CheckReportPath(System.String)">
+      <summary>内部使用専用。</summary>
+      <param name="reportPath"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportSession.ReportAddress">
+      <summary>
+        現在開かれているレポートアドレスを定義する
+        <see cref="T:C1.Win.C1Ssrs.ReportAddressBase" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportSession.ReportPath">
+      <summary>現在開かれているレポートパスを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportSession.ExecutionID">
+      <summary>SSRS セッションの ID を取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportSession.Parameters">
+      <summary>現在ロードされているレポートのパラメータのリストを取得します。</summary>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ReportSession.DefaultPageLayout">
+      <summary>
+        デフォルトのレポートページ設定を指定する
+        <see cref="T:C1.Win.C1Ssrs.PageLayout" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.RplReader.RplParsingException">
+      <summary>RPL ストリームの解析中に発生した例外を表します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.RplReader.RplParsingException.#ctor">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.RplReader.RplParsingException" />クラスの新しいインスタンスを、共通 エラーメッセージ「Invalid RPL stream」を使用して初期化します。
+      </summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.RplReader.RplReader">
+      <summary>RPL ストリームの解析を実装します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.RplReader.RplReader.ReadPage">
+      <summary>
+        RPL ストリームから次のページを読み取ります。ストリームにこれ以上ページがない場合は、
+        <b>null</b>を返します。
+      </summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.RplReader.RplReader.GetPage(System.Int32)">
+      <summary>ストリームから、指定されたインデックスを持つページを取得します。 このメソッドを呼び出す前に、ReadPage() メソッドによってすべてのページを読み取る必要があります。</summary>
+      <param name="pageIndex"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.RplReader.RplReader.ReportItems">
+      <summary>RPL 解析中にロードされたすべてのレポート項目のコレクションを取得します。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.Dig01234567890">
+      <summary>01234567890</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.Traditional">
+      <summary>GDI+ で定義されている旧来の手書き用数字。 ar、bn、bo、fa、gu、hi、kn、kok、lo、mr、ms、or、pa、sa、ta、te、th、ur カルチャの数値言語にのみ適用されます。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.SimplifiedNumberFormat">
+      <summary>ko、ja、zh-CHS、zh-CHT カルチャの数値言語にのみ適用されます （簡易数値書式）。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.TraditionalNumberFormat">
+      <summary>ko、ja、zh-CHS、zh-CHT カルチャの数値言語にのみ適用されます （旧来の数値書式）。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.WideVersionsOfRegularDigits">
+      <summary>ko、ja、zh-CHS、zh-CHT カルチャの数値言語にのみ適用されます （通常の数字の幅広バージョン）。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.NumeralVariantType.KoNumeralLanguages">
+      <summary>ko カルチャの数値言語にのみ適用されます。</summary>
+    </member>
+    <member name="F:C1.Win.C1Ssrs.RplReader.Recs.TypeCode.String2">
+      <summary>この値は MS-RPL.pdf（MS の RPL 仕様）に記載されていませんが、SSRS から取得しました。</summary>
+    </member>
+    <member name="T:C1.Win.C1Ssrs.ServerConnection">
+      <summary>ReportingService.asmx サービスにあるメソッドを実行するために使用できる SSRS サーバーへの接続を表します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ServerConnection.Dispose">
+      <summary>
+        <see cref="T:C1.Win.C1Ssrs.ServerConnection" />オブジェクトによって使用されたすべてのリソースを解放します。
+      </summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ServerConnection.SetConnectionOptions(System.String,C1.Win.C1Ssrs.ConnectionOptions)">
+      <summary>現在の接続オプションを設定します。</summary>
+      <param name="reportServer">SSRS サーバーのアドレス（例：http://www.site.com/ReportServer）。</param>
+      <param name="connectionOptions">
+        認証や資格情報などのタイプを定義する
+        <see cref="T:C1.Win.C1Ssrs.ConnectionOptions" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ServerConnection.ListChildren(System.String,System.Boolean,System.Threading.CancellationToken)">
+      <summary>指定されたフォルダの子のリストを取得します。</summary>
+      <param name="path">親フォルダの完全パス名。</param>
+      <param name="recursive">指定された項目より下の子項目のツリー全体を返すかどうかを示す Boolean 値。</param>
+      <param name="cancellationToken">
+        要求をキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>CatalogItem オブジェクトの配列。子が存在しない場合、このメソッドは空の CatalogItem オブジェクトを返します。</returns>
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.TrustedUserHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.TrustedUserHeader.UserName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.TrustedUserHeader.UserToken">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.TrustedUserHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.Extension">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Extension.ExtensionType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Extension.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Extension.LocalizedName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Extension.Visible">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Extension.IsModelGenerationSupported">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ExtensionTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ExtensionTypeEnum.Delivery">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ExtensionTypeEnum.Render">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ExtensionTypeEnum.Data">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ExtensionTypeEnum.All">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.DocumentMapNode">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DocumentMapNode.Label">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DocumentMapNode.UniqueName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DocumentMapNode.Children">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ParameterValueOrFieldReference">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ParameterValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ParameterValue.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ParameterValue.Value">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ParameterValue.Label">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.DataSourceCredentials">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourceCredentials.DataSourceName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourceCredentials.UserName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourceCredentials.Password">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.Warning">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Warning.Code">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Warning.Severity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Warning.ObjectName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Warning.ObjectType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.Warning.Message">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ExecutionHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionHeader.ExecutionID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ReportMargins">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportMargins.Top">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportMargins.Bottom">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportMargins.Left">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportMargins.Right">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ReportPaperSize">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportPaperSize.Height">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportPaperSize.Width">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.PageSettings">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.PageSettings.PaperSize">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.PageSettings.Margins">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.DataSourcePrompt">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourcePrompt.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourcePrompt.DataSourceID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.DataSourcePrompt.Prompt">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ValidValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ValidValue.Label">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ValidValue.Value">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ReportParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.Type">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.TypeSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.Nullable">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.NullableSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.AllowBlank">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.AllowBlankSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.MultiValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.MultiValueSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.QueryParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.QueryParameterSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.Prompt">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.PromptUser">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.PromptUserSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.Dependencies">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.ValidValuesQueryBased">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.ValidValuesQueryBasedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.ValidValues">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.DefaultValuesQueryBased">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.DefaultValuesQueryBasedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.DefaultValues">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.State">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.StateSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ReportParameter.ErrorMessage">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum.Boolean">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum.DateTime">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum.Integer">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum.Float">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum.String">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ParameterStateEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterStateEnum.HasValidValue">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterStateEnum.MissingValidValue">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterStateEnum.HasOutstandingDependencies">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.ParameterStateEnum.DynamicValuesUnavailable">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ExecutionInfo">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.HasSnapshot">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.NeedsProcessing">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.AllowQueryExecution">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.CredentialsRequired">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ParametersRequired">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ExpirationDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ExecutionDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.NumPages">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.Parameters">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.DataSourcePrompts">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.HasDocumentMap">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ExecutionID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ReportPath">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.HistoryID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.ReportPageSettings">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo.AutoRefreshInterval">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ExecutionInfo2">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ExecutionInfo2.PageCountMode">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.PageCountMode">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.PageCountMode.Actual">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.PageCountMode.Estimate">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader.ReportServerVersionNumber">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader.ReportServerEdition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader.ReportServerVersion">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader.ReportServerDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportExecution4.ServerInfoHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportExecution4.SortDirectionEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.SortDirectionEnum.None">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.SortDirectionEnum.Ascending">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportExecution4.SortDirectionEnum.Descending">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ServerInfoHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ServerInfoHeader.ReportServerVersionNumber">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ServerInfoHeader.ReportServerEdition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ServerInfoHeader.ReportServerVersion">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ServerInfoHeader.ReportServerDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ServerInfoHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ModelDrillthroughReport">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelDrillthroughReport.Path">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelDrillthroughReport.Type">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DrillthroughType">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.DrillthroughType.Detail">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.DrillthroughType.List">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ModelItem">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelItem.ID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelItem.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelItem.Type">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelItem.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelItem.ModelItems">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.Model">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.EntityFolder">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.FieldFolder">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.Entity">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.Attribute">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ModelItemTypeEnum.Role">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ModelPerspective">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelPerspective.ID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelPerspective.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelPerspective.Description">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ModelCatalogItem">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelCatalogItem.Model">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelCatalogItem.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ModelCatalogItem.Perspectives">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Policy">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Policy.GroupUserName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Policy.Roles">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Role">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Role.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Role.Description">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Task">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Task.TaskID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Task.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Task.Description">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Event">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Event.Type">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Extension">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Extension.ExtensionType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Extension.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Extension.LocalizedName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Extension.Visible">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Extension.IsModelGenerationSupported">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ExtensionTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExtensionTypeEnum.Delivery">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExtensionTypeEnum.Render">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExtensionTypeEnum.Data">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExtensionTypeEnum.All">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Subscription">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.SubscriptionID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Owner">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Path">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.VirtualPath">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Report">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.DeliverySettings">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Status">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.Active">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.LastExecuted">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.LastExecutedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.ModifiedBy">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.ModifiedDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.EventType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Subscription.IsDataDriven">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ExtensionSettings">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionSettings.Extension">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionSettings.ParameterValues">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ParameterFieldReference">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ParameterValueOrFieldReference">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ParameterFieldReference.ParameterName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ParameterFieldReference.FieldAlias">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ParameterValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ParameterValue.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ParameterValue.Value">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ParameterValue.Label">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ActiveState">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.DeliveryExtensionRemoved">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.DeliveryExtensionRemovedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.SharedDataSourceRemoved">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.SharedDataSourceRemovedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.MissingParameterValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.MissingParameterValueSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.InvalidParameterValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.InvalidParameterValueSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.UnknownReportParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ActiveState.UnknownReportParameterSpecified">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ExtensionParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.DisplayName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.Required">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.RequiredSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.ReadOnly">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.Value">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.Error">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.Encrypted">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.IsPassword">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ExtensionParameter.ValidValues">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ValidValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ValidValue.Label">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ValidValue.Value">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.QueryDefinition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.QueryDefinition.CommandType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.QueryDefinition.CommandText">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.QueryDefinition.Timeout">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.QueryDefinition.TimeoutSpecified">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Field">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Field.Alias">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Field.Name">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSetDefinition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.Fields">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.Query">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.CaseSensitivity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.CaseSensitivitySpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.Collation">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.AccentSensitivity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.AccentSensitivitySpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.KanatypeSensitivity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.KanatypeSensitivitySpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.WidthSensitivity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.WidthSensitivitySpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSetDefinition.Name">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.SensitivityEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SensitivityEnum.True">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SensitivityEnum.False">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SensitivityEnum.Auto">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataRetrievalPlan">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataRetrievalPlan.Item">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataRetrievalPlan.DataSet">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSourceDefinition">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSourceDefinitionOrReference">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.Extension">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.ConnectString">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.UseOriginalConnectString">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.OriginalConnectStringExpressionBased">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.CredentialRetrieval">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.WindowsCredentials">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.ImpersonateUser">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.ImpersonateUserSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.Prompt">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.UserName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.Password">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.Enabled">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceDefinition.EnabledSpecified">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.CredentialRetrievalEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.CredentialRetrievalEnum.Prompt">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.CredentialRetrievalEnum.Store">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.CredentialRetrievalEnum.Integrated">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.CredentialRetrievalEnum.None">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSourceReference">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceReference.Reference">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.InvalidDataSourceReference">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Schedule">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.ScheduleID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.Definition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.Creator">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.NextRunTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.NextRunTimeSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.LastRunTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.LastRunTimeSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.ReferencesPresent">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Schedule.State">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ScheduleDefinition">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ScheduleDefinitionOrReference">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleDefinition.StartDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleDefinition.EndDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleDefinition.EndDateSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleDefinition.Item">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DailyRecurrence">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.RecurrencePattern">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DailyRecurrence.DaysInterval">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.WeeklyRecurrence">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.WeeklyRecurrence.WeeksInterval">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.WeeklyRecurrence.WeeksIntervalSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.WeeklyRecurrence.DaysOfWeek">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Sunday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Monday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Tuesday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Wednesday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Thursday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Friday">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DaysOfWeekSelector.Saturday">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.MinuteRecurrence">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MinuteRecurrence.MinutesInterval">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.MonthlyDOWRecurrence">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyDOWRecurrence.WhichWeek">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyDOWRecurrence.WhichWeekSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyDOWRecurrence.DaysOfWeek">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyDOWRecurrence.MonthsOfYear">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.WeekNumberEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.WeekNumberEnum.FirstWeek">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.WeekNumberEnum.SecondWeek">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.WeekNumberEnum.ThirdWeek">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.WeekNumberEnum.FourthWeek">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.WeekNumberEnum.LastWeek">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.January">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.February">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.March">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.April">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.May">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.June">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.July">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.August">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.September">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.October">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.November">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthsOfYearSelector.December">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.MonthlyRecurrence">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyRecurrence.Days">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.MonthlyRecurrence.MonthsOfYear">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.NoSchedule">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ScheduleReference">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleReference.ScheduleID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleReference.Definition">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum.Ready">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum.Running">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum.Paused">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum.Expired">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ScheduleStateEnum.Failing">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ReportHistorySnapshot">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportHistorySnapshot.HistoryID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportHistorySnapshot.CreationDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportHistorySnapshot.Size">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSourcePrompt">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourcePrompt.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourcePrompt.DataSourceID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourcePrompt.Prompt">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSource">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSource.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSource.Item">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Job">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.JobID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Path">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Machine">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.User">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.StartDateTime">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Action">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Type">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Job.Status">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.JobActionEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobActionEnum.Render">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobActionEnum.SnapshotCreation">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobActionEnum.ReportHistoryCreation">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobActionEnum.ExecuteQuery">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.JobTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobTypeEnum.User">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobTypeEnum.System">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.JobStatusEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobStatusEnum.New">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobStatusEnum.Running">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.JobStatusEnum.CancelRequested">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ExpirationDefinition">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.TimeExpiration">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.TimeExpiration.Minutes">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ScheduleExpiration">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ScheduleExpiration.Item">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ReportParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.Type">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.TypeSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.Nullable">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.NullableSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.AllowBlank">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.AllowBlankSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.MultiValue">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.MultiValueSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.QueryParameter">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.QueryParameterSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.Prompt">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.PromptUser">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.PromptUserSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.Dependencies">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.ValidValuesQueryBased">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.ValidValuesQueryBasedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.ValidValues">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.DefaultValuesQueryBased">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.DefaultValuesQueryBasedSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.DefaultValues">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.State">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.StateSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ReportParameter.ErrorMessage">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum.Boolean">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum.DateTime">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum.Integer">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum.Float">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterTypeEnum.String">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ParameterStateEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterStateEnum.HasValidValue">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterStateEnum.MissingValidValue">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterStateEnum.HasOutstandingDependencies">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ParameterStateEnum.DynamicValuesUnavailable">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.DataSourceCredentials">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceCredentials.DataSourceName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceCredentials.UserName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.DataSourceCredentials.Password">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Warning">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Warning.Code">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Warning.Severity">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Warning.ObjectName">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Warning.ObjectType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Warning.Message">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ItemNamespaceHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ItemNamespaceHeader.ItemNamespace">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.ItemNamespaceHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ItemNamespaceEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemNamespaceEnum.PathBased">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemNamespaceEnum.GUIDBased">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.CatalogItem">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Path">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.VirtualPath">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Type">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Size">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.SizeSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Description">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.Hidden">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.HiddenSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.CreationDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.CreationDateSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ModifiedDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ModifiedDateSpecified">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.CreatedBy">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ModifiedBy">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.MimeType">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ExecutionDate">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.CatalogItem.ExecutionDateSpecified">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ItemTypeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.Unknown">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.Folder">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.Report">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.Resource">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.LinkedReport">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.DataSource">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ItemTypeEnum.Model">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.Property">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Property.Name">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.Property.Value">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.SearchCondition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.SearchCondition.Condition">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.SearchCondition.ConditionSpecified">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ConditionEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ConditionEnum.Contains">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ConditionEnum.Equals">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.BatchHeader">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.BatchHeader.BatchID">
+      <remarks />
+    </member>
+    <member name="P:C1.Win.ImportServices.ReportingService4.BatchHeader.AnyAttr">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.ExecutionSettingEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExecutionSettingEnum.Live">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.ExecutionSettingEnum.Snapshot">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.BooleanOperatorEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.BooleanOperatorEnum.And">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.BooleanOperatorEnum.Or">
+      <remarks />
+    </member>
+    <member name="T:C1.Win.ImportServices.ReportingService4.SecurityScopeEnum">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SecurityScopeEnum.System">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SecurityScopeEnum.Catalog">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SecurityScopeEnum.Model">
+      <remarks />
+    </member>
+    <member name="F:C1.Win.ImportServices.ReportingService4.SecurityScopeEnum.All">
+      <remarks />
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.ParameterValueToString(System.Object)">
+      <summary>
+        値を
+        <see cref="M:C1.Win.C1Ssrs.ReportSession.RefreshParameters(System.Collections.Generic.IList{C1.Win.ImportServices.ReportExecution4.ParameterValue},System.Threading.CancellationToken)" />などのパラメータ値として使用できる文字列に変換します。
+      </summary>
+      <param name="value"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ConnectionBase.TryParameterValueFromString(System.String,C1.Win.ImportServices.ReportExecution4.ParameterTypeEnum,System.Object@)">
+      <summary>
+        パラメータ値を表す文字列をオブジェクトに変換し、 変換が成功した場合は
+        <b>true</b>を返し、そうでない場合は false を返します。
+      </summary>
+      <param name="str"></param>
+      <param name="parameterType"></param>
+      <param name="v"></param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionBase.Language">
+      <summary>SSRS セッションで使用される言語を取得または設定します。 このプロパティで指定するカルチャは、User!Language レポート識別子に影響します。 デフォルトでは、このプロパティは null です。つまり、CultureInfo.CurrentUICulture が使用されます。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ReportSession.RefreshParameters(System.Collections.Generic.IList{C1.Win.ImportServices.ReportExecution4.ParameterValue},System.Threading.CancellationToken)">
+      <summary>パラメータのリストを更新します。</summary>
+      <param name="values">パラメータの値。</param>
+      <param name="cancellationToken">
+        アクションをキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+    </member>
+    <member name="P:C1.Win.C1Ssrs.ConnectionOptions.Timeout">
+      <summary>サーバー通信を待機するミリ秒数を取得または設定します。</summary>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ServerConnection.GetItemType(System.String,System.Threading.CancellationToken)">
+      <summary>項目が存在する場合に、レポートサーバーデータベース内の項目のタイプを取得します。</summary>
+      <param name="path">項目の完全パス名。</param>
+      <param name="cancellationToken">
+        要求をキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>項目のタイプ。</returns>
+    </member>
+    <member name="M:C1.Win.C1Ssrs.ServerConnection.ListChildrenAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+      <summary>
+        <see cref="M:C1.Win.C1Ssrs.ServerConnection.ListChildren(System.String,System.Boolean,System.Threading.CancellationToken)" />メソッドの非同期バージョン。
+      </summary>
+      <param name="path">親フォルダの完全パス名。</param>
+      <param name="recursive">指定された項目より下の子項目のツリー全体を返すかどうかを示すブール値。</param>
+      <param name="cancellationToken">
+        要求をキャンセルするために使用できる
+        <see cref="T:System.Threading.CancellationToken" />。
+      </param>
+      <returns>
+        CatalogItem オブジェクトの配列を返す
+        <see cref="T:Task{RS.CatalogItem[]}" />。子が存在しない場合、このメソッドは空の CatalogItem オブジェクトを返します。
+      </returns>
+    </member>
+  </members>
+</doc>

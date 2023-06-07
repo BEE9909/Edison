@@ -1,0 +1,4152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>C1.C1Excel.4</name>
+  </assembly>
+  <members>
+    <member name="T:C1.C1Excel.FileFormat">
+      <summary>ワークブックをロード・保存する時使用されるファイルの形式を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.Biff8">
+      <summary>Excel 97- Excel2003 のバイナリファイル形式 (Binary Interchange File Format revision 8)。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.OpaqueBiff8">
+      <summary>不透明なテーブルを解析しない Excel 97/2003 形式（Binary Interchange File Format リビジョン８）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.OpenXml">
+      <summary>Office 2007 のファイル形式 (圧縮 Xml形式)。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.OpenXmlTemplate">
+      <summary>Office 2007/2010 テンプレート形式（圧縮 XML 形式）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.Csv">
+      <summary>単純なカンマ区切り値（CSV）形式。</summary>
+    </member>
+    <member name="T:C1.C1Excel.CompatibilityMode">
+      <summary>Microsoft Excel の特定のバージョンに対応するシートサイズの 限度を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.CompatibilityMode.Excel2003">
+      <summary>シートは最大 65,536 行、256 列まで拡張できます。ワークブックには、最大 4050 種類の異なるセルスタイルを設定できます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.CompatibilityMode.Excel2007">
+      <summary>
+        <para>シートは最大 1,048,576 行、18,278 列まで拡張できます。ワークブックには、最大 65,536 種類の異なるセルスタイルを設定できます。</para>
+        <para>Excel2003 の限度を超えるワークブックは、XLS ではなく OpenXml 形式で保存する必要があります。</para>
+        <para>これらのワークブックは、Excel 2007 より前のバージョンでは開くことができない可能性があります（その場合でも、C1Excel では正しく開きます）。</para>
+      </summary>
+    </member>
+    <member name="F:C1.C1Excel.CompatibilityMode.NoLimits">
+      <summary>
+        <para>サイズの限度は適用されません。</para>
+        <para>これらのワークブックは、Excel のどのバージョンでも開くことができない可能性があります（その場合でも、C1Excel では正しく開きます）。</para>
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.CalculationMode">
+      <summary>ワークブック内のすべての数式の計算モードを示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.CalculationMode.Manual">
+      <summary>ワークブックのすべての数式の手動計算モード（MS Excel の［F9］キー）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.CalculationMode.Auto">
+      <summary>ワークブック内のすべての数式の自動計算モード。</summary>
+    </member>
+    <member name="F:C1.C1Excel.CalculationMode.AutoNoTable">
+      <summary>ワークブック内のすべての数式の自動非テーブル計算モード。</summary>
+    </member>
+    <member name="T:C1.C1Excel.C1XLBook">
+      <summary>
+        <para>複数のワークシートを含む Excel ワークブックを表します。</para>
+        <para>
+          xls ファイルのロードと保存のためのメソッドを含み、各ワークシートを示す
+          <see cref="T:C1.C1Excel.XLSheet" />オブジェクトのコレクションを公開します。
+        </para>
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.#ctor">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />クラスの新規インスタンスを生成します。新規ブックには、"Sheet1" と呼ばれる１個の空の
+        <see cref="T:C1.C1Excel.XLSheet" />が含まれます。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Clear">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />をクリアし、"Sheet1" と呼ばれる１個の空の
+        <see cref="T:C1.C1Excel.XLSheet" />を持つ初期状態に戻します。
+      </summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.C1XLBook.Clear" />メソッドは
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトを、"Sheet1" と呼ばれる１個の空の
+        <see cref="T:C1.C1Excel.XLSheet" />を持ち
+        <see cref="P:C1.C1Excel.C1XLBook.DefaultFont" />が 10pt Arial である初期状態に戻します。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.String)">
+      <summary>
+        XLS ファイルから完全な
+        <see cref="T:C1.C1Excel.C1XLBook" />をロードします。
+      </summary>
+      <param name="fileName">ロードする XLS ファイル。</param>
+      <remarks>ファイルが存在しない、ロックされている、または Excel ファイルではない場合は例外がスローされます。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.String,System.Boolean)">
+      <summary>XLS ファイル内のワークシートのリストをロードします。オプションとしてシート内に含まれるデータをスキップします。</summary>
+      <param name="fileName">ロードする XLS ファイル。</param>
+      <param name="fillSheets">シートのデータを読み込むときは True。シートのみを読み込むときは False。</param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.String,C1.C1Excel.FileFormat)">
+      <summary>
+        XLS ファイルから完全な
+        <see cref="T:C1.C1Excel.C1XLBook" />をロードします。
+      </summary>
+      <param name="fileName">ロードする XLS ファイル。</param>
+      <param name="format">
+        <see cref="T:C1.C1Excel.FileFormat" />ロード対象のワークブックのファイル形式を指定する値。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.String,C1.C1Excel.FileFormat,System.Boolean)">
+      <summary>
+        XLS ファイルから完全な
+        <see cref="T:C1.C1Excel.C1XLBook" />をロードします。
+      </summary>
+      <param name="fileName">ロードする XLS ファイル。</param>
+      <param name="format">
+        <see cref="T:C1.C1Excel.FileFormat" />ロード対象のワークブックのファイル形式を指定する値。
+      </param>
+      <param name="fillSheets">シートのデータを読み込むときは True。シートのみを読み込むときは False。</param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Save(System.String)">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />を XLS ファイルに保存します。
+      </summary>
+      <param name="fileName">保存する XLS ファイル。</param>
+      <remarks>ファイルを作成できない場合、例外がスローされます。これは一般的に、現在ファイルが Microsoft Excel など別のアプリケーションによって開かれていることを示しています。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Save(System.String,C1.C1Excel.FileFormat)">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />をファイルに保存します。
+      </summary>
+      <param name="fileName">保存する XLS ファイル。</param>
+      <param name="format">
+        <see cref="T:C1.C1Excel.FileFormat" />ワークブックを保存する時のファイル形式を指定する値。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.IO.Stream)">
+      <summary>
+        <see cref="T:System.IO.Stream" />より完全な
+        <see cref="T:C1.C1Excel.C1XLBook" />をロードします。
+      </summary>
+      <param name="stream">
+        ロード対象のワークブックを格納している
+        <see cref="T:System.IO.Stream" />。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.IO.Stream,System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.Stream" />へシート内のデータを読み込むかどうかを確認した上、ワークシートの一 覧をロードします。
+      </summary>
+      <param name="stream">
+        ロード対象のワークブックを格納している
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <param name="fillSheets">シート内のデータを読み込む場合は、True。シート名のみを読み込む場合は、False。</param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.IO.Stream,C1.C1Excel.FileFormat)">
+      <summary>
+        <see cref="T:System.IO.Stream" />より
+        <see cref="T:C1.C1Excel.C1XLBook" />をロードします。
+      </summary>
+      <param name="stream">
+        ロード対象のワークブックを格納している
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <param name="format">ロード対象のワークブックのファイル形式を指定する値。</param>
+      <remarks>Biff8 または OpenXML ファイル形式の設定に応じて、ワークシートの一覧は.xls、.xlsx、zip形式にロードされます。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Load(System.IO.Stream,C1.C1Excel.FileFormat,System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.Stream" />へシート内のデータを読み込むかどうかを確認した上、ワークシートの一 覧をロードします。
+      </summary>
+      <param name="stream">
+        ロード対象のワークブックを格納している
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <param name="format">ロード対象のワークブックのファイル形式を指定する値。</param>
+      <param name="fillSheets">シート内のデータを読み込む場合は、True。シート名のみを読み込む場合は、False 。</param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Save(System.IO.Stream)">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />を
+        <see cref="T:System.IO.Stream" />へ保存します。
+      </summary>
+      <param name="stream">
+        ワークブックの保存先となる
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <remarks>
+        本メソッドを使用すると、ワークブックは一時ファイルを使わず、ストリームに直接保存可能になります。 典型的な使用例として、ワークブックを
+        <b>HttpResponse.OutputStream</b>オブジェクトへ保存するケースが挙げられます。
+      </remarks>
+      <example>
+        次のコードでは、
+        <see cref="T:C1.C1Excel.C1XLBook" />を
+        <see cref="T:System.IO.MemoryStream" />へ保存し、内容をクリアします。その後、ワークブックを同じストリームから再度ロードします。
+        <code><![CDATA[
+          // ワークブックを新しい MemoryStream へ保存します
+          MemoryStream ms = new MemoryStream();
+          _book.Save(ms);
+          
+          // ワークブックをクリアします
+          _book.Clear();
+          // MemoryStream から再度ロードします
+          ms.Position = 0;
+          _book.Load(ms);
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Save(System.IO.Stream,C1.C1Excel.FileFormat)">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />を
+        <see cref="T:System.IO.Stream" />へ保存します。
+      </summary>
+      <param name="stream">
+        ワークブックの保存先となる
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <param name="format">ワークブックを保存する時のファイル形式を指定する値。</param>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)">
+      <summary>ピクセルを twips (1/20 point) に変換します。</summary>
+      <param name="pix">スクリーン ピクセルによる計測値。</param>
+      <returns>twips による計測値。</returns>
+      <remarks>
+        <para>Excel は計測値を twips (1/20 point) で保存し、解像度に異存しません。一方 .NET コントロールは計測値をピクセルで表記します。このメソッドは、現在のスクリーン解像度を用いて簡単にピクセルを twips に変換する方法を提供します。</para>
+        <para>
+          <see cref="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)" />
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)">
+      <summary>twips をスクリーン ピクセルに変換します。</summary>
+      <param name="twip">twips による計測値。</param>
+      <returns>スクリーン ピクセルによる計測値。</returns>
+      <remarks>
+        <para>Excel は計測値を twips (1/20 point) で保存し、解像度に異存しません。一方 .NET コントロールは計測値をピクセルで表記します。このメソッドは、現在のスクリーン解像度を用いて簡単に twips をピクセルに変換する方法を提供します。</para>
+        <para>
+          <see cref="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)" />
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.C1XLBook.Clone">
+      <summary>このC1Excelブックのコピーを作成します。</summary>
+      <returns>
+        このブックと同じ内容と書式を保持する新しい
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.Sheets">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />に含まれる
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを表すコレクションを取得します。
+      </summary>
+      <remarks>
+        返される
+        <see cref="T:C1.C1Excel.XLSheetCollection" />には
+        <see cref="T:C1.C1Excel.C1XLBook" />内のシートのカウントや列挙、追加、削除のためのメソッドが含まれます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.DefaultFont">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />のデフォルトの
+        <see cref="T:System.Drawing.Font" />を取得または設定します。
+      </summary>
+      <remarks>
+        <para>
+          <see cref="T:C1.C1Excel.XLStyle" />を使用すれば、あらゆるセルにフォントを指定できます。関連のある独自のスタイルが設定されていないセル、または通常のフォントが指定されていないスタイルが設定されているセルには、ブックのデフォルトのフォントが使用されます。
+        </para>
+        <para>
+          <see cref="P:C1.C1Excel.C1XLBook.DefaultFont" />の初期値は 10pt の Arial に設定されます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.KeepFormulas">
+      <summary>コンポーネントが XLS ファイルから読み込んだ数式を保持し、ファイルへの保存時にそれらを書き戻すかどうかを取得または設定します。</summary>
+      <remarks>
+        <para>True に設定すると、既存の XLS ファイルを読み込み、値を修正しファイルを保存しても、数式は保持されます。これはデフォルトの動作です。</para>
+        <para>False に設定すると、ロード時に数式は削除されます。この場合ファイルを保存すると最後に計算された値を保持しますが、数式は削除されます。</para>
+        <para>コンポーネントでは数式の作成や変更はサポートしません。数式は Excel 内で作成する必要があります。</para>
+        <para>セルに値をアサインすると、セル内の数式はクリアされます。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.OpaqueCopy">
+      <summary>コンポーネントが XLS ファイルをロードおよび保存する際に、メインでない BIFF レコードを不透過としてコピーするかどうかを指定する値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.Author">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.C1XLBook" />を作成した個人、企業、またはアプリケーションの名前を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.UseTempStorage">
+      <summary>使用メモリを最小限にするために、コンポーネントが XLSX/XSLT ファイルへの保存時に一時ストレージを使用するかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.CalculationMode">
+      <summary>数式計算モードを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.NamedRanges">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.C1XLBook" />の名前付き範囲（名前）のコレクションを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.Palette">
+      <summary>このワークブックのカラーパレットを取得または設定します。</summary>
+      <remarks>パレットは８項目以上を含む必要があります（最初の８色は、標準パレットの黒、白、赤、緑、青、黄、マゼンタ、およびシアンです）。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.IsLoading">
+      <summary>ワークブックが現在ロード中かどうかを判定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.CompatibilityMode">
+      <summary>ワークブックごとに許可されるシートサイズおよびスタイルの数に対する制限を決定する値を取得または設定します。</summary>
+      <remarks>
+        <para>このプロパティを使用すると、ワークブックをどのバージョンの Microsoft Excel と互換とするかを指定できます。</para>
+        <para>
+          <b>Excel2003</b>モードでは、最大 65,536 行および 256 列のシートを作成できます。
+          <b>Excel2007</b>モードでは、最大 1,048,576 行および 18,278 列のシートを作成できます。
+        </para>
+        <para>
+          XLS ファイル形式は、
+          <b>Excel2003</b>の制限によって制限されることに注意してください。
+          <b>Excel2007</b>モードを使用し、大きなシートを作成する場合は、XLS ではなく
+          <b>OpenXml</b>ファイルに保存してください。
+        </para>
+      </remarks>
+    </member>
+    <member name="T:C1.C1Excel.XLOpaqueShape">
+      <summary>ワークシートに挿入されている図形を表します。</summary>
+      <remarks>
+        <para>
+          <b>C1ExcelBook</b>はExcelシートの様々な図形をロード・保存しますが、その内
+          <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトのみ が編集可能です。それ以外のグラフィックス（線、長方形、円弧など）、VBAコントロール （編集ボックス、ボタンなど）及びコメントは、
+          <b>XLOpaqueShape</b>オブジェクトとして挿入され、編集不可能になります。
+        </para>
+      </remarks>
+    </member>
+    <member name="T:C1.C1Excel.XLShape">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の埋め込み図形または画像を表します。
+      </summary>
+      <remarks>
+        <para>Excel シートには、画像、グラフィックス、コントロール、コメントなどを埋め込むことができます。</para>
+        <para>
+          <b>XLShape</b>クラスは抽象型クラスで、シート内の図形の位置（
+          <see cref="P:C1.C1Excel.XLShape.Sheet" />、
+          <see cref="P:C1.C1Excel.XLShape.Row" />、
+          <see cref="P:C1.C1Excel.XLShape.Column" />、
+          <see cref="P:C1.C1Excel.XLShape.Rectangle" />、
+          <see cref="P:C1.C1Excel.XLShape.Rotation" />）、境界線（
+          <see cref="P:C1.C1Excel.XLShape.LineWidth" />、
+          <see cref="P:C1.C1Excel.XLShape.LineColor" />、
+          <see cref="P:C1.C1Excel.XLShape.LineStyle" />）、他の情報（
+          <see cref="P:C1.C1Excel.XLShape.Rotation" />、
+          <see cref="P:C1.C1Excel.XLShape.Hyperlink" />）を格納しています。
+        </para>
+        <para>
+          <b>XLShape</b>クラスは
+          <see cref="T:C1.C1Excel.XLPictureShape" />および
+          <see cref="T:C1.C1Excel.XLOpaqueShape" />クラスのベースクラスです。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLShape.Clone">
+      <summary>
+        現在の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトのインスタンスのコピーを生 成します。
+      </summary>
+      <returns>
+        現在の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトのインスタンスの コピーを生成します。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLShape.ParseProperties(System.Collections.IDictionary)">
+      <summary>図形のプロパティを解析します。</summary>
+      <param name="properties">
+        図形のプロパティを持つ
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+      <returns>
+        処理されなかったシェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLShape.CreateProperties(System.Collections.IDictionary)">
+      <summary>
+        <see cref="T:System.Collections.IDictionary" />に図形のプロパティを生成します。
+      </summary>
+      <param name="properties">
+        図形のプロパティが格納された
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.IsEmpty">
+      <summary>図形が空であるかどうかを確認します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Id">
+      <summary>図形の一意識別子を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Row">
+      <summary>図形が属する行のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Column">
+      <summary>図形が属する列のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Sheet">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Workbook">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Rectangle">
+      <summary>図形を格納する長方形を twips 単位で取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Rotation">
+      <summary>図形の回転角を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.LineWidth">
+      <summary>図形の境界線の幅を twips 単位で取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.LineColor">
+      <summary>図形の境界線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.LineStyle">
+      <summary>図形の境界線のスタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.DashedLineStyle">
+      <summary>図形の境界線の破線スタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLShape.Hyperlink">
+      <summary>図形に関連するハイパーリンクを取得または設定します。</summary>
+      <remarks>URLをこのプロパティに設定した場合、Excel内の図形をクリックするとブラウザが起動しURLで示されるサイトが表示されます。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLOpaqueShape.ParseProperties(System.Collections.IDictionary)">
+      <summary>図形のプロパティを解析します。</summary>
+      <param name="properties">
+        図形のプロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+      <returns>
+        処理されなかったシェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLOpaqueShape.CreateProperties(System.Collections.IDictionary)">
+      <summary>
+        <see cref="T:System.Collections.IDictionary" />に図形のプロパティを生成します。
+      </summary>
+      <param name="properties">
+        図形のプロパティが格納されている
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+    </member>
+    <member name="P:C1.C1Excel.XLOpaqueShape.IsEmpty">
+      <summary>図形が空であるかどうかを確認します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.ImageScaling">
+      <summary>シート内のセルの画像調整方法を設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ImageScaling.None">
+      <summary>画像を、セルのサイズとは関係なく元のサイズで表示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ImageScaling.Clip">
+      <summary>画像をセルのサイズに合わせて表示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ImageScaling.Scale">
+      <summary>画像の縦横比を保持し、セルのサイズに合わせて表示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ImageScaling.Stretch">
+      <summary>画像をセルに合わせて拡大します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLPictureShape">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />の埋め込み画像を表します。
+      </summary>
+      <remarks>
+        <para>
+          <b>XLPictureShape</b>　クラスは
+          <see cref="T:C1.C1Excel.XLShape" />クラスを継承します。
+        </para>　　　　　　
+        <para>
+          本クラスにて、
+          <see cref="P:C1.C1Excel.XLPictureShape.Image" />　プロパティ以外に、画像の表 　　　　　　示に関連する
+          <see cref="P:C1.C1Excel.XLPictureShape.Brightness" />　と
+          <see cref="P:C1.C1Excel.XLPictureShape.Contrast" />　プロパティ、及びクリッピング情報を指定できます。 　　　　　　
+        </para>　　　　　　
+        <para>
+          セルに画像を挿入するには、
+          <see cref="T:C1.C1Excel.XLCell" />の　
+          <see cref="P:C1.C1Excel.XLCell.Value" />　プロパティの値へ直接
+          <see cref="P:C1.C1Excel.XLPictureShape.Image" />オブジェクトを設定します。ただし、配置とスケーリング引数を持つコンストラクタを用いて、コード内で
+          <b>XLPictureShape</b>　オブジェクトを生成する方法も提供されています。
+        </para></remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(System.Drawing.Image,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス内に格納されている画像。
+      </param>
+      <param name="x">セルに対する新しい図形の水平位置を twips 単位で示します。</param>
+      <param name="y">セルに対する新しい図形の垂直位置を twips 単位で示します。</param>
+      <example>
+        次のコードを使用し、セルに画像を追加します。画像は元のサイズで左上端から 30twips の間隔でレンダリングされます:
+        <code><![CDATA[
+          // シートおよびセルを取得します
+          XLSheet sheet = c1ExcelBook1.Sheets[0];
+          XLCell  cell  = sheet[row, col];
+          
+          // XLPictureShape をビルドします
+          XLPictureShape pic = new XLPictureShape(image, 30, 30);
+          
+          // XLPictureShape オブジェクトをセルの値として設定します
+          cell.Value = pic;
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化しま す。
+      </summary>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス 内に格納されている画像。
+      </param>
+      <param name="x">セルに対する新しい画像の水平位置を twips 単位で示します。</param>
+      <param name="y">セルに対する新しい画像の垂直位置を twips 単位で示します。</param>
+      <param name="width">画像の幅（twips 単位）。</param>
+      <param name="height">画像の高さ（twips 単位）。</param>
+      <example>
+        次のコードを使用すると、セルに画像を追加できます。画像は長方形内に描画され、セルの中央に境界線より 60twip の間隔で表示されます:
+        <code><![CDATA[
+          // シートおよびセルを宣言します
+          XLSheet sheet = c1ExcelBook1.Sheets[0];
+          XLCell  cell  = sheet[row, col];
+          
+          // 画像を調整するために、セルのサイズを計算します
+          Rectangle rc = new Rectangle(0, 0, 
+            sheet.Columns[col].Width, 
+            sheet.Rows[row].Height);
+            
+          // 60 twip を設定します
+          rc.Inflate(-60, -60);
+          
+          // XLPictureShape をビルドします
+          XLPictureShape pic = new XLPictureShape(image, 
+            rc.X, rc.Y, rc.Width, rc.Height);
+          
+          // セルの Value プロパティへ XLPictureShape を設定します
+          cell.Value = pic;
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(System.Drawing.Image,System.Drawing.Rectangle)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス 内に格納されている画像。
+      </param>
+      <param name="rc">
+        セルに対する画像のサイズと位置を twips 単位で示します
+        <see cref="T:System.Drawing.Rectangle" />。
+      </param>
+      <example>
+        次のコードを使用し、セルに画像を追加します。画像は長方形内に描画され、セルの中央に境界線から 60twip の間隔で表示されます:
+        <code><![CDATA[
+          // シートおよびセルを宣言します
+          XLSheet sheet = c1ExcelBook1.Sheets[0];
+          XLCell  cell  = sheet[row, col];
+          
+          // 画像を調整するために、セルのサイズを計算します
+          Rectangle rc = new Rectangle(0, 0, 
+            sheet.Columns[col].Width, 
+            sheet.Rows[row].Height);
+          
+          // 60 twip を設定します
+          rc.Inflate(-60, -60);
+          
+          // XLPictureShape をビルドします
+          XLPictureShape pic = new XLPictureShape(image, rc);
+          
+          // セルの Value プロパティへ XLPictureShape を設定します
+          cell.Value = pic;
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(System.Drawing.Image)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス 内に格納されている画像。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(System.Drawing.Image,System.Drawing.Size,System.Drawing.ContentAlignment,C1.C1Excel.ImageScaling)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス 内に格納されている画像。
+      </param>
+      <param name="cellSize">ピクセル単位で、画像を格納するセルのサイズ（画像を調整するため）。</param>
+      <param name="align">
+        セルの画像の位置を示す
+        <see cref="T:System.Drawing.ContentAlignment" />の値。
+      </param>
+      <param name="scale">
+        セルの画像のスケーリングを指定する
+        <see cref="T:C1.C1Excel.ImageScaling" />の値。
+      </param>
+      <remarks>本コンストラクタは、セル・画像サイズに基づいて画像の表示サイズ、位置、クリッピングなどを自動調整します。</remarks>
+      <example>
+        次のコードを使用し、セルに画像を追加します。 この場合、画像はセルの中央に配置され、画像の縦横比 を保持し、セルのサイズに合わせて表示されます。
+        <code><![CDATA[
+          // シートおよびセルを取得します
+          XLSheet sheet = c1ExcelBook1.Sheets[0];
+          XLCell  cell  = sheet[row, col];
+          
+          // 画像を調整するためセルサイズを計算します
+          Size cellSize = new Size(
+            sheet.Columns[col].Width, 
+            sheet.Rows[row].Height);
+          
+          // XLPictureShapeをビルドします
+          XLPictureShape pic = new XLPictureShape(
+            image, 
+            cellSize, 
+            ContentAlignment.MiddleCenter, 
+            ImageScaling.Scale);
+          
+          // セルの Value プロパティに XLPictureShape を設定します
+          cell.Value = pic;
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.C1Excel.XLSheet,System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />クラスの新しいインスタンスを初期化します。
+      </summary>
+      <param name="sheet">
+        新しい画像を保持する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクト。
+      </param>
+      <param name="img">
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンス 内に格納している画像。
+      </param>
+      <param name="x">セルに対する新しい画像の水平位置を twips 単位で示します。</param>
+      <param name="y">セルに対する新しい画像の垂直位置を twips 単位で示します。</param>
+      <param name="width">twips 単位で、画像の幅。</param>
+      <param name="height">twips 単位で、画像の高さ。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.ParseProperties(System.Collections.IDictionary)">
+      <summary>図形のプロパティを解析します。</summary>
+      <param name="properties">
+        図形のプロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.CreateProperties(System.Collections.IDictionary)">
+      <summary>
+        <see cref="T:System.Collections.IDictionary" />に図形のプロパティを生成します。
+      </summary>
+      <param name="properties">
+        図形のプロパティが格納されている
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+      <returns>
+        処理されなかったシェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.IsEmpty">
+      <summary>図形が空であるかどうかを確認します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.Image">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトに格納さ れている
+        <see cref="P:C1.C1Excel.XLPictureShape.Image" />への参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.ViewType">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLPictureShape" />をカラーで表示するか、グレースケールや白黒で表示するかを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.Brightness">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトの明るさを取得または設定します。(0.0 か ら1.0 の範囲内)。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.Contrast">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトのコントラストを取得または設定します。(0.0 か ら 1.0 の範囲内)。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.BrightnessInPercents">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLPictureShape" />の明るさをパーセント単位で取得または設定します（-100～100）。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.ContrastInPercents">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLPictureShape" />のコントラストをパーセント単位で取得または設定します（-100～100）。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.Transparent">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLPictureShape" />の透明色を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.LeftClip">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />　オブジェクトの左部の描画領域を twips 単位で切り取る値を 取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.RightClip">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトの右部の描画領域を twips 単位で切り取る値を取得 または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.TopClip">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトの上部の描画領域を twips 単位で切り取る値を取得 または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.BottomClip">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトの下部の描画領域を twips 単位で切り取る値を取得 または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.ImageSize">
+      <summary>画像サイズ（twip 単位）を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPictureShape.FileName">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />オブジェクトのファイル名を取得または設定します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.ShapeCollection">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトのコレクシ ョンを表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Contains(C1.C1Excel.XLShape)">
+      <summary>
+        指定された
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトが画像コレクションに存在するかどうかを確認 します。
+      </summary>
+      <param name="shape">
+        検索する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクト。
+      </param>
+      <returns>コレクションに存在する場合は True。それ以外の場合は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Contains(System.Int32)">
+      <summary>
+        指定された
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトがシェープコレクションに含まれるかどうかを 確認します。
+      </summary>
+      <param name="id">
+        検索する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの識別子。
+      </param>
+      <returns>コレクションに含まれる場合は True。それ以外の場合は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.IndexOf(C1.C1Excel.XLShape)">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの位置を取得します。
+      </summary>
+      <param name="shape">
+        検索する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクト。
+      </param>
+      <returns>コレクション内のオブジェクトの位置。オブジェクトがコレクションのメンバーでない場合は -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.IndexOf(System.Int32)">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの位置を取得します。
+      </summary>
+      <param name="id">
+        検索する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの識別子。
+      </param>
+      <returns>コレクション内のオブジェクトの位置。オブジェクトがコレクションのメンバーでない場合は -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Remove(C1.C1Excel.XLShape)">
+      <summary>
+        コレクションから指定した
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトを削除します。
+      </summary>
+      <param name="shape">
+        コレクションから削除する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Remove(System.Int32)">
+      <summary>
+        コレクションから指定した
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトを削除します。
+      </summary>
+      <param name="id">
+        コレクションから削除する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの識別 子。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Add(C1.C1Excel.XLShape)">
+      <summary>
+        画像コレクションへ
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトを追加します。
+      </summary>
+      <param name="shape">
+        コレクションへ追加する
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクト。
+      </param>
+      <returns>コレクションへの追加が成功した場合、オブジェクトへの参照。コレクションへの追加ができな かった場合（コレクション内の既存のセル範囲と重なっている場合など）、Null を返します。</returns>
+    </member>
+    <member name="M:C1.C1Excel.ShapeCollection.Insert(System.Int32,C1.C1Excel.XLShape)">
+      <summary>
+        コレクションの指定した位置に
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">オブジェクトを挿入する位置。</param>
+      <param name="shape">コレクションに挿入するオブジェクト。</param>
+      <returns>コレクションへの追加が成功した場合、オブジェクトへの参照。 コレクションへの追加ができな かった場合（コレクション内の既存のセル範囲と 重なっている場合など）、Null を返します。</returns>
+    </member>
+    <member name="P:C1.C1Excel.ShapeCollection.Item(System.Int32)">
+      <summary>
+        コレクション内の指定した位置の
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.ShapeCollection.Count">
+      <summary>コレクション内のカウント項目を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.ShapeCollection.Sheet">
+      <summary>
+        コレクションを保持する
+        <see cref="P:C1.C1Excel.ShapeCollection.Sheet" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLPictureViewType">
+      <summary>画像の色の階調（白黒、グレースケール、自動）を決定する値を設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPictureViewType.Auto">
+      <summary>画像をオリジナルの色で表示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPictureViewType.GrayScale">
+      <summary>画像をグレースケールで表示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPictureViewType.BlackAndWhite">
+      <summary>画像を白黒で表示します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLShapeLineStyleEnum">
+      <summary>
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの境界線のスタイルを指定します。
+      </summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeLineStyleEnum.Simple">
+      <summary>単線を指定します（線の幅 = LineWidth プロパティの値）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeLineStyleEnum.Double">
+      <summary>同じ幅の二重線を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeLineStyleEnum.ThickThin">
+      <summary>二重線（極太線、細線）を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeLineStyleEnum.ThinThick">
+      <summary>二重線（細線、極太線）を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeLineStyleEnum.Triple">
+      <summary>三重線 (細線、極太線、細線)を指定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLShapeDashedLineStyleEnum">
+      <summary>
+        <see cref="T:C1.C1Excel.XLShape" />オブジェクトの境界線の破線スタイルを指定します。
+      </summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.Solid">
+      <summary>実線スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.Dash">
+      <summary>破線を指定します（システムのアナログ PS_DASH ペン）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.Dot">
+      <summary>点線を指定します（システムのアナログ PS_DOT ペン）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.DashDot">
+      <summary>一点鎖線を指定します（システムのアナログ PS_DASHDOT ペン）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.DashDotDot">
+      <summary>二点鎖線スタイルを指定します （システムのアナログ PS_DASHDOTDOT ペン）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.SquareDot">
+      <summary>点線（角）スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.ShortDash">
+      <summary>短破線スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.LongDash">
+      <summary>長破線スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.ShortDashDot">
+      <summary>短一点鎖線スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.LongDashDot">
+      <summary>長一点鎖線スタイルを指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLShapeDashedLineStyleEnum.LongDashDotDot">
+      <summary>長二点鎖線スタイルを指定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLCommentShape">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />に埋め込まれたテキストシェイプを表します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLTextShape">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />に埋め込まれた通常のテキストシェイプを表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLTextShape.ParseProperties(System.Collections.IDictionary)">
+      <summary>シェイププロパティを解析します。</summary>
+      <param name="properties">
+        シェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+      <returns>
+        処理されなかったシェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLTextShape.CreateProperties(System.Collections.IDictionary)">
+      <summary>
+        <see cref="T:System.Collections.IDictionary" />にシェイププロパティを格納します。
+      </summary>
+      <param name="properties">
+        シェイププロパティが格納される
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.Text">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />に含まれるテキスト文字列への参照を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.Orientation">
+      <summary>
+        <see cref="T:C1.C1Excel.XLTextShape" />の向きを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.HorizAlign">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />のテキストの水平配置を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.VertAlign">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />のテキストの垂直配置を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.Locked">
+      <summary>
+        <see cref="T:C1.C1Excel.XLTextShape" />のロック状態を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.Wrapped">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の折り返しテキストを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.TextScale">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />のテキストスケールを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.TextId">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />のテキスト識別子を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.Bidirectional">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />のテキストシェイプの双方向カウントを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.TextToFit">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の「テキストをシェイプに合わせる」フラグを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.LeftMargin">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の左マージン領域を取得または設定します（twip（1/20 ポイント）単位）。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.RightMargin">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の右マージンを取得または設定します（twip（1/20 ポイント）単位）。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.TopMargin">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の上マージンを取得または設定します（twip（1/20 ポイント）単位）。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLTextShape.BottomMargin">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLTextShape" />の下マージンを取得または設定します（twip（1/20 ポイント）単位）。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCommentShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="text">
+        新しい
+        <see cref="T:C1.C1Excel.XLCommentShape" />に含まれるテキスト。
+      </param>
+      <param name="x">セルを基準とした新しいシェイプの水平位置（twip（1/20 ポイント）単位）。</param>
+      <param name="y">セルを基準とした新しいシェイプの垂直位置（twip（1/20 ポイント）単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCommentShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="text">
+        新しい
+        <see cref="T:C1.C1Excel.XLCommentShape" />に含まれるテキスト。
+      </param>
+      <param name="x">セルを基準とした画像の水平位置（twip（1/20 ポイント）単位）。</param>
+      <param name="y">セルを基準とした画像の垂直位置（twip（1/20 ポイント）単位）。</param>
+      <param name="width">画像の幅（twip（1/20 ポイント）単位）。</param>
+      <param name="height">画像の高さ（twip（1/20 ポイント）単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.#ctor(System.String,System.Drawing.Rectangle)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCommentShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="text">
+        新しい
+        <see cref="T:C1.C1Excel.XLCommentShape" />に含まれるテキスト。
+      </param>
+      <param name="rc">セルを基準とした画像のサイズと 位置を指定する矩形（twip（1/20 ポイント）単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.#ctor(System.String)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCommentShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="text">
+        新しい
+        <see cref="T:C1.C1Excel.XLCommentShape" />に含まれるテキスト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.ParseProperties(System.Collections.IDictionary)">
+      <summary>シェイププロパティを解析します。</summary>
+      <param name="properties">
+        シェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+      <returns>
+        処理されなかったシェイププロパティを含む
+        <see cref="T:System.Collections.IDictionary" />。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentShape.CreateProperties(System.Collections.IDictionary)">
+      <summary>
+        <see cref="T:System.Collections.IDictionary" />にシェイププロパティを格納します。
+      </summary>
+      <param name="properties">
+        シェイププロパティが格納される
+        <see cref="T:System.Collections.IDictionary" />。
+      </param>
+    </member>
+    <member name="P:C1.C1Excel.XLCommentShape.IsEmpty">
+      <summary>シェイプが空であるかどうかを判定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCommentShape.Visible">
+      <summary>シェイプが可視かどうかを判定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLHorizTextAlign">
+      <summary>テキストの水平配置を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLHorizTextAlign.Left">
+      <summary>テキストは左揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLHorizTextAlign.Center">
+      <summary>テキストは中央揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLHorizTextAlign.Right">
+      <summary>テキストは右揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLHorizTextAlign.Justify">
+      <summary>テキストは両端揃えで配置されます。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLVertTextAlign">
+      <summary>テキストの垂直配置を指定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLVertTextAlign.Top">
+      <summary>テキストは上揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLVertTextAlign.Center">
+      <summary>テキストは上下に中央揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLVertTextAlign.Bottom">
+      <summary>テキストは下揃えで配置されます。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLVertTextAlign.Justify">
+      <summary>テキストは上下に両端揃えで配置されます。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLTextOrientation">
+      <summary>テキストの向きを示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLTextOrientation.Default">
+      <summary>デフォルトの向き（横向き）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLTextOrientation.TopToBottom">
+      <summary>上下反転テキスト。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLTextOrientation.RightRotation">
+      <summary>テキストを時計回りに 90°回転します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLTextOrientation.LeftRotation">
+      <summary>テキストを反時計回りに 90°回転します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLCell">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の各セルを示し、セルの
+        <see cref="P:C1.C1Excel.XLCell.Value" />、
+        <see cref="P:C1.C1Excel.XLCell.Style" />および
+        <see cref="P:C1.C1Excel.XLCell.Hyperlink" />を設定するプロパティを提供します。
+      </summary>
+      <remarks>
+        <para>
+          セルを作成するには、
+          <see cref="T:C1.C1Excel.XLSheet" />インデクサ (Item プロパティ) を使用します。 セルが既に存在する場合、通常のように参照が戻ります。存在しない場合、シートにセルが作成され（必要なら行および列も作成されます）、新規セルへの参照が戻ります。
+        </para>
+        <para>自動的にセルが作成されるため、シートの作成と配置の際にインデクサは特に有用となります。</para>
+      </remarks>
+      <example>
+        たとえば、次のコードでは新規
+        <see cref="T:C1.C1Excel.C1XLBook" />を作成して、10 × 10 のテーブルを持つ最初のシートを配置します：
+        <code><![CDATA[
+          C1XLBook book = new C1XLBook();
+          XLSheet sheet = book.Sheets[0];
+          for (int r = 0; r < 10; r++)
+          {
+            for (int c = 0; c < 10; c++)
+            {
+              XLCell cell = sheet[r, c];
+              cell.Value = (r+1) * (c+1);
+            }
+          }
+          book.Save(@"c:\temp\test.xls");
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLCell.Clone">
+      <summary>値も含めてこのセルのコピーを作成します。</summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLCell" />オブジェクト。
+      </returns>
+      <remarks>セルの数式は、行、ワークシート、またはワークブックの一部としてのみクローンされます。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLCell.SetValue(System.Object,C1.C1Excel.XLStyle)">
+      <summary>
+        セルの
+        <see cref="P:C1.C1Excel.XLCell.Value" />および
+        <see cref="P:C1.C1Excel.XLCell.Style" />プロパティを設定します。
+      </summary>
+      <param name="value">セルの新しい値。</param>
+      <param name="style">セルの新しいスタイル。</param>
+      <remarks>
+        <b>SetValue</b>メソッドを実行すると、セルの
+        <b>Value</b>および
+        <b>Style</b>プロパティを同時に設 定することが可能になります。 このメソッドを使用すると、以下の例のようにメンテナンスの容易なコードを作成できます。
+        <code><![CDATA[
+          // セルの値およびスタイルを設定します (SetValue メソッドを使用)
+          sheet[0,0].SetValue("Hello", styleBold);
+          
+          // セルの値およびスタイルを設定します (SetValue メソッドを使用せずに)
+          sheet[0,0].Value = "Hello";
+          sheet[0,0].Style = styleBold;
+          ]]></code></remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLCell.Value">
+      <summary>セルに保持された値を取得または設定します。</summary>
+      <remarks>
+        <para>
+          値には文字列、数値、ブール型、
+          <see cref="T:System.DateTime" />型、または null値のオブジェクトが含まれます。他のタイプのオブジェクトは Excel ファイルに保存することができません。
+        </para>
+        <para>
+          DateTime 型の値は内部で Double 型に変換されて、シートに保存されます。Excel で DateTime 型の値と Double 型を見分ける唯一の方法は、セルに関連付けられている書式設定を確認することです (
+          <see cref="P:C1.C1Excel.XLStyle.Format" />プロパティ参照)。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLCell.Style">
+      <summary>
+        セルに関連付けられた
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを取得または設定します。
+      </summary>
+      <remarks>
+        <para>各セルの外観は複数の XLStyle オブジェクトによって設定されています。</para>
+        <para>セルを表示するとき、Excel は行、列、セルのスタイルを結合し、それぞれに設定されているスタイルの要素をマージして、セルの外観を決定します。</para>
+        <para>スタイルの優先順位は、（１）セル、（２）行、（３）列、（４）デフォルトのスタイルです。たとえば、セルのスタイルでフォントと背景色が設定されると、行と列のスタイルが設定されていても、セルのスタイルが適用されます。また、行のスタイルで配置が設定されると、列のスタイルを無視して適用されます。</para>
+        <para>セルのスタイルは null値を取ることがあります。その場合、セルは他のスタイルを使用して表示されます。他のスタイルが設定されていない場合は、ブックのデフォルトのスタイルを使用して表示されます。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLCell.Hyperlink">
+      <summary>セルがクリックされたときの動作を指定する文字列を取得または設定します。</summary>
+      <remarks>
+        <para>Hyperlinks には、クリックしたときにブラウザウィンドウを開き指定したサイト(たとえば "http://www.grapecity.com")(e.g. "http://www.componentone.com")に移動する URL が含まれます。またファイル タイプ (たとえば "readme.doc") にしたがってアプリケーションを開始するためのファイルへの参照を含む場合もあります。さらに e-メールの送信 (たとえば "mailto:sales@grapecity.com")にも使用されます。</para>
+        <para>
+          各セルにはハイパーリンクと値を含むことができます。値のないハイパーリンクをアサインした場合には (たとえば
+          <see cref="P:C1.C1Excel.XLCell.Value" />== null)、ハイパーリンクのテキストが自動的にセルの値としてアサインされます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLCell.Formula">
+      <summary>セルの数式を指定する文字列を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCell.Text">
+      <summary>現在のセル値の文字列表現を取得します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLReferenceMode">
+      <summary>参照形式。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReferenceMode.R1C1">
+      <summary>R1C1 スタイル。数式のデフォルトです。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReferenceMode.A1">
+      <summary>A1 スタイル。スプレッドシートのデフォルトです。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLReferenceType">
+      <summary>参照タイプ。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReferenceType.Absolute">
+      <summary>絶対座標。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReferenceType.Relative">
+      <summary>相対座標。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLRangeType">
+      <summary>セル範囲の種類。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Default">
+      <summary>デフォルトのセル範囲。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Indirect">
+      <summary>Indirectのセル範囲。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Offset">
+      <summary>Offsetのセル範囲。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Name">
+      <summary>名前付き範囲。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Text">
+      <summary>テキスト範囲。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLRangeType.Formula">
+      <summary>数式の範囲。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLCellRangeCollection">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />上の
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Clear">
+      <summary>
+        コレクションからすべての
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを削除します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Contains(C1.C1Excel.XLCellRange)">
+      <summary>
+        コレクションが指定した
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを含むかどうかチェックします。
+      </summary>
+      <param name="cr">
+        <see cref="T:C1.C1Excel.XLCellRange" />検索するオブジェクト。
+      </param>
+      <returns>コレクションが指定した範囲を含む場合は True。それ以外は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.IndexOf(C1.C1Excel.XLCellRange)">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトの位置を取得します。
+      </summary>
+      <param name="cr">
+        <see cref="T:C1.C1Excel.XLCellRange" />検索するオブジェクト。
+      </param>
+      <returns>コレクション内のオブジェクトの位置。オブジェクトがコレクションのメンバーではない場合は -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Remove(C1.C1Excel.XLCellRange)">
+      <summary>
+        コレクションから指定した
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを削除します。
+      </summary>
+      <param name="cr">
+        <see cref="T:C1.C1Excel.XLCellRange" />コレクションから削除するオブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.RemoveAt(System.Int32)">
+      <summary>
+        コレクションから指定した位置の
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを削除します。
+      </summary>
+      <param name="index">コレクションから削除するオブジェクトのインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Add(C1.C1Excel.XLCellRange)">
+      <summary>
+        コレクションに
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを追加します。
+      </summary>
+      <param name="cr">
+        <see cref="T:C1.C1Excel.XLCellRange" />コレクションに追加するオブジェクト。
+      </param>
+      <returns>コレクションへの追加が成功した場合、オブジェクトへの参照。 コレクションへの追加ができなかった場合（コレクション内の既存のセル範囲と重なっている場合など）、Null を返します。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Add(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを作成し、コレクションに追加します。
+      </summary>
+      <param name="rowIndex">セル範囲の上部の行のインデックス。</param>
+      <param name="colIndex">セル範囲の左端の列のインデックス。</param>
+      <param name="rowCount">セル範囲の行数。</param>
+      <param name="colCount">セル範囲の列数。</param>
+      <returns>コレクションへの追加が成功した場合、オブジェクトへの参照。 コレクションへの追加ができなかった場合（コレクション内の既存のセル範囲と重なっている場合など）、Null を返します。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRangeCollection.Insert(System.Int32,C1.C1Excel.XLCellRange)">
+      <summary>
+        コレクションの指定した位置に
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">オブジェクトを挿入する位置。</param>
+      <param name="cr">コレクションに挿入するオブジェクト。</param>
+      <returns>コレクションへの追加が成功した場合、オブジェクトへの参照。 コレクションへの追加ができなかった場合（コレクション内の既存のセル範囲と重なっている場合など）、Null を返します。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRangeCollection.Count">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトの数を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRangeCollection.Sheet">
+      <summary>
+        コレクションを所有する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRangeCollection.Book">
+      <summary>
+        親
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRangeCollection.ActiveIndex">
+      <summary>コレクション内のアクティブなセル範囲のインデックスを設定または取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRangeCollection.Item(System.Int32)">
+      <summary>
+        コレクション内の指定した位置の
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLCellRange">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLCell" />オブジェクトの範囲を表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor">
+      <summary>
+        空の範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを生成します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        指定した範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを生成します。
+      </summary>
+      <param name="rowFrom">セル範囲の上部の行。</param>
+      <param name="rowTo">セル範囲の下部の行。</param>
+      <param name="colFrom">セル範囲の左端の列。</param>
+      <param name="colTo">セル範囲の右端の列。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(C1.C1Excel.XLSheet,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを作成します。
+      </summary>
+      <param name="sheet">
+        このセル範囲の
+        <see cref="T:C1.C1Excel.XLSheet" />。
+      </param>
+      <param name="rowFrom">範囲の上端の行。</param>
+      <param name="rowTo">範囲の下端の行。</param>
+      <param name="colFrom">範囲の左端の列。</param>
+      <param name="colTo">範囲の右端の列。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(C1.C1Excel.XLSheet,System.Int32,System.Int32,System.Int32,System.Int32,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを作成します。
+      </summary>
+      <param name="sheet">
+        このセル範囲の
+        <see cref="T:C1.C1Excel.XLSheet" />。
+      </param>
+      <param name="rowFrom">範囲の上端の行。</param>
+      <param name="rowTo">範囲の下端の行。</param>
+      <param name="colFrom">範囲の左端の列。</param>
+      <param name="colTo">範囲の右端の列。</param>
+      <param name="rowFromRef">範囲の上端行の参照タイプ。</param>
+      <param name="rowToRef">範囲の下端行の参照タイプ。</param>
+      <param name="colFromRef">範囲の左端列の参照タイプ。</param>
+      <param name="colToRef">範囲の右端列の参照タイプ。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(C1.C1Excel.XLSheet,System.Int32,System.Int32,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを作成します。
+      </summary>
+      <param name="ws">
+        範囲の
+        <see cref="T:C1.C1Excel.XLSheet" />。
+      </param>
+      <param name="row">１つのセルから成るセル範囲の行。</param>
+      <param name="col">１つのセルから成るセル範囲の列。</param>
+      <param name="rowRef">行の参照タイプ。</param>
+      <param name="colRef">列の参照タイプ。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType,C1.C1Excel.XLReferenceType)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトのインスタンスを作成します。
+      </summary>
+      <param name="sheetFrom">
+        範囲の
+        <see cref="T:C1.C1Excel.XLSheet" />の最初のインデックス。
+      </param>
+      <param name="sheetTo">
+        範囲の
+        <see cref="T:C1.C1Excel.XLSheet" />の最後のインデックス。
+      </param>
+      <param name="rowFrom">範囲の上端の行。</param>
+      <param name="rowTo">範囲の下端の行。</param>
+      <param name="colFrom">範囲の左端の列。</param>
+      <param name="colTo">範囲の右端の列。</param>
+      <param name="rowFromRef">範囲の上端行の参照タイプ。</param>
+      <param name="rowToRef">範囲の下端行の参照タイプ。</param>
+      <param name="colFromRef">範囲の左端列の参照タイプ。</param>
+      <param name="colToRef">範囲の右端列の参照タイプ。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(C1.C1Excel.XLSheet,System.String)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトの インスタンス（空の範囲）を作成します。
+      </summary>
+      <param name="sheet">範囲のオーナーシート。</param>
+      <param name="reference">指定された範囲のシートなしのテキスト表現。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.#ctor(C1.C1Excel.C1XLBook,System.String)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトの インスタンス（空の範囲）を作成します。
+      </summary>
+      <param name="book">範囲のオーナーワークブック。</param>
+      <param name="reference">指定された範囲のテキスト表現。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.Clone">
+      <summary>セル範囲のコピーを作成します。</summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.ToString">
+      <summary>範囲を表す参照文字列を返します。</summary>
+      <returns>範囲を表す参照文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.Contains(C1.C1Excel.XLSheet,System.Int32,System.Int32)">
+      <summary>範囲に特定のセルが含まれるかどうかを判定します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.Contains(C1.C1Excel.XLCellRange)">
+      <summary>範囲に特定の範囲が含まれるかどうかを判定します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCellRange.Intersects(C1.C1Excel.XLCellRange)">
+      <summary>セル範囲が他の範囲と交わるかどうか決定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.IsEmpty">
+      <summary>範囲が空であるかどうか決定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RowFrom">
+      <summary>セル範囲の上部の行のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.ColumnFrom">
+      <summary>セル範囲の左端の列のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RowCount">
+      <summary>セル範囲の上部の行のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.ColumnCount">
+      <summary>セル範囲の列数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.SheetCount">
+      <summary>範囲内のシート数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RowTo">
+      <summary>セル範囲の下部の行のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.ColumnTo">
+      <summary>セル範囲の右端の列のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RowFromRef">
+      <summary>範囲の上端の行の参照タイプを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.ColumnFromRef">
+      <summary>範囲の左端の列の参照タイプを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RowToRef">
+      <summary>範囲の下端の行の参照タイプを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.ColumnToRef">
+      <summary>範囲の右端の列の参照タイプを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.Book">
+      <summary>
+        親
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.RangeType">
+      <summary>このセル範囲のタイプ（Default／Indirect／Offset）を設定または取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.SheetFrom">
+      <summary>範囲内の最初のシートのインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.SheetTo">
+      <summary>範囲内の最後のシートのインデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.Sheets">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトの配列を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.Value">
+      <summary>このセル範囲に関連付けられた複素数値を取得または設定します。</summary>
+      <remarks>この値は、文字列、数値、ブール値、DateTime、または null オブジェクトを含むことができます。その他の型のオブジェクトを Excel ファイルに保存することはできません。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLCellRange.Style">
+      <summary>
+        このセル範囲に関連付けられた
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを取得または設定します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLCommentCollection">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトのコレクションを表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Clear">
+      <summary>
+        コレクションからすべての
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを削除します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Contains(C1.C1Excel.XLComment)">
+      <summary>
+        コレクションに特定の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトが含まれるかどうかをチェックします。
+      </summary>
+      <param name="comment">
+        検索対象の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクト。
+      </param>
+      <returns>コレクションがコメントを含む場合は true、それ以外の場合は false。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.IndexOf(C1.C1Excel.XLComment)">
+      <summary>
+        コレクション内の特定の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトのインデックスを取得します。
+      </summary>
+      <param name="comment">
+        検索対象の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクト。
+      </param>
+      <returns>コレクション内のオブジェクトの位置、またはオブジェクトがそのコレクションのメンバでない場合は -１です。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Remove(C1.C1Excel.XLComment)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトをコレクションから削除します。
+      </summary>
+      <param name="comment">
+        コレクションから削除する
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.RemoveAt(System.Int32)">
+      <summary>
+        特定の位置の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトをコレクションから削除します。
+      </summary>
+      <param name="index">コレクションから削除するオブジェクトのインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Add(C1.C1Excel.XLComment)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトをコレクションの末尾に追加します。
+      </summary>
+      <param name="comment">
+        コレクションに追加する
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクト。
+      </param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のコメントと重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Add(System.Int32,System.Int32,System.String)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="rowIndex">コメント内の最初の行のインデックス。</param>
+      <param name="colIndex">コメント内の最初の列のインデックス。</param>
+      <param name="author">コメントの作者。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のコメントと重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Add(System.Int32,System.Int32,System.String,System.String)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="rowIndex">コメント内の最初の行のインデックス。</param>
+      <param name="colIndex">コメント内の最初の列のインデックス。</param>
+      <param name="author">コメントの作者。</param>
+      <param name="text">コメントのコンテキスト。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のコメントと重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Add(System.Int32,System.Int32,System.String,System.String,System.Boolean)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="rowIndex">コメント内の最初の行のインデックス。</param>
+      <param name="colIndex">コメント内の最初の列のインデックス。</param>
+      <param name="author">コメントの作者。</param>
+      <param name="text">コメントのテキスト。</param>
+      <param name="toRtf">
+        <paramref name="author" />と
+        <paramref name="text" />を RTF 形式に変換するかどうかを示すフラグ。
+      </param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のコメントと重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLCommentCollection.Insert(System.Int32,C1.C1Excel.XLComment)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを コレクション内の特定の位置に挿入します。
+      </summary>
+      <param name="index">オブジェクトが挿入される位置。</param>
+      <param name="comment">コレクションに挿入するオブジェクト。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のコメントと重なるため）。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLCommentCollection.Count">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトの数を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCommentCollection.Sheet">
+      <summary>
+        コレクションを所有する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLCommentCollection.Item(System.Int32)">
+      <summary>
+        コレクション内の指定された位置の
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLComment">
+      <summary>セルに関連付けられたコメントを表します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLComment.#ctor(System.Int32,System.Int32,System.String,System.String)">
+      <summary>
+        指定された範囲を含む
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトの インスタンスを作成します。
+      </summary>
+      <param name="row">コメントが適用される行。</param>
+      <param name="col">コメントが適用される列。</param>
+      <param name="author">コメント作者。</param>
+      <param name="text">コメント内容。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLComment.Clone">
+      <summary>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLComment" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.IsShow">
+      <summary>コメントの表示フラグを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.RowIndex">
+      <summary>コメントの行インデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.ColumnIndex">
+      <summary>コメントの列インデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.Author">
+      <summary>このコメントの作者を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.Sheet">
+      <summary>
+        親
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.Cell">
+      <summary>このコメントのセルへの参照を取得します。</summary>
+      <remarks>
+        コメント座標の
+        <see cref="T:C1.C1Excel.XLCell" />オブジェクトへの参照。指定された位置にセルがない場合は null。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLComment.TextBox">
+      <summary>
+        <see cref="T:C1.C1Excel.XLCommentShape" />オブジェクトへの参照をコンテキスト付きで取得します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLUnderlineStyle">
+      <summary>Excel フォントの下線スタイル。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLUnderlineStyle.None">
+      <summary>下線なし。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLUnderlineStyle.Single">
+      <summary>一重下線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLUnderlineStyle.Double">
+      <summary>二重下線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLUnderlineStyle.SingleAccounting">
+      <summary>一重下線（会計）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLUnderlineStyle.DoubleAccounting">
+      <summary>二重下線（会計）。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLFontScript">
+      <summary>Excel フォントの上付き/下付き文字スタイル。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLFontScript.None">
+      <summary>標準。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLFontScript.Superscript">
+      <summary>上付き文字。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLFontScript.Subscript">
+      <summary>下付き文字。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingType">
+      <summary>条件付き書式設定の種類。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.CellIs">
+      <summary>条件付き書式設定の種類は「セルの値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Expression">
+      <summary>条件付き書式設定の種類は「数式」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.EndsWith">
+      <summary>条件付き書式設定の種類は「末尾の一致」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.ContainsText">
+      <summary>条件付き書式設定の種類は「含まれる文字列」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.TimePeriod">
+      <summary>条件付き書式設定の種類は「日付」（今日、昨日など）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.DuplicateValues">
+      <summary>条件付き書式設定の種類は「重複する値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Top10">
+      <summary>条件付き書式設定の種類は「上位 n 項目の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Top10Percent">
+      <summary>条件付き書式設定の種類は「上位 n ％の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Bottom10">
+      <summary>条件付き書式設定の種類は「下位 n 項目の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Bottom10Percent">
+      <summary>条件付き書式設定の種類は「下位 n ％の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.AboveAverage">
+      <summary>条件付き書式設定の種類は「平均値より上の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.BelowAverage">
+      <summary>条件付き書式設定の種類は「平均値より下の値」。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingType.Unknown">
+      <summary>条件付き書式設定の種類は「不明」。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingOperator">
+      <summary>条件付き書式設定の演算子（セルタイプの書式設定の場合に適用可能）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.NoComparision">
+      <summary>条件付き書式設定なし。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.Between">
+      <summary>「値が指定の範囲内にある」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.NotBetween">
+      <summary>「値が指定の範囲外にある」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.Equal">
+      <summary>「値が指定の値に等しい」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.NotEqual">
+      <summary>「値が指定の値と等しくない」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.GreaterThan">
+      <summary>「値が指定の値より大きい（GT）」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.LessThan">
+      <summary>「値が指定の値より小さい（LT）」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.GreaterThanOrEqual">
+      <summary>「値が指定の値以上である（GE）」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLConditionalFormattingOperator.LessThanOrEqual">
+      <summary>「値が指定の値以下である（LE）」場合の条件付き書式設定。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLRange">
+      <summary>単純なセル範囲。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.#ctor(System.Int32,System.Int32)">
+      <summary>範囲の初期化。</summary>
+      <param name="row">セル内の行のインデックス。</param>
+      <param name="col">セル内の列のインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>範囲の初期化。</summary>
+      <param name="rowFirst">範囲内の上端の行のインデックス。</param>
+      <param name="colFirst">範囲内の左端の列のインデックス。</param>
+      <param name="rowLast">範囲内の下端の行のインデックス。</param>
+      <param name="colLast">範囲内の右端の列のインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.Clone">
+      <summary>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLRange" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLRange" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.GetHashCode">
+      <summary></summary>
+      <returns></returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.Equals(System.Object)">
+      <summary></summary>
+      <param name="obj"></param>
+      <returns></returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.ToString">
+      <summary></summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.C1Excel.XLRange.RowFirst">
+      <summary>範囲内の上端の行のインデックスを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRange.ColumnFirst">
+      <summary>範囲内の左端の列のインデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRange.RowLast">
+      <summary>範囲内の下端の行のインデックスを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRange.ColumnLast">
+      <summary>範囲内の右端の列のインデックスを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLFontFormatting">
+      <summary>フォントの書式設定。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLFontFormatting.#ctor">
+      <summary>フォントの書式設定の初期化。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.FontHeight">
+      <summary>この書式設定のフォントの高さを取得または設定します（自動高さ設定の場合は -1）。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.Escapement">
+      <summary>この書式設定のエスケープメントの種類を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.Underline">
+      <summary>この書式設定の下線の種類を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.FontWeight">
+      <summary>この書式設定のフォントウェイトを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.FontColor">
+      <summary>この書式設定のフォントの色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.Bold">
+      <summary>この書式設定のフォントの太字属性を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.Italic">
+      <summary>この書式設定のフォントの斜体属性を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLFontFormatting.Strikeout">
+      <summary>この書式設定のフォントの取り消し線属性を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLBorderFormatting">
+      <summary>罫線の書式設定。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLBorderFormatting.#ctor">
+      <summary>罫線の書式設定の初期化。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.LeftBorder">
+      <summary>この書式設定の左罫線を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.RightBorder">
+      <summary>この書式設定の右罫線を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.TopBorder">
+      <summary>この書式設定の上罫線を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.BottomBorder">
+      <summary>この書式設定の下罫線を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.LeftColor">
+      <summary>この書式設定の左罫線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.RightColor">
+      <summary>この書式設定の右罫線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.TopColor">
+      <summary>この書式設定の上罫線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.BottomColor">
+      <summary>この書式設定の下罫線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.Diagonal">
+      <summary>表示する斜線（なし、左下がり、右下がり）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.DiagonalStyle">
+      <summary>この書式設定の斜線の種類を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLBorderFormatting.DiagonalColor">
+      <summary>この書式設定の斜め罫線の色を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLPatternFormatting">
+      <summary>パターンの書式設定。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLPatternFormatting.#ctor">
+      <summary>パターンの書式設定の初期化。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPatternFormatting.Pattern">
+      <summary>この書式設定の塗りつぶしパターンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPatternFormatting.BackColor">
+      <summary>この書式設定の塗りつぶしの背景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPatternFormatting.ForeColor">
+      <summary>この書式設定の塗りつぶしの前景色を取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingRangeCollection">
+      <summary>条件付き書式設定範囲コレクション。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLConditionalFormattingRangeCollection.ToString">
+      <summary></summary>
+      <returns></returns>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRangeCollection.ConditionalFormatting">
+      <summary>条件付き書式設定オブジェクトを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRangeCollection.ToughRecalc">
+      <summary>セルの外観がかなりの処理を必要とするかどうかを決定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingRule">
+      <summary>条件付き書式設定ルール。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLConditionalFormattingRule.#ctor">
+      <summary>条件付き書式設定ルールオブジェクトの初期化。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLConditionalFormattingRule.Clone">
+      <summary>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLConditionalFormattingRule" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLConditionalFormattingRule" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Type">
+      <summary>条件付き書式設定の種類を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Operator">
+      <summary>条件付き書式設定演算子を取得または設定します（セルタイプの書式の場合に適用可能）。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Priority">
+      <summary>条件付き書式設定の優先度を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Font">
+      <summary>条件付き書式設定のテキストのフォントと前景色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Border">
+      <summary>条件付き書式設定の罫線と斜線を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Pattern">
+      <summary>条件付き書式設定のパターンを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.FirstFormula">
+      <summary>この条件の１番目の式を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.SecondFormula">
+      <summary>この条件の２番目の式を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.Parameter">
+      <summary>この条件のパラメータオブジェクトのスタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRule.IsEmpty">
+      <summary>IsEmpty フラグを取得します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingRuleCollection">
+      <summary>条件付き書式設定ルールコレクション。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingRuleCollection.ConditionalFormatting">
+      <summary>親の条件付き書式設定オブジェクトを取得します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormatting">
+      <summary>条件付き書式設定。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLConditionalFormatting.#ctor">
+      <summary>条件付き書式設定オブジェクトの初期化。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLConditionalFormatting.Clone">
+      <summary>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLConditionalFormatting" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLConditionalFormatting" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormatting.Rules">
+      <summary>条件付き書式設定ルールのコレクション。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormatting.Ranges">
+      <summary>条件付き書式設定範囲のコレクション。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLConditionalFormattingCollection">
+      <summary>条件付き書式設定コレクション。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLConditionalFormattingCollection.Sheet">
+      <summary>条件付き書式設定オブジェクトを取得します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.Strings">
+      <summary>デザイナによって使用される UI 文字列を含む静的クラス。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLNamedRangeCollection">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />上の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの コレクションを表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Clear">
+      <summary>
+        コレクションからすべての
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを削除します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Contains(C1.C1Excel.XLNamedRange)">
+      <summary>
+        コレクションに特定の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトが含まれるかどうかをチェックします。
+      </summary>
+      <param name="namedRange">
+        検索対象の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクト。
+      </param>
+      <returns>コレクションにその範囲が含まれる場合は True、その他の場合は False です。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Contains(System.String)">
+      <summary>
+        コレクションに特定の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトが含まれるかどうかをチェックします。
+      </summary>
+      <param name="name">
+        検索する
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <returns>コレクションにその範囲が含まれる場合は True、その他の場合は False です。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.IndexOf(C1.C1Excel.XLNamedRange)">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの位置を取得します。
+      </summary>
+      <param name="nr">
+        検索する
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクト。
+      </param>
+      <returns>コレクション内のオブジェクトの位置、またはオブジェクトがそのコレクションのメンバでない場合は -１です。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.IndexOf(System.String)">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの位置を取得します。
+      </summary>
+      <param name="name">
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <returns>コレクション内のオブジェクトの位置、またはオブジェクトがそのコレクションのメンバでない場合は -１です。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Remove(C1.C1Excel.XLNamedRange)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトをコレクションから削除します。
+      </summary>
+      <param name="nr">
+        コレクションから削除する
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクト。
+      </param>
+      <returns>オブジェクトが削除された場合は true、コレクションのメンバでなかった場合は false。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Remove(System.String)">
+      <summary>
+        指定された名前の
+        <see cref="T:C1.C1Excel.XLNamedRange" />をコレクションから削除します。
+      </summary>
+      <param name="name">コレクションから削除する範囲の名前（大文字と小文字は区別されません）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.RemoveAt(System.Int32)">
+      <summary>
+        特定の位置の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトをコレクションから削除します。
+      </summary>
+      <param name="index">コレクションから削除するオブジェクトのインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(C1.C1Excel.XLNamedRange)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトをコレクションの末尾に追加します。
+      </summary>
+      <param name="namedRange">
+        コレクションに追加する
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクト。
+      </param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(System.String,C1.C1Excel.XLCellRange)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="name">
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <param name="cellRange">
+        名前付き範囲に含める
+        <see cref="T:C1.C1Excel.XLCellRange" />。
+      </param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(System.String,C1.C1Excel.XLCellRange[])">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="name">作成する名前付き範囲の名前。</param>
+      <param name="cellRanges">
+        名前付き範囲に含める
+        <see cref="T:C1.C1Excel.XLCellRange" />の配列。
+      </param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、 コレクション内にすでに存在している別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(System.String,C1.C1Excel.XLSheet,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="name">
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <param name="sheet">範囲のワークシート。</param>
+      <param name="rowIndex">セル範囲の上端の行のインデックス。</param>
+      <param name="colIndex">セル範囲の左端の列のインデックス。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="name">
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <param name="firstSheetIndex">
+        含める最初の
+        <see cref="T:C1.C1Excel.XLSheet" />のインデックス。
+      </param>
+      <param name="lastSheetIndex">
+        含める最後の
+        <see cref="T:C1.C1Excel.XLSheet" />のインデックス。
+      </param>
+      <param name="rowIndex">セル範囲の上端の行のインデックス。</param>
+      <param name="colIndex">セル範囲の左端の列のインデックス。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Add(System.String,C1.C1Excel.XLSheet,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成して、コレクションの末尾に追加します。
+      </summary>
+      <param name="name">
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの名前。
+      </param>
+      <param name="sheet">範囲のワークシート。</param>
+      <param name="rowIndex">セル範囲の上端の行のインデックス。</param>
+      <param name="colIndex">セル範囲の左端の列のインデックス。</param>
+      <param name="rowCount">セル範囲内の行数。</param>
+      <param name="colCount">セル範囲内の列数。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRangeCollection.Insert(System.Int32,C1.C1Excel.XLNamedRange)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトをコレクション内の 特定の位置に挿入します。
+      </summary>
+      <param name="index">オブジェクトが挿入される位置。</param>
+      <param name="namedRange">コレクションに挿入する名前付き範囲。</param>
+      <returns>コレクションへの追加が成功した場合はオブジェクトへの参照、 失敗した場合は null です（通常、コレクション内にすでに存在している 別のセル範囲と重なるため）。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRangeCollection.Count">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトの数を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRangeCollection.Book">
+      <summary>
+        親
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRangeCollection.Item(System.Int32)">
+      <summary>
+        指定されたインデックスの
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトへの参照を返します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRangeCollection.Item(System.String)">
+      <summary>
+        指定された名前の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトへの参照を返します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLNamedRange">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLCell" />オブジェクトの範囲を表します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRange.Clone">
+      <summary>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRange.Contains(C1.C1Excel.XLSheet,System.Int32,System.Int32)">
+      <summary>範囲に特定のセルが含まれるかどうかを判定します。</summary>
+      <param name="sheet">セルを含むワークシート。</param>
+      <param name="row">セルの行インデックス。</param>
+      <param name="col">セルの列インデックス。</param>
+      <returns>現在の名前付き範囲に指定されたセルが含まれる場合は true、そうでない場合は false。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.IsEmpty">
+      <summary>範囲が空であるかどうかを判定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.IsNameOnly">
+      <summary>現在の名前付き範囲に有効な名前があるが 範囲が定義されていない状態かどうかを判定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.IsBuiltInName">
+      <summary>範囲が組み込みの名前を持つかどうかを判定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.Book">
+      <summary>
+        親
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.CellRange">
+      <summary>
+        参照の
+        <see cref="T:C1.C1Excel.XLNamedRange" />オブジェクトを取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.CellRanges">
+      <summary>
+        現在の名前付き範囲に含まれるセルを決定する
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトの配列への参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.Name">
+      <summary>名前付き範囲の名前を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.Comment">
+      <summary>この名前付き範囲のコメントテキストを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLPrintSettings">
+      <summary>
+        印刷のための
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトのオプションと設定を提供します。
+      </summary>
+      <remarks>
+        <para>
+          設定は各シートに適用され、シートの
+          <see cref="P:C1.C1Excel.XLSheet.PrintSettings" />プロパティを通してアクセスできます。
+        </para>
+        <para>
+          <see cref="T:C1.C1Excel.C1XLBook" />は印刷機能を提供しないことに注意してください。この設定は Excel から印刷するときに使用されます。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLPrintSettings.Clone">
+      <summary>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLPrintSettings" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLPrintSettings" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLPrintSettings.#ctor">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPrintSettings" />クラスの新規インスタンスを生成します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.Header">
+      <summary>シートを印刷するときのページヘッダとして表示される文字列を取得または設定します。</summary>
+      <remarks>
+        <para>ヘッダ文字列には、ページ数のプレースホルダ、現在の日付、テキスト書式の属性など特殊なコマンドを含めることができます。これらのフィールドのほとんどは ("&amp;") で始まる一文字を用いて表示されます。</para>
+        <para>ページヘッダは、左、中央、右の３つのセクションに分かれます。各セクションは特殊なコマンド ("&amp;L", "&amp;C", and "&amp;R") から始まります。すべてのテキストとコマンドの次に、選択したセクション部分が続きます。</para>
+        <para>次のコマンドが利用できます：</para>
+        <para>&amp;L 左のセクションの開始</para>
+        <para>&amp;C 中央のセクションの開始</para>
+        <para>&amp;R 右のセクションの開始</para>
+        <para>&amp;P 現在のページ番号</para>
+        <para>&amp;N ページ数</para>
+        <para>&amp;D 現在の日付</para>
+        <para>&amp;T 現在の時刻</para>
+        <para>&amp;A シート名</para>
+        <para>&amp;F パスなしのファイル名</para>
+        <para>&amp;Z ファイル名なしのパスe</para>
+        <para>&amp;G 画像 (ファイル名)</para>
+        <para>&amp;B 太字</para>
+        <para>&amp;I 斜体</para>
+        <para>&amp;U 下線</para>
+        <para>&amp;E 二重下線</para>
+        <para>&amp;S 取り消し線</para>
+        <para>&amp;X 上付き文字</para>
+        <para>&amp;Y 下付き文字</para>
+        <para>&amp;"[fontname]" 新規フォントの設定</para>
+        <para>&amp;"[fontname,fontstyle]" 指定したスタイルの新規フォントの設定。スタイルは "標準"、"太字"、"斜体"、"太字斜体"など。</para>&amp;[fontheight] フォントサイズをポイントで指定
+      </remarks>
+      <example>
+        下のコードは、左、中央、および右の部分を含むヘッダを作成します。
+        <code><![CDATA[
+          PrintSettings ps = sheet.PrintSettings;
+          ps.Header = "&LHeader Left&CHeader Center&RHeader Right";
+          ]]></code></example>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.Footer">
+      <summary>シートの印刷時にページフッタとして表示する文字列を取得または設定します。</summary>
+      <remarks>
+        振った文字列はヘッダ文字列と同じ構造を持ち、コマンドを埋むことができます。詳細は
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティを参照してください。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.CenterHorizontal">
+      <summary>印刷時にシートをページの中央揃え（水平方向）にするかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.CenterVertical">
+      <summary>印刷時にシートをページの中央揃え（垂直方向）にするかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginLeft">
+      <summary>左マージンを取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginRight">
+      <summary>右マージンを取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginTop">
+      <summary>上部マージンをインチ単位で取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginBottom">
+      <summary>下部マージンをインチ単位で取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginHeader">
+      <summary>ヘッダのマージンをインチ単位で取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.MarginFooter">
+      <summary>フッタのマージンをインチ単位で取得または設定します。負の値を設定するとデフォルトマージンを使用します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.PrintHeaders">
+      <summary>行または列のヘッダ（行数と列文字を表す領域）を印刷するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.PrintGridlines">
+      <summary>グリッド線を印刷するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.PaperKind">
+      <summary>シートの印刷時に用紙サイズを設定するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.ScalingFactor">
+      <summary>シートの印刷時にスケーリングファクタ（パーセント）を使用するかどうかを取得または設定します。</summary>
+      <remarks>
+        <see cref="P:C1.C1Excel.XLPrintSettings.ScalingFactor" />プロパティは、自動的に
+        <see cref="P:C1.C1Excel.XLPrintSettings.AutoScale" />プロパティを False に設定し、スケーリングファクタを使用し、
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesAcross" />および
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesDown" />を無視するように設定します。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.AutoScale">
+      <summary>印刷の出力に用いるスケーリング モードを取得または設定します。</summary>
+      <remarks>
+        <para>
+          <see cref="P:C1.C1Excel.XLPrintSettings.AutoScale" />を True に設定すると、印刷されるシートは、自動的に
+          <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesAcross" />および
+          <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesDown" />プロパティで設定されたページ数に適合するように設定されます。
+        </para>
+        <para>
+          <see cref="P:C1.C1Excel.XLPrintSettings.AutoScale" />を False に設定すると、印刷されるシートは、自動的に
+          <see cref="P:C1.C1Excel.XLPrintSettings.ScalingFactor" />プロパティの値に従ってスケーリングされます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.StartPage">
+      <summary>シートの印刷時に使用する開始ページ番号を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FitPagesAcross">
+      <summary>シートを、このページ数に合うように適合させます（0の場合、必要なだけ使用されます）。</summary>
+      <remarks>
+        C1Excel をページの印刷モードに合うよう適合させ、
+        <see cref="P:C1.C1Excel.XLPrintSettings.ScalingFactor" />プロパティの値は無視されます。
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesAcross" />または
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesDown" />プロパティを設定すると、自動的に
+        <see cref="P:C1.C1Excel.XLPrintSettings.AutoScale" />は True になり、指定したページ数に基づいてスケーリングファクタが計算され、
+        <see cref="P:C1.C1Excel.XLPrintSettings.ScalingFactor" />プロパティの値を無視するように設定されます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FitPagesDown">
+      <summary>シートを、このページ送りの数にあうよう適合させます（0の場合、必要なだけ使用されます）。</summary>
+      <remarks>
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesAcross" />または
+        <see cref="P:C1.C1Excel.XLPrintSettings.FitPagesDown" />プロパティを True 設定すると、指定したページ数に基づいて自動的にスケーリングファクタが計算され、
+        <see cref="P:C1.C1Excel.XLPrintSettings.ScalingFactor" />プロパティの値を無視するよう設定されます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.Copies">
+      <summary>印刷枚数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.PrintPagesInRows">
+      <summary>１ページに印刷する行（横方向優先）または列（下方向優先）の数を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.Landscape">
+      <summary>シートを横向きで印刷するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.BlackAndWhite">
+      <summary>シートを白黒モードで印刷するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.DraftQuality">
+      <summary>シートを高品質モードで印刷するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.HeaderPictureLeft">
+      <summary>
+        ヘッダの左部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.HeaderPictureCenter">
+      <summary>
+        ヘッダの中央部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.HeaderPictureRight">
+      <summary>
+        ヘッダの右部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FooterPictureLeft">
+      <summary>
+        フッタの左部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FooterPictureCenter">
+      <summary>
+        フッタの中央部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FooterPictureRight">
+      <summary>
+        フッタの右部分の
+        <see cref="T:System.Drawing.Image" />または
+        <see cref="T:C1.C1Excel.XLPictureShape" />を取得または設定します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLRowCollection">
+      <summary>
+        各
+        <see cref="T:C1.C1Excel.XLSheet" />内の個別行を示す
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトのコレクションを表します。
+      </summary>
+      <remarks>コレクションには、コレクションからの行のカウント、列挙、追加、および削除を実行するメソッドが含まれます。</remarks>
+      <example>
+        シートのインデクサを用いると、行が自動的に生成できることに注意してください。たとえば次のコードでは、(3,3) の座標のセルを取得し、4つの行と4つの列が自動生成されます。
+        <code><![CDATA[
+          C1XLBook book = new C1XLBook();
+          sheet = book.Sheets[0];
+          XLCell cell   = sheet[3,3]; // 4行4列を作成します
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Clear">
+      <summary>コレクションからすべてのアイテムを削除します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Add">
+      <summary>
+        新規
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを生成し、コレクションに追加します。
+      </summary>
+      <returns>
+        新規
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトへの参照。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Add(C1.C1Excel.XLRow)">
+      <summary>
+        コレクションに
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを追加します。
+      </summary>
+      <param name="row">コレクションに追加するアイテム。</param>
+      <returns>
+        コレクションに追加されたアイテムへの参照（この場合常に
+        <paramref name="row" />パラメータ）。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Insert(System.Int32)">
+      <summary>
+        新規
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを生成し、指定したコレクションの位置に挿入します。
+      </summary>
+      <param name="index">新規アイテムを挿入する位置。</param>
+      <returns>新規アイテムへの参照。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Contains(C1.C1Excel.XLRow)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLRow" />がコレクションのメンバーであるかどうかを決定します。
+      </summary>
+      <param name="row">検索するアイテム。</param>
+      <returns>コレクションがそのアイテムを含んでいれば True。それ以外の場合は False。.</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.IndexOf(C1.C1Excel.XLRow)">
+      <summary>
+        コレクション内の指定した
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトのインデックスを取得します。
+      </summary>
+      <param name="row">検索するアイテム。</param>
+      <returns>コレクション内のアイテムの位置。アイテムがコレクションのメンバーでない場合は -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.RemoveAt(System.Int32)">
+      <summary>
+        コレクション内で指定した位置にある
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを削除します。
+      </summary>
+      <param name="index">コレクションから削除するアイテムのインデックス。</param>
+      <returns>コレクションから削除されたアイテムへの参照。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Insert(System.Int32,C1.C1Excel.XLRow)">
+      <summary>
+        コレクション内で指定した位置に
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">挿入するアイテムの位置。</param>
+      <param name="row">挿入されるアイテム。</param>
+      <returns>コレクションに挿入されたアイテムへの参照。</returns>
+      <remarks>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトの最大数は 65,536 です。これは Excel による制限です。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLRowCollection.Remove(C1.C1Excel.XLRow)">
+      <summary>
+        コレクションから
+        <see cref="T:C1.C1Excel.XLRow" />を削除します。
+      </summary>
+      <param name="row">コレクションから削除されるアイテム</param>
+      <returns>削除されたアイテムへの参照。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLRowCollection.Book">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRowCollection.Count">
+      <summary>コレクション内のアイテムの数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRowCollection.Sheet">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRowCollection.Item(System.Int32)">
+      <summary>
+        指定したインデックスの
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトへの参照を取得します。
+      </summary>
+      <remarks>
+        インデクサは、必要に応じて指定された位置に新規
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを生成します。null は返りません。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLRowCollection.Frozen">
+      <summary>コレクション内の固定行の数を取得または設定します。</summary>
+      <remarks>固定行はシートの上部に表示され、垂直スクロールはされません。列ヘッダ表示として役立ちます。</remarks>
+    </member>
+    <member name="T:C1.C1Excel.XLColumnCollection">
+      <summary>
+        各
+        <see cref="T:C1.C1Excel.XLSheet" />内の個別列を示す
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトのコレクションを表します。
+      </summary>
+      <remarks>
+        <para>コレクションには、コレクションからの列のカウント、列挙、追加、および削除を実行するメソッドが含まれます。</para>
+        <para>
+          <see cref="T:C1.C1Excel.XLColumn" />オブジェクトには何もデータは含まれません。コレクションから列を削除すると、データは失われます。その後、同じ列をコレクションに再度挿入しても、列はブランクのままです。
+        </para>
+      </remarks>
+      <example>
+        シートのインデクサを用いると、行が自動的に生成できることに注意してください。たとえば次のコードでは、(3,3) の座標のセルを取得し、4つの行と4つの列が自動生成されます。
+        <code><![CDATA[
+          C1XLBook book  = new C1XLBook();
+          XLSheet  sheet = book.Sheets[0];
+          XLCell   cell  = sheet[3,3]; // 4行4列を作成します
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Clear">
+      <summary>コレクションからすべてのアイテムを削除します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Add">
+      <summary>
+        新規
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを生成し、コレクションに追加します。
+      </summary>
+      <returns>
+        新規
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトへの参照。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Add(C1.C1Excel.XLColumn)">
+      <summary>
+        コレクションに
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを追加します。
+      </summary>
+      <param name="col">コレクションに追加するアイテム。</param>
+      <returns>
+        コレクションに追加されたアイテムへのリファレンス（この場合、常に
+        <paramref name="col" />パラメータ）。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Insert(System.Int32)">
+      <summary>
+        新規
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを生成し、コレクション内ので指定された位置に挿入します。
+      </summary>
+      <param name="index">新規アイテムを挿入する位置。</param>
+      <returns>新規アイテムへの参照。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Contains(C1.C1Excel.XLColumn)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLColumn" />がコレクションのメンバーであるかどうかを決定します。
+      </summary>
+      <param name="col">検索するアイテム。</param>
+      <returns>アイテムがコレクションに含まれれば True。それ以外の場合は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.IndexOf(C1.C1Excel.XLColumn)">
+      <summary>
+        コレクション内で指定した
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトのインデックスを取得します。
+      </summary>
+      <param name="col">検索するアイテム。</param>
+      <returns>コレクション内のアイテムの位置。アイテムがコレクションのメンバーでない場合は -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.RemoveAt(System.Int32)">
+      <summary>
+        コレクション内で指定した位置にある
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを削除します。
+      </summary>
+      <param name="index">コレクションから削除するアイテムのインデックス。</param>
+      <returns>コレクションから削除されたアイテムへの参照。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Insert(System.Int32,C1.C1Excel.XLColumn)">
+      <summary>
+        コレクション内で指定した位置に
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">挿入するアイテムの位置。</param>
+      <param name="col">挿入されるアイテム。</param>
+      <returns>コレクションに挿入されたアイテムへの参照。</returns>
+      <remarks>
+        <see cref="T:C1.C1Excel.XLSheet" />内の
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトの最大数は 65,536 です。これは Excel の制限によります。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Insert(System.Int32,C1.C1Excel.XLColumn,C1.C1Excel.XLCell[])">
+      <summary>
+        コレクションの特定の位置に
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">項目を挿入する位置。</param>
+      <param name="col">挿入される項目。</param>
+      <param name="cells">挿入される列のセルの配列。</param>
+      <returns>コレクションに追加された項目への参照。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumnCollection.Remove(C1.C1Excel.XLColumn)">
+      <summary>
+        コレクションから
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを削除します。
+      </summary>
+      <param name="col">コレクションから削除されるアイテム。</param>
+      <returns>コレクションから削除されたアイテムへの参照。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLColumnCollection.Count">
+      <summary>コレクション内のアイテムの数を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumnCollection.Book">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumnCollection.Sheet">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumnCollection.Item(System.Int32)">
+      <summary>
+        指定したインデックスにある
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトへの参照を返します。
+      </summary>
+      <remarks>
+        インデクサは、必要に応じて指定された位置に新規
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを生成します。null は返しません。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLColumnCollection.Frozen">
+      <summary>コレクション内の固定列の数を取得または設定します。</summary>
+      <remarks>固定列はシートの左端に表示され、水平スクロールはされません。行ヘッダ表示として役立ちます。</remarks>
+    </member>
+    <member name="T:C1.C1Excel.XLRow">
+      <summary>ワークシート内の行を表し、行の高さ、スタイル、外観を設定するプロパティを提供します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLRow.#ctor">
+      <summary>
+        <see cref="T:C1.C1Excel.XLRow" />クラスの新規インスタンスを生成します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLRow.Clone">
+      <summary>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLRow" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Visible">
+      <summary>行が表示されるかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.PageBreak">
+      <summary>指定された行の後で強制的に改ページされるかどうかを取得または設定します。</summary>
+      <example>
+        次のコードは、シート上の10行目ごとに強制改ページを挿入し、他のすべての行で改ページをクリアします。
+        <code><![CDATA[
+          C1.C1Excel.XLSheet sheet = c1XLBook1.Sheets[0];
+          for (int r = 0; r < sheet.Rows.Count; r++)
+          {
+            sheet.Rows[r].PageBreak = (r > 0 && r % 10 == 0);
+          }
+          ]]></code></example>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Height">
+      <summary>行の高さを twips 単位で取得または設定します。</summary>
+      <remarks>
+        <para>
+          -1 の場合、行をシートの
+          <see cref="P:C1.C1Excel.XLSheet.DefaultRowHeight" />を用いて表示します。
+        </para>
+        <para>
+          ピクセルと twips 間の変換には、
+          <see cref="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)" />と
+          <see cref="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)" />メソッドを用います。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Style">
+      <summary>
+        行の外観を決定する
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Sheet">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Book">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.IsCustomHeight">
+      <summary>行のユーザー設定高さのフラグを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.IsSubtotal">
+      <summary>行が小計かどうかを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.OutlineLevel">
+      <summary>行の小計アウトラインレベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.Collapsed">
+      <summary>行の縮小フラグを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLColumn">
+      <summary>ワークシート内の列を表し、列の幅、スタイル、外観を設定するプロパティを提供します。</summary>
+      <remarks>
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトにはデータは含まれません。コレクションから列を削除した場合、データは失われます。後に、コレクションに列を再度挿入しても、列は空のままです。
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLColumn.#ctor">
+      <summary>
+        <see cref="T:C1.C1Excel.XLColumn" />クラスの新規インスタンスを生成します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLColumn.Clone">
+      <summary>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを作成します。
+      </summary>
+      <returns>
+        現在のインスタンスのコピーである新しい
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクト。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLColumn.Clone(C1.C1Excel.XLCell[]@)">
+      <summary>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクトを作成します。
+      </summary>
+      <param name="cells">現在のインスタンスのセルの配列。</param>
+      <returns>
+        現在のインスタンスをコピーした新しい
+        <see cref="T:C1.C1Excel.XLColumn" />オブジェクト。
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Visible">
+      <summary>列を表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.PageBreak">
+      <summary>指定された列の後で強制的に改ページされるかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Width">
+      <summary>列の幅を twips 単位で取得または設定します。</summary>
+      <remarks>
+        <para>
+          -1 の場合、列をシートの
+          <see cref="P:C1.C1Excel.XLSheet.DefaultColumnWidth" />を用いて表示します。
+        </para>
+        <para>
+          ピクセルと twips 間の変換には、
+          <see cref="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)" />と
+          <see cref="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)" />メソッドを用います。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Style">
+      <summary>
+        列の外観を決定する
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Sheet">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Book">
+      <summary>
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />オブジェクトへの参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.IsSubtotal">
+      <summary>列が小計かどうかを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.OutlineLevel">
+      <summary>列の小計アウトラインレベルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLColumn.Collapsed">
+      <summary>列の縮小フラグを取得または設定します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.ConsolidationFunction">
+      <summary>シート小計の統合関数を示します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Sum">
+      <summary>Sum 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Count">
+      <summary>Count 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Average">
+      <summary>Average 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Max">
+      <summary>Max 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Min">
+      <summary>Min 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Product">
+      <summary>Product 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.CountNums">
+      <summary>Count Numbers 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.StdDev">
+      <summary>StdDev 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.StdDevp">
+      <summary>StdDevp 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Var">
+      <summary>Var 関数を表します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.ConsolidationFunction.Varp">
+      <summary>Varp 関数を表します。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLSheetCollection">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />内の個別のワークシートを表す
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトのコレクションです。
+      </summary>
+      <remarks>ワークシートからのシートのカウント、列挙、追加、および削除を実行するメソッドおよびプロパティを提供します。</remarks>
+      <example>
+        ブックのシートのコレクションを取得する
+        <see cref="T:C1.C1Excel.C1XLBook" />の
+        <see cref="P:C1.C1Excel.C1XLBook.Sheets" />プロパティを用います。たとえば、以下のコードではブック上の最初のシートへの参照を取得し、シート名を印刷します。
+        <code><![CDATA[
+          C1XLBook book = new C1XLBook();
+          XLSheet sheet = book.Sheets[0];
+          Debug.WriteLine(sheet.Name);
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Add">
+      <summary>
+        新規の
+        <see cref="T:C1.C1Excel.XLSheet" />を生成し、コレクションに追加します。
+      </summary>
+      <returns>
+        新規の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Add(C1.C1Excel.XLSheet)">
+      <summary>
+        コレクションに既存の
+        <see cref="T:C1.C1Excel.XLSheet" />を追加します。
+      </summary>
+      <param name="sheet">コレクションに追加するオブジェクト。</param>
+      <returns>
+        コレクションに追加されたオブジェクトへの参照（この場合、常に
+        <paramref name="sheet" />パラメータ）。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Insert(System.Int32)">
+      <summary>
+        新規の
+        <see cref="T:C1.C1Excel.XLSheet" />を生成し、コレクションの指定した位置に挿入します。
+      </summary>
+      <param name="index">
+        新規の
+        <see cref="T:C1.C1Excel.XLSheet" />を追加する場所のインデックス。
+      </param>
+      <returns>
+        新規の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Contains(C1.C1Excel.XLSheet)">
+      <summary>
+        コレクションが指定した
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを含むかどうかを決定します。
+      </summary>
+      <param name="sheet">コレクション内で検索するオブジェクト。</param>
+      <returns>コレクションがそのオブジェクトを含む場合は True。それ以外の場合は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Contains(System.String)">
+      <summary>
+        コレクションが指定した名前の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを含むかどうかを決定します。
+      </summary>
+      <param name="sheetName">検索するシート名 (大文字／小文字を区別しない)。</param>
+      <returns>
+        コレクションが
+        <paramref name="sheetName" />で指定した名前を持つ
+        <see cref="T:C1.C1Excel.XLSheet" />を含む場合は True。それ以外の場合は False。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.IndexOf(C1.C1Excel.XLSheet)">
+      <summary>
+        コレクション内の指定した
+        <see cref="T:C1.C1Excel.XLSheet" />のインデックスを取得します。
+      </summary>
+      <param name="sheet">検索するオブジェクト。</param>
+      <returns>コレクションのオブジェクトのインデックス。オブジェクトがコレクションのメンバーでなければ -1。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Remove(C1.C1Excel.XLSheet)">
+      <summary>
+        コレクションから
+        <see cref="T:C1.C1Excel.XLSheet" />を削除します。
+      </summary>
+      <param name="sheet">
+        コレクションから削除する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.RemoveAt(System.Int32)">
+      <summary>
+        コレクションから指定したインデックスの
+        <see cref="T:C1.C1Excel.XLSheet" />を削除します。
+      </summary>
+      <param name="index">コレクションから削除するオブジェクトのインデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Clear">
+      <summary>コレクションからすべてのアイテムを削除します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Add(System.String)">
+      <summary>
+        指定した名前の新規
+        <see cref="T:C1.C1Excel.XLSheet" />を生成し、コレクションに追加します。
+      </summary>
+      <param name="name">
+        新規
+        <see cref="T:C1.C1Excel.XLSheet" />の名前。
+      </param>
+      <returns>
+        新規
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトへの参照。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Remove(System.String)">
+      <summary>
+        コレクションから指定した名前の新規
+        <see cref="T:C1.C1Excel.XLSheet" />を削除します。
+      </summary>
+      <param name="name">コレクションから削除するシート名 (大文字／小文字を区別しない)。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.Insert(System.Int32,C1.C1Excel.XLSheet)">
+      <summary>
+        コレクションの指定した位置に
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトを挿入します。
+      </summary>
+      <param name="index">アイテムを挿入する位置。</param>
+      <param name="sheet">
+        コレクションに追加する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクト。
+      </param>
+      <returns>
+        コレクションに追加するオブジェクトへの参照 (この場合、常に
+        <paramref name="sheet" />パラメータ)。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheetCollection.IndexOf(System.String)">
+      <summary>コレクション内で指定した名前を持つシートの位置を取得します。</summary>
+      <param name="name">検索するオブジェクトの名前(大文字／小文字を区別しない)。</param>
+      <returns>検索するオブジェクトの位置。シートがコレクション内で見つからない場合は -1。</returns>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.Book">
+      <summary>
+        コレクションを所有する
+        <see cref="T:C1.C1Excel.C1XLBook" />への参照。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.Count">
+      <summary>
+        コレクション内の
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクトの数を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.FirstIndex">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />ファイルを Excel にロードしたときに 最初に開かれるシートのインデックスを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.SelectedIndex">
+      <summary>
+        <see cref="T:C1.C1Excel.C1XLBook" />が Excel にロードされるとき選択されるシートのインデックスを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.Item(System.Int32)">
+      <summary>
+        コレクション内の指定された位置の
+        <see cref="T:C1.C1Excel.XLSheet" />を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheetCollection.Item(System.String)">
+      <summary>
+        指定した名前を持つ
+        <see cref="T:C1.C1Excel.XLSheet" />を取得します（大文字／小文字を区別しない)。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLSheet">
+      <summary>
+        Excel ワークブック (
+        <see cref="T:C1.C1Excel.C1XLBook" />) 内の個々のワークシートを表します。
+      </summary>
+      <remarks>
+        個々のセル(
+        <see cref="T:C1.C1Excel.XLCell" />) の値を設定または取得し、シート上の
+        <see cref="P:C1.C1Excel.XLSheet.Rows" />および
+        <see cref="P:C1.C1Excel.XLSheet.Columns" />にアクセスします。
+      </remarks>
+      <example>
+        個々のシートを取得するため、
+        <see cref="T:C1.C1Excel.C1XLBook" />の
+        <see cref="P:C1.C1Excel.C1XLBook.Sheets" />インデクサを使用します。たとえば、以下のコードでは最初のシートへの参照を取得し、シート上の行および列の数を印刷します。
+        <code><![CDATA[
+          C1XLBook book = new C1XLBook();
+          XLSheet sheet = book.Sheets[0];
+          Debug.WriteLine("Sheet has {0} rows and {1} columns", 
+            sheet.Rows.Count, sheet.Columns.Count);
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.Clone">
+      <summary>このシートのコピーを生成します。</summary>
+      <returns>
+        このシートと同じ内容、書式を持つ新規
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクト。
+      </returns>
+      <remarks>
+        <para>シートのクローンを生成した後、名前を変更してブックに追加してください（重複する名前は許可されません）。</para>
+        <para>大量の類似したシートを持つブックを生成するアプリケーションで、このメソッドは役立ちます。</para>
+      </remarks>
+      <example>
+        以下のコードでは、テンプレート シートを含むブックをロード、シートを12枚コピー、テンプレート シートを削除し、最後に新しい名前でファイルを保存します。
+        <code><![CDATA[
+          // テンプレートシートを含むブックをロードします
+          _c1xl.Load(@"c:\temp\template.xls");
+          
+          // テンプレートのコピーを12枚作成します
+          XLSheet templateSheet = _c1xl.Sheets["Template"];
+          for (int month = 1; month <= 12; month++)
+          {
+            XLSheet newSheet = templateSheet.Clone();
+            newSheet.Name = month.ToString(); // クローンをリネーム
+            newSheet[0,0].Value = month;      // 値の変更
+            _c1xl.Sheets.Add(newSheet);       // クローンをブックに追加
+          }
+          
+          // テンプレートシートを削除し、新しい名前で保存します
+          _c1xl.Sheets.Remove("Template");
+          _c1xl.Save(@"C:\temp\expense_report.xls");
+          ]]></code></example>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.GetCell(System.Int32,System.Int32)">
+      <summary>指定した座標にあるセルへの参照を取得します。セルが存在しなければ null を返します。</summary>
+      <param name="rowIndex">行のインデックス。</param>
+      <param name="colIndex">列のインデックス。</param>
+      <returns>
+        指定した座標にある
+        <see cref="T:C1.C1Excel.XLCell" />オブジェクトへの参照。指定した場所にセルがなければ -1。
+      </returns>
+      <remarks>
+        <para>
+          新規シートを配置するには、代わりに
+          <see cref="P:C1.C1Excel.C1XLBook.Sheets" />を用います。
+        </para>
+        <para>インデクサは、必要に応じて自動的に新規行、新規列、新規セルを生成します。null は返しません。</para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.GetFormattedText(System.Int32,System.Int32)">
+      <summary>
+        セルの
+        <see cref="T:C1.C1Excel.XLStyle" />形式値を使用して書式付きテキストを取得します。
+      </summary>
+      <param name="rowIndex">行のインデックス。</param>
+      <param name="colIndex">列のインデックス。</param>
+      <returns>行と列のインデックスで指定されるセルの書式付きテキスト。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.CopyFormula(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>セル間で式をコピーし、相対参照を調整します。</summary>
+      <param name="rowFrom">既存の式を含むコピー元のセルの行インデックス。</param>
+      <param name="colFrom">既存の式を含むコピー元のセルの列インデックス。</param>
+      <param name="rowTo">式のコピー先のセルの行インデックス。</param>
+      <param name="colTo">式のコピー先のセルの列インデックス。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.Load(System.String,System.Boolean)">
+      <summary>ファイルから Excel ワークシートをロードします。</summary>
+      <param name="fileName">ワークシートを含むファイルの名前。</param>
+      <param name="last">
+        ワークブックからのロードを完了する場合は
+        <b>True</b>、他のワークシートにデータをロードする場合は
+        <b>False</b>。
+      </param>
+      <remarks>このメソッドは、以前はワークシートを埋めずにストリームからワークブックをロードする必要がありました。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.Load(System.IO.Stream,System.Boolean)">
+      <summary>ストリームから Excel ワークシートをロードします。</summary>
+      <param name="stream">
+        ワークシートを含む
+        <see cref="T:System.IO.Stream" />。
+      </param>
+      <param name="last">
+        ワークブックからのロードを完了する場合は
+        <b>True</b>、他のワークシートにデータをロードする場合は
+        <b>False</b>。
+      </param>
+      <remarks>このメソッドは、以前はワークシートを埋めずにストリームからワークブックをロードする必要がありました。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.LoadCsv(System.String)">
+      <summary>カンマ区切りの値を含むファイル（.csv）から現在のシートにデータをロードします。</summary>
+      <param name="fileName">.csv 形式のデータを含むファイルの名前。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.LoadCsv(System.IO.Stream)">
+      <summary>カンマ区切りの値を含むストリーム（.csv）から現在のシートにデータをロードします。</summary>
+      <param name="stream">.csv 形式のデータを含むストリーム。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.SaveCsv(System.String)">
+      <summary>現在のシートからカンマ区切りの値（.csv）形式のファイルにデータを保存します。</summary>
+      <param name="fileName">ターゲット（.csv）ファイル名。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.SaveCsv(System.IO.Stream)">
+      <summary>現在のシートからカンマ区切りの値（.csv）形式のストリームにデータを保存します。</summary>
+      <param name="stream">ターゲットストリーム。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.GetRangeToRepeat(System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+      <summary>このワークシートに印刷タイトルが指定されているかどうかを示す値を返します （印刷タイトルとは、 シートが印刷されるときにページごとに繰り返し印刷される一番上の行と一番左の列です）。 出力パラメータは、タイトル行と列のインデックスを示します。</summary>
+      <param name="rowFrom">出力： （一番上で繰り返される）先頭のタイトル行のインデックス。</param>
+      <param name="rowTo">出力： （一番上で繰り返される）末尾のタイトル行のインデックス。</param>
+      <param name="colFrom">出力： （一番左で繰り返される）先頭のタイトル列のインデックス。</param>
+      <param name="colTo">出力： （一番左で繰り返される）末尾のタイトル列のインデックス。</param>
+      <returns>このシートのタイトル行または列が指定された場合は true、そうでない場合は false。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLSheet.SetRangeToRepeat(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>このワークシートの印刷タイトルとして使用する行と列の範囲を指定します （印刷タイトルとは、 シートが印刷されるときにページごとに繰り返し印刷される一番上の行と一番左の列です）。</summary>
+      <param name="rowFrom">（一番上で繰り返される）先頭のタイトル行のインデックス。</param>
+      <param name="rowTo">（一番上で繰り返される）末尾のタイトル行のインデックス。</param>
+      <param name="colFrom">（一番左で繰り返される）先頭のタイトル列のインデックス。</param>
+      <param name="colTo">（一番左で繰り返される）末尾のタイトル列のインデックス。</param>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Book">
+      <summary>
+        シートを所有する
+        <see cref="T:C1.C1Excel.C1XLBook" />への参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Name">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />の名前を取得または設定します。
+      </summary>
+      <remarks>
+        <para>Excel 内のワークブックを開いた場合、シート名は下部の作業領域のタブに示されます。</para>
+        <para>シート名はインデクサとして使用可能なので、ユニークでなければなりません。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Rows">
+      <summary>シートの行のコレクションへの参照を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Columns">
+      <summary>シートの列のコレクションへの参照を取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.MergedCells">
+      <summary>
+        シート上の結合セルのコレクションを含む
+        <see cref="T:C1.C1Excel.XLCellRangeCollection" />を取得します。
+      </summary>
+      <remarks>
+        このコレクションは、シート内の結合範囲を調査、追加、クリアするメソッドを含みます。各結合範囲は
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトで表示されます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.SelectedCells">
+      <summary>
+        シートで選択されているセルのコレクションを含む
+        <see cref="T:C1.C1Excel.XLCellRangeCollection" />を取得します。
+      </summary>
+      <remarks>
+        コレクションは、シート内の結合範囲の調査、追加、およびクリアを行うメソッドを保持します。 各選択範囲は
+        <see cref="T:C1.C1Excel.XLCellRange" />オブジェクトによって表されます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Comments">
+      <summary>
+        シート上のコメントのコレクションを含む
+        <see cref="T:C1.C1Excel.XLCommentCollection" />を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.DefaultRowHeight">
+      <summary>シートのデフォルトの行高を twips 単位で取得または設定します。</summary>
+      <remarks>
+        <para>
+          個々の行の高さは
+          <see cref="T:C1.C1Excel.XLRow" />クラスを用いて設定できます。行にカスタムの高さがアサインされていない場合、シートの
+          <see cref="P:C1.C1Excel.XLSheet.DefaultRowHeight" />を用いて表示されます。
+        </para>
+        <para>
+          <see cref="P:C1.C1Excel.XLSheet.DefaultRowHeight" />プロパティはピクセルではなく、twips 単位 (1/20 point) で表現されます。これで、シートは表示の解像度にかかわらず外観を保持できます。
+        </para>
+        <para>
+          ピクセルと twips 間の変換には、
+          <see cref="T:C1.C1Excel.C1XLBook" />の
+          <see cref="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)" />および
+          <see cref="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)" />メソッドを用います。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.DefaultColumnWidth">
+      <summary>シートのデフォルトの行高を取得または設定します。</summary>
+      <remarks>
+        <para>
+          個々の列の幅は
+          <see cref="T:C1.C1Excel.XLColumn" />クラスを用いて設定できます。列にカスタムの幅がアサインされていない場合、シートの
+          <see cref="P:C1.C1Excel.XLSheet.DefaultColumnWidth" />を用いて表示されます。
+        </para>
+        <para>
+          <see cref="P:C1.C1Excel.XLSheet.DefaultColumnWidth" />プロパティはピクセルではなく、twips 単位 (1/20 point) で表現されます。これで、シートは表示の解像度にかかわらず外観を保持できます。
+        </para>
+        <para>
+          ピクセルと twips 間の変換には、
+          <see cref="T:C1.C1Excel.C1XLBook" />の
+          <see cref="M:C1.C1Excel.C1XLBook.TwipsToPixels(System.Double)" />および
+          <see cref="M:C1.C1Excel.C1XLBook.PixelsToTwips(System.Double)" />メソッドを用います。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Item(System.Int32,System.Int32)">
+      <summary>シート上で指定した位置のセルを取得し、必要に応じて新規セルを生成します。</summary>
+      <remarks>
+        <para>インデクサを呼び出して指定したセルが存在しない場合、シートは拡張され、新規セルが生成されて戻されます。これにより、シートを簡単に生成し配置できます。</para>
+        <para>
+          指定したセルが定義されたかどうかを決定したければ、代わりに
+          <see cref="M:C1.C1Excel.XLSheet.GetCell(System.Int32,System.Int32)" />メソッドを使用してください。
+        </para>
+        <para>
+          インデクサは、シートを生成し配置する場合により役立ちます。既存のシートをロードする場合は、
+          <see cref="M:C1.C1Excel.XLSheet.GetCell(System.Int32,System.Int32)" />メソッドが役立ちます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Locked">
+      <summary>編集のためにシートがックされているかどうかを決定する値を取得または設定します。</summary>
+      <remarks>
+        <para>シートとスタイルはロックできます。デフォルトでは、シートはロックされておらず、スタイルはロックされています。この設定によりユーザーが Excel を編集することが可能になります。</para>
+        <para>
+          Excel 内でセルが編集されるのを妨げるには、シートとセルスタイルの両方の
+          <see cref="P:C1.C1Excel.XLSheet.Locked" />プロパティが True になっていなければなりません。
+        </para>
+        <para>シート上のほとんどのセルをロックし残りのいくつかのセルだけを編集可能にするには、シートをロックし、ロックなしのスタイルを作成して編集可能とするセルに割り当てます。</para>
+      </remarks>
+      <example>
+        以下のコードは、データエントリ シートを作成します。ほとんどのセルをロックし、データ入力用のセルだけを編集可能にします。
+        <code><![CDATA[
+          // 単一のロックされたシートから開始します
+          _c1xl.Clear();
+          XLSheet sheet = _c1xl.Sheets[0];
+          sheet.Locked = true;
+          
+          // ロックを解除したスタイルを作成します
+          XLStyle dataEntry = new XLStyle(_c1xl);
+          dataEntry.Locked = false;
+          dataEntry.BackColor = Color.Beige;
+          
+          // データ入力セルのタイトルを作成します
+          sheet[0,0].Value = "Name:";
+          sheet[1,0].Value = "Address:";
+          sheet[2,0].Value = "Phone #:";
+          
+          // データ入力セルを作成します（ロックは解除）
+          sheet[0,1].Style = dataEntry;
+          sheet[1,1].Style = dataEntry;
+          sheet[2,1].Style = dataEntry;
+          
+          // ブックを保存します
+          _c1xl.Save(@"c:\temp\Protected.xls");
+          ]]></code></example>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Visible">
+      <summary>シートを表示にするかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.ShowGridLines">
+      <summary>シートの表示時に、Excel にグリッドの線をするかどうか取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.ShowHeaders">
+      <summary>Excel でシートを表示するときに行ヘッダと列ヘッダを表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.ShowZeros">
+      <summary>Excel のシートに０値を表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Scale">
+      <summary>このワークシートの表示スケール（%）を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.GridColor">
+      <summary>グリッド線の表示に使用される色を取得または設定します。</summary>
+      <remarks>
+        <para>グリッド線をデフォルトの色で表示する場合には、このプロパティを Color.Transparent に設定してください。</para>
+        <para>
+          グリッド線を非表示にするには、
+          <see cref="P:C1.C1Excel.XLSheet.ShowGridLines" />プロパティを falseに設定します。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.TabColor">
+      <summary>このシートのタブの表示に使用される色を取得または設定します。</summary>
+      <remarks>
+        <para>
+          デフォルトの色を使用してシートのタブを表示するには、このプロパティを
+          <b>Color.Transparent</b>に設定します。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.PrintSettings">
+      <summary>
+        シートの印刷方法を制御する
+        <see cref="T:C1.C1Excel.XLPrintSettings" />オブジェクトを取得または設定します。
+      </summary>
+      <example>
+        以下のコードは、シートのヘッダを生成し、向きを横長にします。
+        <code><![CDATA[
+          XLPrintSettings pp = sheet.PrintSettings();
+          pp.Landscape = true;
+          pp.Header = "&LLeft Header&CCenter Header&RRight Header";
+          ]]></code></example>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.Shapes">
+      <summary>
+        シートの
+        <see cref="T:C1.C1Excel.ShapeCollection" />への参照を取得します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.TotalsBelowData">
+      <summary>シートを表示するときに Excel に小計データを表示するかどうかを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.OutlinesBelow">
+      <summary>アウトラインボタンの垂直位置を示す値を取得または設定します。</summary>
+      <remarks>
+        このプロパティが true に設定されると、アウトラインボタンはアウトライングループの下に配置されます。 そうでない場合は、アウトライングループの上に配置されます。
+        <para>
+          デフォルト値は
+          <b>true</b>です
+        </para>。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.OutlinesRight">
+      <summary>アウトラインボタンの水平位置を示す値を取得または設定します。</summary>
+      <remarks>
+        このプロパティが true に設定されると、アウトラインボタンはアウトライングループの右に配置されます。 そうでない場合は、アウトライングループの左に配置されます。
+        <para>
+          デフォルト値は
+          <b>true</b>です
+        </para>。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.MaxOutlineLevel">
+      <summary>行または列の最大小計アウトラインレベルを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.RowMaxLevel">
+      <summary>行の最大アウトラインレベルを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.ColumnMaxLevel">
+      <summary>列の最大アウトラインレベルを取得します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.ConditionalFormattings">
+      <summary>
+        現在のワークブックの
+        <see cref="T:C1.C1Excel.XLConditionalFormatting" />オブジェクトのコレクションを取得します。
+      </summary>
+    </member>
+    <member name="T:C1.C1Excel.XLAlignHorzEnum">
+      <summary>この列挙体のメンバを使用してAlignHorz プロパティの値を設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Undefined">
+      <summary>XLStyle オブジェクトでは設定しません（デフォルト）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.General">
+      <summary>文字列を左揃えに、数値を右揃えにします。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Left">
+      <summary>すべての値を左揃えにします。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Center">
+      <summary>すべての値を中央揃えにします。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Right">
+      <summary>すべての値を右揃えにします。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Fill">
+      <summary>全体を表示します（改行は非表示）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Justify">
+      <summary>両端揃え（複数行のエントリを列に合わせて調整します）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignHorzEnum.Selection">
+      <summary>選択した箇所の中心にします。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLAlignVertEnum">
+      <summary>この列挙体のメンバを使用してAlignVert プロパティの値を設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignVertEnum.Undefined">
+      <summary>XLStyle オブジェクトでは設定しません（デフォルト）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignVertEnum.Top">
+      <summary>行の上端です。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignVertEnum.Center">
+      <summary>行の中央です。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignVertEnum.Bottom">
+      <summary>行の下端です。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLAlignVertEnum.Justify">
+      <summary>両端揃え（複数行のエントリを行に合わせて調整します）。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLDiagonalFlags">
+      <summary>この列挙体のメンバを使用してDiagonal プロパティの値を設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLDiagonalFlags.None">
+      <summary>なし。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLDiagonalFlags.Forward">
+      <summary>左上-右下 。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLDiagonalFlags.Backward">
+      <summary>左下-右上。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLLineStyleEnum">
+      <summary>セルの境界に用いる線のスタイルを設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.None">
+      <summary>なし。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Thin">
+      <summary>細い実線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Medium">
+      <summary>太い実線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Dashed">
+      <summary>破線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Dotted">
+      <summary>点線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Thick">
+      <summary>極太の実線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Double">
+      <summary>二重線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.Hair">
+      <summary>極細の実線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.MediumDashed">
+      <summary>太い破線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.ThinDashDotted">
+      <summary>細い一点鎖線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.MediumDashDotted">
+      <summary>太い一点鎖線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.ThinDashDotDotted">
+      <summary>細い二点差線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.MediumDashDotDotted">
+      <summary>太い一点鎖線。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLLineStyleEnum.SlantedMediumDashDotted">
+      <summary>斜線による太い一点差線。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLPatternEnum">
+      <summary>セルの背景に用いるパターンを設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.None">
+      <summary>パターンなし（透過）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Solid">
+      <summary>単色。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Gray50">
+      <summary>50% ドットパターン。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Gray75">
+      <summary>75% ドットパターン。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Gray25">
+      <summary>25% ドットパターン。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.HorizontalStripe">
+      <summary>横縞。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.VerticalStripe">
+      <summary>縦縞。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ReverseDiagonalStripe">
+      <summary>左上-右下の縞模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.DiagonalStripe">
+      <summary>左下-右上の縞模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.DiagonalCrosshatch">
+      <summary>斜めクロス模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThickDiagonalCrosshatch">
+      <summary>太い斜めクロス模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinHorizontalStripe">
+      <summary>細い横縞。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinVerticalStripe">
+      <summary>細い縦縞。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinReverseDiagonalStripe">
+      <summary>細い左上-右下の縞模様 (＼)。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinDiagonalStripe">
+      <summary>細い左下-右上の縞模様 (/)。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinHorizontalCrosshatch">
+      <summary>細い水平クロス模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.ThinDiagonalCrosshatch">
+      <summary>細い斜めクロス模様。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Gray12">
+      <summary>12% ドットパターン。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLPatternEnum.Gray06">
+      <summary>6% ドットパターン。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLReadingDirection">
+      <summary>読む方向を指定します（MS Excel の東アジアバージョン）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReadingDirection.Context">
+      <summary>現在のコンテキストを使用します（デフォルト）。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReadingDirection.LeftToRight">
+      <summary>左から右方向。</summary>
+    </member>
+    <member name="F:C1.C1Excel.XLReadingDirection.RightToLeft">
+      <summary>右から左方向。</summary>
+    </member>
+    <member name="T:C1.C1Excel.XLStyle">
+      <summary>セルの外観を定義するために用いるスタイルの要素を含みます。</summary>
+      <remarks>
+        <para>
+          各
+          <see cref="T:C1.C1Excel.XLStyle" />オブジェクトは、次のうちひとつ以上の要素を定義します。 フォント、書式設定、背景色、背景パターン、前景色、配置、文字の方向、単語の折り返し、テキストの方向、 ワードラップ。
+        </para>
+        <para>セルを表示する場合、Excel では、行、列およびセルのスタイルを結合します。つまり、行、列および セルで設定されているスタイルの要素を結合し、セルの表示方法を決定します。スタイルの優先順位は、 （１）セル、（２）行、（３）列、（４）デフォルトのスタイルです。たとえば、セルのスタイルでフォントと 背景色が設定されると、行と列のスタイルが設定されていても、セルのスタイルが適用されます。また、行の スタイルで配置が設定されると、列のスタイルを無視して適用されます。</para>
+        <para>
+          各
+          <see cref="T:C1.C1Excel.XLStyle" />オブジェクトは
+          <see cref="T:C1.C1Excel.C1XLBook" />に 属して、複数の
+          <see cref="T:C1.C1Excel.XLRow" />、
+          <see cref="T:C1.C1Excel.XLColumn" />、および
+          <see cref="T:C1.C1Excel.XLCell" />に関連付けられていることがあります。
+        </para>
+      </remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.#ctor(C1.C1Excel.C1XLBook)">
+      <summary>
+        新規
+        <see cref="T:C1.C1Excel.XLStyle" />のインスタンスを生成し、指定した
+        <see cref="T:C1.C1Excel.C1XLBook" />に追加します。
+      </summary>
+      <param name="book">
+        親の
+        <see cref="T:C1.C1Excel.C1XLBook" />。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.Clone">
+      <summary>
+        現在のインスタンスをコピーして、新規
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを生成します。
+      </summary>
+      <returns>
+        現在のインスタンスをコピーして、新規
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトを生成します。
+      </returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.SetBorderStyle(C1.C1Excel.XLLineStyleEnum)">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に対する境界線のスタイルを設定します。
+      </summary>
+      <param name="style">境界線を描くのに用いる線のスタイル。</param>
+      <remarks>このメソッドは設定をすべての4つの境界線に適用します。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.SetBorderColor(System.Drawing.Color)">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に対する境界線のスタイルを設定します。
+      </summary>
+      <param name="color">境界線の描画に使用する色。</param>
+      <remarks>このメソッドは設定をすべての4つの境界線に適用します。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatDotNetToXL(System.String,System.Type)">
+      <summary>.NET-スタイルの書式文字列を Excel 書式文字列に変換します。</summary>
+      <param name="fmt">Excel 形式の文字列に変換する .NET 形式の文字列。</param>
+      <param name="dataType">書式付けするデータのタイプ。</param>
+      <returns>Excel スタイルの書式文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatDotNetToXL(System.String,System.Type,System.Globalization.CultureInfo)">
+      <summary>.NET 形式の書式文字列を Excel 形式の書式文字列に変換します。</summary>
+      <param name="fmt">変換する .NET 形式の書式。</param>
+      <param name="dataType">書式設定されるデータ型。</param>
+      <param name="culture">
+        <see cref="T:System.Globalization.CultureInfo" />オブジェクト。
+      </param>
+      <returns>Excel 形式の書式文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatDotNetToXL(System.String)">
+      <summary>.NET-スタイルの書式文字列を Excel 書式文字列に変換します。</summary>
+      <param name="fmt">変換される .NET-スタイルの書式</param>
+      <returns>Excel-スタイルの書式文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatDotNetToXL(System.String,System.Globalization.CultureInfo)">
+      <summary>.NET 形式の書式文字列を Excel 形式の書式文字列に変換します。</summary>
+      <param name="fmt">変換する .NET 形式の書式。</param>
+      <param name="culture">
+        <see cref="T:System.Globalization.CultureInfo" />オブジェクト。
+      </param>
+      <returns>Excel 形式の書式文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatXLToDotNet(System.String)">
+      <summary>Excel 書式文字列を .NET-スタイルの書式文字列に変換します。</summary>
+      <param name="fmt">変換される Excel-スタイルの書式文字列。</param>
+      <returns>.NET アプリケーションで使用される形式の文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.FormatXLToDotNet(System.String,System.Globalization.CultureInfo)">
+      <summary>Excel 形式の書式文字列を .NET 形式の書式文字列に変換します。</summary>
+      <param name="fmt">変換する Excel 形式の書式。</param>
+      <param name="culture">
+        <see cref="T:System.Globalization.CultureInfo" />オブジェクト。
+      </param>
+      <returns>.NET 形式の書式文字列。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.Equals(System.Object)">
+      <summary>
+        ２つの
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクトが等価かどうかを決定します。
+      </summary>
+      <param name="obj">
+        現在のインスタンスと比較する
+        <see cref="T:C1.C1Excel.XLStyle" />オブジェクト。
+      </param>
+      <returns>スタイルが等価な場合 True。それ以外は False。</returns>
+    </member>
+    <member name="M:C1.C1Excel.XLStyle.GetHashCode">
+      <summary>ハッシュテーブルのように、ハッシュアルゴリズム内で使用するのに適したハッシュ機能とデータ構造を提供します。</summary>
+      <returns>
+        現在のハッシュコード
+        <see cref="T:C1.C1Excel.XLStyle" />.
+      </returns>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Font">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連付けられたフォントを取得または設定します。
+      </summary>
+      <remarks>
+        <see cref="P:C1.C1Excel.XLStyle.Font" />プロパティを null 値に設定すると、スタイルの要素を非表示にして、代わりにデフォルトのフォントを使用できます。デフォルトのフォントはブックの
+        <see cref="P:C1.C1Excel.C1XLBook.DefaultFont" />プロパティで決定されます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.ForeColor">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連した前景色を取得または設定します。
+      </summary>
+      <remarks>
+        <para>
+          <see cref="P:C1.C1Excel.XLStyle.ForeColor" />プロパティを
+          <b>Color.Transparent</b>に設定すると、スタイルの要素を非表示にして、代わりにデフォルトの背景色（黒）を使用できます。
+        </para>
+        <para>
+          <see cref="T:C1.C1Excel.C1XLBook" />の色はすべてパレットにマッピングされています。つまり、色をスタイルに割り当てて、ブックを保存してから、再びロードすると、ブックを作成したときに使用した色と若干違った色が表示されることがあります。ただし、違いはほんのわずかです。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BackColor">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連した前景色を取得または設定します。
+      </summary>
+      <remarks>
+        <para>
+          <see cref="P:C1.C1Excel.XLStyle.BackColor" />プロパティを
+          <b>Color.Transparent</b>に設定すると、スタイルの要素を非表示にして、代わりにデフォルトの背景色（白）を使用できます。
+        </para>
+        <para>
+          <see cref="T:C1.C1Excel.C1XLBook" />の色はすべてパレットにマッピングされています。つまり、色をスタイルに割り当てて、ブックを保存してから、再びロードすると、ブックを作成したときに使用した色と若干違った色が表示されることがあります。ただし、違いはほんのわずかです。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BackPattern">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に対する背景パターンを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.PatternColor">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に対する背景色を取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Format">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連した書式を取得または設定します。
+      </summary>
+      <remarks>
+        <para>Excel は .NETと類似はしていますが同じではない書式を使用しています。書式文字列を作成する方法については Excel の文書を参照してください。</para>
+        <para>
+          一般に Excel の書式文字列と .NET 書式文字列間の変換には、
+          <see cref="M:C1.C1Excel.XLStyle.FormatXLToDotNet(System.String)" />メソッドおよび
+          <see cref="M:C1.C1Excel.XLStyle.FormatDotNetToXL(System.String,System.Type)" />メソッドを使用できます。
+        </para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.AlignHorz">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連付けられた横位置の配置を取得または設定します。
+      </summary>
+      <remarks>
+        <see cref="P:C1.C1Excel.XLStyle.AlignHorz" />プロパティを
+        <see cref="F:C1.C1Excel.XLAlignHorzEnum.Undefined" />に設定すると、スタイルの要素を非表示にして、代わりにデフォルトの横の配置 (
+        <see cref="F:C1.C1Excel.XLAlignHorzEnum.General" />) を使用できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.AlignVert">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />に関連付けられた縦位置の配置を取得または設定します。
+      </summary>
+      <remarks>
+        <see cref="P:C1.C1Excel.XLStyle.AlignVert" />プロパティを
+        <see cref="F:C1.C1Excel.XLAlignVertEnum.Undefined" />に設定すると、スタイルの要素を非表示にして、代わりにデフォルトの縦の配置 (
+        <see cref="F:C1.C1Excel.XLAlignVertEnum.Bottom" />) を使用できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.ShrinkToFit">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />がセルの内容を縮小して全体を表示するどうかを取得または設定します。
+      </summary>
+      <remarks>内容がセル幅より長い場合は、内容が縮小されて全体が表示されます。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.WordWrap">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />を用いると、長い文字列をセル内で折り返すかどうかを取得または設定します。
+      </summary>
+      <remarks>ワードラップしない場合、改行が含まれるとしてもセルの内容は連続したセルの上に表示されます。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Indent">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />のインデントセルのコンテンツを取得または設定します。
+      </summary>
+      <remarks>このプロパティは、０～255 の値に設定する必要があります（Excel 2003 互換モードの場合は０～15）。 インデントは、2.5 ポイント（180 ツイップ）のステップを乗算した値（テキストのタブ値と同様）として計算されます。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Direction">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />の内容を読む方向を取得または設定します。
+      </summary>
+      <remarks>このプロパティは、MS Excel の東アジアバージョンでのみ使用されます。</remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Rotation">
+      <summary>
+        この
+        <see cref="T:C1.C1Excel.XLStyle" />のテキストの方向を角度で取得または設定します。
+      </summary>
+      <remarks>
+        <para>このプロパティは、次のように０から 180 または 255 の値に設定する必要があります。</para>
+        <para>0：回転しません。</para>
+        <para>1-90：１度から 90 度まで反時計回りに回転します（90 に設定すると、セルの上に向かって垂直にテキストを表示します）。</para>
+        <para>91-180：１度から 90 度まで時計回りに回転します（180 に設定すると、セルの下に向かってに垂直にテキストを表示します）。</para>
+        <para>255：文字は上から下へ配置されて回転しません。</para>
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Locked">
+      <summary>
+        <see cref="T:C1.C1Excel.XLSheet" />が保護されている場合に、編集に対してセルをロックする必要があるかどうかを取得または設定します。
+      </summary>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderLeft">
+      <summary>左側の罫線のスタイルを取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderStyle(C1.C1Excel.XLLineStyleEnum)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderRight">
+      <summary>右側の罫線のスタイルを取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderStyle(C1.C1Excel.XLLineStyleEnum)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderTop">
+      <summary>上部の罫線のスタイルを取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderStyle(C1.C1Excel.XLLineStyleEnum)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderBottom">
+      <summary>下部の罫線のスタイルを取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderStyle(C1.C1Excel.XLLineStyleEnum)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderColorLeft">
+      <summary>左側の罫線の色を取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderColor(System.Drawing.Color)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderColorRight">
+      <summary>右側の罫線の色を取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderColor(System.Drawing.Color)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderColorTop">
+      <summary>上側の罫線の色を取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderColor(System.Drawing.Color)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.BorderColorBottom">
+      <summary>下側の罫線の色を取得または設定します。</summary>
+      <remarks>
+        <see cref="M:C1.C1Excel.XLStyle.SetBorderColor(System.Drawing.Color)" />メソッドを用いてすべての罫線を一度に設定できます。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.Diagonal">
+      <summary>セルを横切って描写される対角線の方向を取得または設定します (なし、前方、後方) 。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.DiagonalStyle">
+      <summary>セルを横切って描写される対角線のスタイルを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLStyle.DiagonalColor">
+      <summary>セルを横切って描写される対角線の色を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.HeaderEven">
+      <summary>シートを印刷するときに偶数ページのヘッダーとして表示される文字列を取得または設定します。</summary>
+      <remarks>
+        奇数ページのヘッダー文字列は
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティに含まれます。 この文字列の構造と埋め込まれるコマンドは、メインのヘッダー文字列と同じです。 詳細については、
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティを参照してください。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FooterEven">
+      <summary>シートを印刷するときに偶数ページのフッターとして表示される文字列を取得または設定します。</summary>
+      <remarks>
+        奇数ページのフッター文字列は
+        <see cref="P:C1.C1Excel.XLPrintSettings.Footer" />プロパティに含まれます。 この文字列の構造と埋め込まれるコマンドは、メインのヘッダー文字列と同じです。 詳細については、
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティを参照してください。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.HeaderFirst">
+      <summary>シートを印刷するときに最初のページのヘッダーとして表示される文字列を取得または設定します。</summary>
+      <remarks>
+        この文字列の構造と埋め込まれるコマンドは、メインのヘッダー文字列と同じです。 詳細については、
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティを参照してください。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.FooterFirst">
+      <summary>シートを印刷するときに最初のページのフッターとして表示される文字列を取得または設定します。</summary>
+      <remarks>
+        この文字列の構造と埋め込まれるコマンドは、メインのヘッダー文字列と同じです。 詳細については、
+        <see cref="P:C1.C1Excel.XLPrintSettings.Header" />プロパティを参照してください。
+      </remarks>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.ScaleWithDocument">
+      <summary>印刷出力でヘッダー/フッターをドキュメントに合わせて拡大縮小するかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLPrintSettings.AlignWithMargins">
+      <summary>印刷出力でヘッダー/フッターをページマージンに揃えるかどうかを示す値を取得または設定します。</summary>
+    </member>
+    <member name="F:C1.C1Excel.FileFormat.OpenXmlMacro">
+      <summary>VBA マクロが有効な Office 2007/2013 のファイル形式（圧縮 XML 形式）。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.ListSeparator">
+      <summary>CSV データで使用するリスト区切り文字を取得または設定します。デフォルトは、Windows システムで使用されるリスト区切り文字です。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLSheet.PageBreakPreview">
+      <summary>Excel でシートを表示するときに、ページ区切りのプレビューを表示するかどうかを取得または設定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.ReferenceMode">
+      <summary>このワークブックの参照モードを取得または設定します。</summary>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.Win.Bitmap.C1Bitmap,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+      <param name="x">セルに対する新しい図形の水平位置（ツイップ単位）。</param>
+      <param name="y">セルに対する新しい図形の垂直位置（ツイップ単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.Win.Bitmap.C1Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+      <param name="x">セルに対する画像の水平位置（ツイップ単位）。</param>
+      <param name="y">セルに対する画像の垂直位置（ツイップ単位）。</param>
+      <param name="width">画像の幅（ツイップ単位）。</param>
+      <param name="height">画像の高さ（ツイップ単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.Win.Bitmap.C1Bitmap,System.Drawing.Rectangle)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+      <param name="rc">セルに対する画像のサイズおよび位置をツイップ単位で 指定する四角形。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.Win.Bitmap.C1Bitmap)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.Win.Bitmap.C1Bitmap,System.Drawing.Size,System.Drawing.ContentAlignment,C1.C1Excel.ImageScaling)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+      <param name="cellSize">画像を含むセルのサイズ（ピクセル単位）（画像の調整に使用）。</param>
+      <param name="align">セル内の画像の位置を指定する水平方向のコンテンツ配置の値。</param>
+      <param name="valign">
+        セル内の画像の位置を指定する
+        <see cref="!:VerticalAlignment" />値。
+      </param>
+      <param name="scale">
+        セル内の画像の拡大縮小を指定する
+        <see cref="T:C1.C1Excel.ImageScaling" />値。
+      </param>
+      <remarks>このコンストラクタは、セルサイズと画像サイズ、および指定された配置パラメータと拡大縮小パラメータに基づいて、 画像サイズ、位置、およびクリッピングを自動的に計算します。</remarks>
+    </member>
+    <member name="M:C1.C1Excel.XLPictureShape.#ctor(C1.C1Excel.XLSheet,C1.Win.Bitmap.C1Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <see cref="T:C1.C1Excel.XLPictureShape" />の新しいインスタンスを初期化します。
+      </summary>
+      <param name="sheet">
+        新しい図形を所有する
+        <see cref="T:C1.C1Excel.XLSheet" />オブジェクト。
+      </param>
+      <param name="bmp">
+        新しい
+        <see cref="T:C1.C1Excel.XLPictureShape" />に含まれる、指定されたビットマップオブジェクト。
+      </param>
+      <param name="x">シートに対する画像の水平位置（ツイップ単位）。</param>
+      <param name="y">シートに対する画像の垂直位置（ツイップ単位）。</param>
+      <param name="width">画像の幅（ツイップ単位）。</param>
+      <param name="height">画像の高さ（ツイップ単位）。</param>
+    </member>
+    <member name="M:C1.C1Excel.XLRange.#ctor(System.String,C1.C1Excel.XLReferenceMode)">
+      <summary>範囲の初期化。</summary>
+      <param name="areaRef">エリア参照テキスト（たとえば、「A4:D8」）。</param>
+      <param name="mode">エリア参照テキスト（たとえば、「A4:D8」）。</param>
+    </member>
+    <member name="P:C1.C1Excel.XLNamedRange.Refers">
+      <summary>
+        現在の名前付き範囲と近似する
+        <see cref="P:C1.C1Excel.XLNamedRange.CellRanges" />の参照テキストを取得します。
+      </summary>
+    </member>
+    <member name="M:C1.C1Excel.XLNamedRange.ParseRefers(C1.C1Excel.C1XLBook,System.String)">
+      <summary>名前付き範囲参照を解析してセル範囲配列を作成します。</summary>
+      <param name="book">セル範囲のワークブック。</param>
+      <param name="refers">名前付き範囲のテキスト参照。</param>
+      <returns></returns>
+    </member>
+    <member name="P:C1.C1Excel.C1XLBook.UseDefaultCsvEncoding">
+      <summary>コンポーネントが CSV ファイルでデフォルトのエンコーディングを使用するかどうかを指定します。</summary>
+    </member>
+    <member name="P:C1.C1Excel.XLRow.CellCount">
+      <summary>行のセルの数を取得します。</summary>
+    </member>
+  </members>
+</doc>
